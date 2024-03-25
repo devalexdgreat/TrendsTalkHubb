@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    background-color: #fff;
+    color: white;
+}
+
+.profile {
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.heading h1 {
+    color: #000;
+}
+
+.blue {
+    background-color: #2563eb;
+}
+
+.gray {
+    background-color: #262626;
+}
+
+.t-box {
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.post-img {
+    border-radius: 0.5rem 0.5rem 0 0;
+}
