@@ -13,6 +13,7 @@ const getPosts = async () => {
       }
 
       return res.json();
+      
   } catch (error) {
       console.log(error);
   }
