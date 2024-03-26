@@ -3,3 +3,5 @@ Disallow: /_next/
 Disallow: /api/
 Disallow: /login
 Disallow: /signup
+
+Sitemap: https://trendstalkhubb.vercel.app/sitemap.xml
