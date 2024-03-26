@@ -239,7 +239,7 @@ export default function PostCard({ postid }) {
     return (
         <div className="w-full md:w-9/12 text-black">
             {data ? (
-                <div className="w-full">          
+                <div className="w-full">       
                     <div>
                         <div className="text-[14px] flex gap-1 items-center">
                         <Link href={'/'} className="text-black/80 rounded-md font-bold flex gap-1 items-center">

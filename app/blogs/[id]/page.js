@@ -1,13 +1,14 @@
-"use client";
-import { useEffect, useState } from 'react';
+// "use client";
 import PostCard from "@/app/components/PostCard";
 import { useRouter } from 'next/navigation';
 import Navbar from '@/app/components/Navbar';
 import PostSideBar from '@/app/components/PostSideBar';
+// import { useEffect, useState } from "react";
+import Head from "next/head";
+import Layout from "./layout";
 
 export default function Blog({ params }) {
     const { id } = params;
-    const router = useRouter();
 
     function isTokenExpired(token) {
         if (!token) {
@@ -29,28 +30,28 @@ export default function Blog({ params }) {
             return true;
         }
     }
-    
-    // Usage
-    useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
-        if (isTokenExpired(accessToken)) {
-            console.log('Access token has expired');
-            router.push('/login');
 
-        } else {
-            console.log('Access token is still valid');
-        }
-    });
+    // useEffect(() => {
+    //     const accessToken = localStorage.getItem('accessToken');
+    //     if (isTokenExpired(accessToken)) {
+    //         console.log('Access token has expired');
+    //         router.push('/login');
+
+    //     } else {
+    //         console.log('Access token is still valid');
+    //     }
+    // });
 
     return (
-        <div className="w-full">
-            <Navbar />
-            <div className="w-full mt-20 mb-24">
-                <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
-                    <PostCard postid={id} />
-                    <PostSideBar />
+            <div className="w-full">
+                
+                <Navbar />
+                <div className="w-full mt-20 mb-24">
+                    <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
+                        <PostCard postid={id} />
+                        <PostSideBar />
+                    </div>
                 </div>
             </div>
-        </div>
     );
 }
