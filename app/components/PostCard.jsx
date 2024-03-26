@@ -236,7 +236,7 @@ export default function PostCard({ postid }) {
 
     return (
         <section className="w-full md:w-9/12 text-black">
-            {/* {data ? ( */}
+            {data ? (
                 <div className="w-full">       
                     <article>
                         <div className="text-[14px] flex gap-1 items-center">
@@ -308,12 +308,12 @@ export default function PostCard({ postid }) {
                         </div>
                     </article>
 
-                    <section className="mt-12">
+                    <div className="mt-12">
                         <div className="mb-4 heading">
-                            <h1 className="font-bold text-base mb-0.5">Related Posts</h1>
+                            <span className="font-bold text-base mb-0.5">Related Posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
-                        {/* {relatedData ? ( */}
+                        {relatedData ? (
                             <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 {relatedData.map((r) => (
                                     <article className="h-72" key={r.id}>
@@ -332,7 +332,7 @@ export default function PostCard({ postid }) {
                                                     </div>
                                                 </div>
                                                 <div className="my-2">
-                                                    <p className="text-[15px] font-bold duration-500">{r.title}</p>
+                                                    <h2 className="text-[15px] font-bold duration-500">{r.title}</h2>
                                                 </div>
                                                 <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-bold w-11/12 justify-between">
                                                     <div className="flex gap-3">
@@ -360,19 +360,19 @@ export default function PostCard({ postid }) {
                                     </article>
                                 ))}
                             </div>
-                        {/* ):(
+                        ):(
                             <span>Loading...</span>
-                        )} */}
-                    </section>
+                        )}
+                    </div>
                 </div>
-            {/* ):( */}
+            ):(
                 <div className='w-full md:w-9/12 text-black'>
-                    <h1 className='text-black'>Loading posts...</h1>
+                    <span className='text-black'>Loading posts...</span>
                     <button onClick={() => window.location.reload(false)} className="bg-black text-white py-1 px-3 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center mt-2">
                         <MdRefresh />Refresh<span></span>
                     </button>
                 </div>
-            {/* )} */}
+            )}
         </section>
     );
 }
