@@ -150,9 +150,9 @@ export default function Navbar() {
                             </span>
                             <div className="h-full ps-2 pe-3 flex justify-center items-center">
                             {user ? (
-                                <h1 className="font-bold">@{user.username}</h1>
+                                <span className="font-bold">@{user.username}</span>
                             ):(
-                                <h1>Error!</h1>
+                                <span>Error!</span>
                             )}
                             </div>
                         </button>
@@ -173,9 +173,9 @@ export default function Navbar() {
                             </span>
                             <div className="h-full ps-2 pe-3 flex justify-center items-center">
                                 {user ? (
-                                    <h1 className="font-bold">@{user.username}</h1>
+                                    <span className="font-bold">@{user.username}</span>
                                 ):(
-                                    <h1>Error!</h1>
+                                    <span>Error!</span>
                                 )}
                             </div>
                         </button>
@@ -256,7 +256,7 @@ export default function Navbar() {
                                     <LogoutBtn />
                                 </div>
                             ):(
-                                <h1 className="pt-2 px-2">Loading...</h1>
+                                <span className="pt-2 px-2">Loading...</span>
                             )}
                         </div>
                     </div>

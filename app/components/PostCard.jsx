@@ -256,7 +256,7 @@ export default function PostCard({ postid }) {
                             {data.tags.map((tag) => (
                                 <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-black/80 backdrop-blur-sm bg-black text-white">
                                     <AiOutlineRise />
-                                    <span>{tag}</span>
+                                    <p>{tag}</p>
                                 </Link>
                             ))}
                         </div>
@@ -286,22 +286,22 @@ export default function PostCard({ postid }) {
                         <div className="w-full mt-5 mb-5 h-64 md:h-[26rem] rounded-lg">
                             <Image src={imgOne} alt="" className="rounded-lg object-cover object-center h-full w-full"/>
                         </div>
-                        <span>
+                        <p>
                             {data.content}
-                        </span>
+                        </p>
                         <div className="mt-5 border-y border-black py-2 flex justify-between items-center">
                             <div className="flex gap-1 items-center">
                                 <IoShareSocialOutline />
                                 <span>Share <span className="hidden md:inline-block">this Article</span></span>
                             </div>
                             <div className="flex gap-3 items-center">
-                                <Link href={'#'} className="flex items-center gap-1 bg-blue-600 text-white py-1 px-2 rounded-md">
+                                <Link href={'/share#'} className="flex items-center gap-1 bg-blue-600 text-white py-1 px-2 rounded-md">
                                     <FaFacebook /><span>Facebook</span>
                                 </Link>
-                                <Link href={'#'} className="flex items-center gap-1 bg-blue-500 text-white py-1 px-2 rounded-md">
+                                <Link href={'/share#'} className="flex items-center gap-1 bg-blue-500 text-white py-1 px-2 rounded-md">
                                     <FaTwitter /><span>Twitter</span>
                                 </Link>
-                                <Link href={'#'} className="flex items-center gap-1 bg-green-500 text-white p-2 rounded-md">
+                                <Link href={'/share#'} className="flex items-center gap-1 bg-green-500 text-white p-2 rounded-md">
                                     <FaWhatsapp />
                                 </Link>
                             </div>
@@ -361,13 +361,13 @@ export default function PostCard({ postid }) {
                                 ))}
                             </div>
                         ):(
-                            <h1>No Posts</h1>
+                            <h1>Loading...</h1>
                         )}
                     </div>
                 </div>
             ):(
                 <div className='w-full md:w-9/12 text-black'>
-                    <h1 className='text-black'>Error! Loading posts...</h1>
+                    <h1 className='text-black'>Loading posts...</h1>
                     <button onClick={() => window.location.reload(false)} className="bg-black text-white py-1 px-3 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center mt-2">
                         <MdRefresh />Refresh<span></span>
                     </button>

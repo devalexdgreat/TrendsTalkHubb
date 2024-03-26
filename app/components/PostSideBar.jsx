@@ -25,7 +25,7 @@ export default function PostSideBar() {
                 
                 <div className="flex justify-between">
                     <div>
-                        <h1 className="font-bold text-[15px]">Follow our Socials</h1>
+                        <span className="font-bold text-[15px]">Follow our Socials</span>
                     </div>
                     <button className="hover:bg-white/10 backdrop-blur-sm p-1 rounded-full duration-500">
                         <LuMoreHorizontal />
@@ -166,7 +166,7 @@ export default function PostSideBar() {
                 </div>
                 <div className="flex flex-col w-full my-3">
                     <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full h-64 justify-center items-center">
-                        <h1>Adverts</h1>
+                        <span>Adverts</span>
                     </div>
                 </div>
                 <div className="flex justify-center">
