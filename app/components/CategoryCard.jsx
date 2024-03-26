@@ -57,20 +57,6 @@ function formatNumber(number) {
     }
 }
 
-// function formatNumber(number) {
-//     if (number >= 1000000000000) {
-//         return Math.floor(number / 1000000000000) + ' T';
-//     } else if (number >= 1000000000) {
-//         return Math.floor(number / 1000000000) + ' B';
-//     } else if (number >= 1000000) {
-//         return Math.floor(number / 1000000) + ' M';
-//     } else if (number >= 1000) {
-//         return Math.floor(number / 1000) + ' K';
-//     } else {
-//         return number.toString();
-//     }
-// }
-
 export default function CategoryCard({ data, tag }) {
 
     const [postdata, setPostData] = useState(null);

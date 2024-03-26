@@ -103,7 +103,7 @@ export default function PostCard({ postid }) {
     const [relatedData, setRelatedData] = useState(null);
     const [likeData, setLikeData] = useState(1);
     const [incrementing, setIncrementing] = useState(false);
-
+    const router = useRouter();
     const id = postid;
  
     useEffect(() => {
@@ -212,8 +212,6 @@ export default function PostCard({ postid }) {
         setIncrementing(prevIncrementing => !prevIncrementing);
     };
 
-    const router = useRouter();
-
     const likePost = async (postid) => {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${postid}/like`, {
@@ -237,10 +235,10 @@ export default function PostCard({ postid }) {
     }
 
     return (
-        <div className="w-full md:w-9/12 text-black">
-            {data ? (
+        <section className="w-full md:w-9/12 text-black">
+            {/* {data ? ( */}
                 <div className="w-full">       
-                    <div>
+                    <article>
                         <div className="text-[14px] flex gap-1 items-center">
                         <Link href={'/'} className="text-black/80 rounded-md font-bold flex gap-1 items-center">
                             <IoHomeOutline />Home
@@ -286,9 +284,11 @@ export default function PostCard({ postid }) {
                         <div className="w-full mt-5 mb-5 h-64 md:h-[26rem] rounded-lg">
                             <Image src={imgOne} alt="" className="rounded-lg object-cover object-center h-full w-full"/>
                         </div>
-                        <p>
-                            {data.content}
-                        </p>
+                        <article>
+                            <p>
+                                {data.content}
+                            </p>
+                        </article>
                         <div className="mt-5 border-y border-black py-2 flex justify-between items-center">
                             <div className="flex gap-1 items-center">
                                 <IoShareSocialOutline />
@@ -306,17 +306,17 @@ export default function PostCard({ postid }) {
                                 </Link>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div className="mt-12">
+                    <section className="mt-12">
                         <div className="mb-4 heading">
                             <h1 className="font-bold text-base mb-0.5">Related Posts</h1>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
-                        {relatedData ? (
+                        {/* {relatedData ? ( */}
                             <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 {relatedData.map((r) => (
-                                    <div className="h-72" key={r.id}>
+                                    <article className="h-72" key={r.id}>
                                         <Link href={`/blogs/${r.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
                                             <div className="h-3/6">
                                                 <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
@@ -357,22 +357,22 @@ export default function PostCard({ postid }) {
                                             </div>
                                             <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
                                         </Link>
-                                    </div>
+                                    </article>
                                 ))}
                             </div>
-                        ):(
-                            <h1>Loading...</h1>
-                        )}
-                    </div>
+                        {/* ):(
+                            <span>Loading...</span>
+                        )} */}
+                    </section>
                 </div>
-            ):(
+            {/* ):( */}
                 <div className='w-full md:w-9/12 text-black'>
                     <h1 className='text-black'>Loading posts...</h1>
                     <button onClick={() => window.location.reload(false)} className="bg-black text-white py-1 px-3 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center mt-2">
                         <MdRefresh />Refresh<span></span>
                     </button>
                 </div>
-            )}
-        </div>
+            {/* )} */}
+        </section>
     );
 }

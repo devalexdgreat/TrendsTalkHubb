@@ -60,20 +60,6 @@ function formatNumber(number) {
     }
 }
 
-// function formatNumber(number) {
-//     if (number >= 1000000000000) {
-//         return Math.floor(number / 1000000000000) + ' T';
-//     } else if (number >= 1000000000) {
-//         return Math.floor(number / 1000000000) + ' B';
-//     } else if (number >= 1000000) {
-//         return Math.floor(number / 1000000) + ' M';
-//     } else if (number >= 1000) {
-//         return Math.floor(number / 1000) + ' K';
-//     } else {
-//         return number.toString();
-//     }
-// }
-
 export default function Content({ data }) {
 
     const [dData, setDData] = useState('none');
@@ -151,14 +137,14 @@ export default function Content({ data }) {
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-4 heading">
-                            <h1 className="font-bold text-base mb-0.5">Trending Posts</h1>
+                            <span className="font-bold text-base mb-0.5">Trending Posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
-                            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 
                                 {data.map((d) => (
-                                    <div className="h-72" key={d.id} onClick={handleClick}>
+                                    <article className="h-72" key={d.id} onClick={handleClick}>
                                         <Link href={`/blogs/${d.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
                                             <div className="h-3/6">
                                                 <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
@@ -199,13 +185,13 @@ export default function Content({ data }) {
                                             </div>
                                             <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
                                         </Link>
-                                    </div>
+                                    </article>
                                 ))}
-                            </div>
+                            </section>
                         ):(
                             <div className="h-[63vh] text-black w-full flex justify-center items-center">
                                 <div  className="flex flex-col justify-center text-center">
-                                    <h1 className="font-bol text-xl md:text-2xl">Error! Loading posts...Check Network...</h1>
+                                    <span className="font-bol text-xl md:text-2xl">Loading posts...</span>
                                     <div className="flex justify-center mt-3">
                                         <button onClick={() => window.location.reload(false)} className="bg-black text-white py-1 px-3 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center">
                                             <MdRefresh />Refresh<span></span>

@@ -20,7 +20,7 @@ import { CiFacebook, CiYoutube } from "react-icons/ci";
 
 export default function PostSideBar() {
     return (
-        <div className="sticky top-0 w-full md:w-3/12 flex gap-3 flex-col">
+        <aside className="sticky top-0 w-full md:w-3/12 flex gap-3 flex-col">
             <div className="p-4 bg-black rounded-lg hover:shadow-2xl duration-500">
                 
                 <div className="flex justify-between">
@@ -252,6 +252,6 @@ export default function PostSideBar() {
                     <button className="text-[12px] bg-white/10 backdrop-blur-sm py-0.5 px-2 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Go to Shop</button>
                 </div>
             </div> */}
-        </div>
+        </aside>
     );
 }
