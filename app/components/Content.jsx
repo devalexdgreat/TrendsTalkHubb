@@ -65,7 +65,50 @@ export default function Content({ data }) {
     const [dData, setDData] = useState('none');
     const [postdata, setPostData] = useState(null);
     const [isLogIn, setIsLogIn] = useState(false);
+
     const router = useRouter();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    
+    const handleSumbit = async (e) => {
+        e.preventDefault();
+
+        if (!email || !password) {
+            setError("All fields are necessary!");
+            return;
+        }
+        setError("");
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email, password}),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const accessToken = data.accessToken;
+
+                // Store the token in local storage or session storage
+                localStorage.setItem('accessToken', accessToken);
+
+                // Redirect to a secured page or any other page
+                router.refresh();
+                router.push("/");
+            } else {
+                const errorData = await response.json();
+                setError(errorData.message);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            setError('An unexpected error occurred');
+        }
+    }
 
     useEffect(() => {
         if(data) {
@@ -110,18 +153,20 @@ export default function Content({ data }) {
                                 <h1 className="font-bold text-2xl md:text-4xl pb-0.5">Login</h1>
                             </div>
                             <div className="w-full text-[12px]">
-                                <div className="mb-4">
-                                    <span className="bg-red-500 text-white px-2 py-0.5 rounded-md">Wrong Password!</span>
-                                </div>
-                                <form className="w-full">
+                                {error && (
+                                    <div className="mb-4">
+                                        <span className="bg-red-500 text-white px-2 py-0.5 rounded-md">{error}</span>
+                                    </div>
+                                )}
+                                <form className="w-full" onSubmit={handleSumbit}>
                                     <div className="flex flex-col w-full gap-2">
                                         <label>Email Address</label>
-                                        <input type="email" placeholder="johndoe@gmail.com" className="text-[12px] py-2 rounded-md ps-3 border border-black" />
+                                        <input type="email" placeholder="johndoe@gmail.com" onChange={(e) => setEmail(e.target.value)} className="text-[12px] py-2 rounded-md ps-3 border border-black" />
                                     </div>
 
                                     <div className="mt-5 mb-5 flex flex-col w-full gap-2">
                                         <label>Password</label>
-                                        <input type="password" placeholder="abc1234%" className="text-[12px] py-2 rounded-md ps-3 border border-black" />
+                                        <input type="password" placeholder="abc1234%" onChange={(e) => setPassword(e.target.value)} className="text-[12px] py-2 rounded-md ps-3 border border-black" />
                                     </div>
 
                                     <div className="mb-4">
@@ -137,7 +182,7 @@ export default function Content({ data }) {
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-4 heading">
-                            <span className="font-bold text-base mb-0.5">Trending Posts</span>
+                            <span className="font-bold text-base mb-0.5 text-black">Trending Posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
@@ -160,7 +205,7 @@ export default function Content({ data }) {
                                                     </div>
                                                 </div>
                                                 <div className="my-2">
-                                                    <p className="text-[15px] font-bold duration-500">{d.title}</p>
+                                                    <h1 className="text-[15px] font-bold duration-500">{d.title}</h1>
                                                 </div>
                                                 <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-bold w-11/12 justify-between">
                                                     <div className="flex gap-3">

@@ -9,7 +9,6 @@ export async function generateMetadata({params, searchParams }, parent) {
     console.log('hey', posts.data);
     const ps = posts.data;
     let realPost = ps.filter(p => p.id == id);
-    console.log("welcome", realPost[0].tags);
   
  
   return {

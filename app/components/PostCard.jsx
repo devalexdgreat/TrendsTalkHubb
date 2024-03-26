@@ -132,6 +132,38 @@ export default function PostCard({ postid }) {
         fetchPostById();
     }, [id]);
 
+    function isTokenExpired(token) {
+        if (!token) {
+            // If token is not provided, consider it as expired
+            return true;
+        }
+    
+        try {
+            // Decode the token
+            const payload = JSON.parse(atob(token.split('.')[1]));
+    
+            // Get the expiration time (exp) from the payload
+            const expirationTime = payload.exp * 1000; // Convert to milliseconds
+    
+            // Check if the current time is after the expiration time
+            return Date.now() >= expirationTime;
+        } catch (error) {
+            // If decoding fails, consider the token as expired
+            return true;
+        }
+    }
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (isTokenExpired(accessToken)) {
+            console.log('Access token has expired');
+            router.push('/login');
+
+        } else {
+            console.log('Access token is still valid');
+        }
+    });
+
     useEffect(() => {
         const fetchRelated = async (data) => {
             try {
