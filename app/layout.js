@@ -32,14 +32,13 @@ export const metadata = {
 };
 
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, isAppleDevice }) {
   // Detect user-agent to determine the font
-  const isAppleDevice = /Mac|iPhone|iPad/.test(navigator.userAgent);
   const fontClass = isAppleDevice ? fontForAppleDevices.className : fontForOtherDevices.className;
   return (
     <html lang="en" className="">
       <Head>
-        <link rel="icon" type="image/png" href='/favicon.png' />
+        <link rel="icon" href='/favicon.png' />
       </Head>
       <body className={fontClass}>
           
@@ -49,3 +48,9 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+RootLayout.getInitialProps = ({ req }) => {
+  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
+  const isAppleDevice = /Mac|iPhone|iPad/.test(userAgent);
+  return { isAppleDevice };
+};
