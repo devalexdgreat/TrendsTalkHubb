@@ -128,7 +128,7 @@ export default function Content({ data }) {
                             <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 
                                 {data.map((d) => (
-                                    <article className="h-80" key={d.id} onClick={handleClick}>
+                                    <article className="h-72" key={d.id} onClick={handleClick}>
                                         <Link href={`/blogs/${d.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
                                             <div className="h-3/6">
                                                 <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
