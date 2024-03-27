@@ -2,6 +2,8 @@ import Head from "next/head";
 import Footer from "./components/Footer";
 import "./globals.css";
 import localFont from 'next/font/local';
+import UAParser from 'ua-parser-js';
+
 
 // Define fonts for iPhones/MacBooks and Android/Windows separately
 const fontForAppleDevices = localFont({
@@ -34,7 +36,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   // Detect user-agent to determine the font
-  const fontClass = fontForAppleDevices.className;
+  const userAgent = typeof window === 'undefined' ? null : navigator.userAgent;
+  const parser = new UAParser(userAgent);
+  const { device, os } = parser.getResult();
+  const isAppleDevice = device.family === 'iPhone' || device.family === 'iPad' || os.name === 'Mac OS';
+  console.log(isAppleDevice);
+  const fontClass = isAppleDevice ? fontForAppleDevices.className : fontForOtherDevices.className;
   return (
     <html lang="en" className="">
       <Head>

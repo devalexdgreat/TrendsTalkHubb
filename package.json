@@ -21,7 +21,9 @@
     "react-infinite-logo-slider": "^1.0.13",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "ua-parser-js": "^1.0.37",
+    "useragent": "^2.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
