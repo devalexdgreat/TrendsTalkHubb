@@ -68,48 +68,6 @@ export default function Content({ data }) {
 
     const router = useRouter();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    
-    const handleSumbit = async (e) => {
-        e.preventDefault();
-
-        if (!email || !password) {
-            setError("All fields are necessary!");
-            return;
-        }
-        setError("");
-
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({email, password}),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                const accessToken = data.accessToken;
-
-                // Store the token in local storage or session storage
-                localStorage.setItem('accessToken', accessToken);
-
-                // Redirect to a secured page or any other page
-                router.refresh();
-                router.push("/");
-            } else {
-                const errorData = await response.json();
-                setError(errorData.message);
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            setError('An unexpected error occurred');
-        }
-    }
-
     useEffect(() => {
         if(data) {
             setPostData(data);
@@ -147,35 +105,16 @@ export default function Content({ data }) {
                 <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8 h-full">
 
                     <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
-                        <div className="rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
+                        <div className="text-center rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
                             <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-bold" onClick={toggleMenu}><IoClose /></button>
-                            <div className="w-full pb-6">
-                                <h1 className="font-bold text-2xl md:text-4xl pb-0.5">Login</h1>
+                            <div className="w-full py-7">
+                                <span className="font-bold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
                             </div>
-                            <div className="w-full text-[12px]">
-                                {error && (
-                                    <div className="mb-4">
-                                        <span className="bg-red-500 text-white px-2 py-0.5 rounded-md">{error}</span>
-                                    </div>
-                                )}
-                                <form className="w-full" onSubmit={handleSumbit}>
-                                    <div className="flex flex-col w-full gap-2">
-                                        <label>Email Address</label>
-                                        <input type="email" placeholder="johndoe@gmail.com" onChange={(e) => setEmail(e.target.value)} className="text-[12px] py-2 rounded-md ps-3 border border-black" />
-                                    </div>
-
-                                    <div className="mt-5 mb-5 flex flex-col w-full gap-2">
-                                        <label>Password</label>
-                                        <input type="password" placeholder="abc1234%" onChange={(e) => setPassword(e.target.value)} className="text-[12px] py-2 rounded-md ps-3 border border-black" />
-                                    </div>
-
-                                    <div className="mb-4">
-                                        <input type="submit" className="py-2 px-5 bg-black text-white rounded-lg" value="Log in" />
-                                    </div>
-                                    <div className="">
-                                        <span className="text-gray-500">Dont have an account? </span><Link href={'/signup'} className="text-black font-bold">Sign up</Link>
-                                    </div>
-                                </form>
+                            <div>
+                                <Link href={'/signup'} className="py-1 px-7 bg-black text-white rounded-md hover:text-black/80 duration-500">Sign up</Link>
+                            </div>
+                            <div className="mt-7">
+                                <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black font-bold hover:text-black/80 duration-500">Sign in</Link>
                             </div>
                         </div>
                     </div>

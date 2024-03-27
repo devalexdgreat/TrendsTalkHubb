@@ -1,14 +1,21 @@
 import Head from "next/head";
 import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 import "./globals.css";
 import localFont from 'next/font/local';
-import favicon from '@/public/favicon.png'
 
-const anyFont = localFont({
+// Define fonts for iPhones/MacBooks and Android/Windows separately
+const fontForAppleDevices = localFont({
   src: [
     {
-      path: './fonts/Poppins-Light.ttf',
+      path: './fonts/Helvetica.ttf', // Replace with your font path for Apple devices
+    },
+  ],
+})
+
+const fontForOtherDevices = localFont({
+  src: [
+    {
+      path: './fonts/Poppins-Light.ttf', // Replace with your font path for other devices
     },
   ],
 })
@@ -26,12 +33,15 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
+  // Detect user-agent to determine the font
+  const isAppleDevice = /Mac|iPhone|iPad/.test(navigator.userAgent);
+  const fontClass = isAppleDevice ? fontForAppleDevices.className : fontForOtherDevices.className;
   return (
     <html lang="en" className="">
       <Head>
         <link rel="icon" type="image/png" href='/favicon.png' />
       </Head>
-      <body className={anyFont.className}>
+      <body className={fontClass}>
           
           {children}
           <Footer />
