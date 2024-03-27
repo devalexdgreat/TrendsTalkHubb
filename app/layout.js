@@ -32,9 +32,9 @@ export const metadata = {
 };
 
 
-export default function RootLayout({ children, isAppleDevice }) {
+export default function RootLayout({ children }) {
   // Detect user-agent to determine the font
-  const fontClass = isAppleDevice ? fontForAppleDevices.className : fontForOtherDevices.className;
+  const fontClass = fontForAppleDevices.className;
   return (
     <html lang="en" className="">
       <Head>
@@ -48,9 +48,3 @@ export default function RootLayout({ children, isAppleDevice }) {
     </html>
   );
 }
-
-RootLayout.getInitialProps = ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-  const isAppleDevice = /Mac|iPhone|iPad/.test(userAgent);
-  return { isAppleDevice };
-};
