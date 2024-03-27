@@ -56,25 +56,25 @@ export default function PostSideBar() {
                     </button>
                 </div>
                 <div className="grid grid-cols-1 gap-2 items-center w-full my-3">
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-base md:text-[12px] group">
+                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
                         <Image src={imgOne} className="w-3/12" alt="" />
                         <div className="w-9/12">
                             <h1 className="group-hover:text-gray-400 duration-500 font-bold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
                         </div>
                     </Link>
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-base md:text-[12px] group">
+                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
                         <Image src={imgOne} className="w-3/12" alt="" />
                         <div className="w-9/12">
                             <h1 className="group-hover:text-gray-400 duration-500 font-bold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
                         </div>
                     </Link>
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-base md:text-[12px] group">
+                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
                         <Image src={imgOne} className="w-3/12" alt="" />
                         <div className="w-9/12">
                             <h1 className="group-hover:text-gray-400 duration-500 font-bold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
                         </div>
                     </Link>
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-base md:text-[12px] group">
+                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
                         <Image src={imgOne} className="w-3/12" alt="" />
                         <div className="w-9/12">
                             <h1 className="group-hover:text-gray-400 duration-500 font-bold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
