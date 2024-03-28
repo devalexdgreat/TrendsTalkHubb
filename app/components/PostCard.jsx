@@ -256,7 +256,6 @@ export default function PostCard({ postid }) {
 
             if(response.ok) {
                 const message = await response.json();
-                alert(message.message);
                 toggleLike();
                 checkLiked();
                 router.refresh();
@@ -270,21 +269,20 @@ export default function PostCard({ postid }) {
         <section className="w-full md:w-9/12 text-black">
             {data ? (
                 <div className="w-full">       
-                    <article>
-                        <div className="text-[14px] flex gap-1 items-center">
-                        <Link href={'/'} className="text-black/80 rounded-md font-bold flex gap-1 items-center">
-                            <IoHomeOutline />Home
-                        </Link>/
-                        <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-bold flex gap-1 items-center hover:text-black/80 duration-500">
-                            <FaFolderOpen />{data.category}
-                        </Link>
+                    <div>
+                        <div className="text-[13px] flex gap-1 items-center">
+                            <Link href={'/'} className="text-black/80 rounded-md font-bold flex gap-1 items-center">Home
+                            </Link>/
+                            <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-bold flex gap-1 items-center hover:text-black/80 duration-500">
+                                <FaFolderOpen />{data.category}
+                            </Link>
                         </div>
-                        <div className="text-[12px] flex gap-2 items-center mt-1">
+                        <div className="text-[12px] flex gap-2 items-center mt-4 overflow-x-scroll scrollbar-hide">
                             <div className="font-bold">
-                                #
+                                #Tags
                             </div>
                             {data.tags.map((tag) => (
-                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-black/80 backdrop-blur-sm bg-black text-white">
+                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-1 px-2 rounded-md duration-500 text-[10px] flex items-center gap-2 hover:bg-black/80 backdrop-blur-sm bg-black text-white whitespace-nowrap">
                                     <AiOutlineRise />
                                     <p>{tag}</p>
                                 </Link>
@@ -292,7 +290,7 @@ export default function PostCard({ postid }) {
                         </div>
                         <h1 className="w-full my-4 font-bold text-2xl md:text-4xl">{data.title}</h1>
                         <div className="flex gap-2 items-center text-[12px]">
-                            <span className="border rounded-full border-black p-1"><FaUser /></span>
+                            <FaUser className="text-[10px]"/>
                             <div className="flex gap-0.5 items-center">
                                 <h1>{data.author}</h1>
                                 <span><BsDot /></span>
@@ -338,7 +336,7 @@ export default function PostCard({ postid }) {
                                 </Link>
                             </div>
                         </div>
-                    </article>
+                    </div>
 
                     <div className="mt-12">
                         <div className="mb-4 heading">
@@ -379,7 +377,7 @@ export default function PostCard({ postid }) {
                                                     </div>
                                                     <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
                                                         {r.tags.map((tag) => (
-                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm">
+                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
                                                                 <AiOutlineRise />
                                                                 <span>{tag}</span>
                                                             </Link>

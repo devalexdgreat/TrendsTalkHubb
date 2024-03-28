@@ -15,6 +15,7 @@ import SearchComponent from "./SearchComponent";
 import LogoutBtn from "./LogoutBtn";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
+import { HiOutlineMenu } from "react-icons/hi";
 
 export default function Navbar() {
 
@@ -190,7 +191,9 @@ export default function Navbar() {
 
                 <div className="flex gap-2 items-center md:hidden">
                     <button onClick={toggleSearch} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2"><FiSearch /></button>
-                    <button onClick={toggleMenu} className="bg-black py-1 px-2 rounded-md text-white">Menu</button>
+                    <button onClick={toggleMenu} className="text-xl hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
+                        <HiOutlineMenu />
+                    </button>
                 </div>
             </div>
             {menuOpen && (
@@ -200,7 +203,9 @@ export default function Navbar() {
                             <Image src={logoLight} className="h-10 w-32" alt="" />
                         </Link>
                         <div className="flex items-center md:hidden">
-                            <button onClick={toggleMenu} className="bg-white text-black py-1 px-2 rounded-md">Close</button>
+                            <button onClick={toggleMenu} className="text-xl hover:bg-white/10 backdrop-blur-sm rounded-sm duration-500 p-2">
+                                <IoClose />
+                            </button>
                         </div>
                     </div>
                     <div className="w-[95%] mx-auto flex flex-col">
