@@ -138,26 +138,21 @@ export default function Navbar() {
         }
     }
 
+    const Logout = () => {
+        // Clear the access token from local storage
+        localStorage.removeItem('accessToken');
+        
+        // Redirect the user to the login page
+        router.push('/login'); // Replace '/login' with the appropriate login page route
+        toggleMenu();
+    }
+
     return (
         <div className="w-full fixed top-0 z-30 bg-white shadow-md" ref={ref}>
             <div className="w-[95%] mx-auto flex items-center text-black justify-between py-3">
                 <Link href={'/'} className="font-bold">
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>
-                {isloggedIn && (
-                        <button onClick={toggleProfile} className="flex rounded-full h-9 justify-center items-center text-[12px] bg-black text-white p-0.5 md:hidden">
-                            <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
-                                <FaCircleUser className="text-2xl" />
-                            </span>
-                            <div className="h-full ps-2 pe-3 flex justify-center items-center">
-                            {user ? (
-                                <span className="font-bold">@{user.username}</span>
-                            ):(
-                                <span>Error!</span>
-                            )}
-                            </div>
-                        </button>
-                    )}
                 <div className="hidden md:flex items-center gap-6">
                     
                     <Link href={'/'} className="hover:text-black/60 duration-500">Home</Link>
@@ -218,10 +213,28 @@ export default function Navbar() {
                             <GoMegaphone />
                         </Link>
                         {isloggedIn ? (
-                            <button onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
-                                <span>Logout</span>
-                                <FiLogOut />
-                            </button>
+                            <div className="flex justify-between items-center py-2">
+                                <div className="flex rounded-full h-9 justify-center items-center text-[12px] bg-black text-white p-0.5 md:hidden">
+                                    <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
+                                        <FaCircleUser className="text-2xl" />
+                                    </span>
+                                    <div className="h-full ps-2 pe-3 flex justify-center items-center">
+                                        {user ? (
+                                            <div className="text-[12px] md:text-base flex flex-col">
+                                                <span>@{user.username}</span>
+                                                <span>{user.email}</span>
+                                            </div>
+                                        ):(
+                                            <span className="pt-2 px-2">Loading...</span>
+                                        )}
+                                    </div>
+                                </div>
+                                <button onClick={Logout} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 px-3 py-2 text-center mt-2 flex justify-center gap-3 items-center">
+                                    <span>Logout</span>
+                                    <FiLogOut />
+                                </button>
+                            </div>
+                            
                         ):(
                             <Link href={'/login'} onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
                                 <span>Login</span>

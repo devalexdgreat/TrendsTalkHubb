@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 const anyFont = localFont({
   src: [
     {
-      path: './fonts/pp.woff2', // Replace with your font path for Apple devices
+      path: './fonts/Poppins-Regular.ttf', // Replace with your font path for Apple devices
     },
   ],
 })

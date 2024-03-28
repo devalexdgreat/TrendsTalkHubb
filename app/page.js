@@ -25,7 +25,7 @@ export default async function Home() {
   console.log("heeloo", posts);
 
   return (
-    <main className="h-auto">
+    <main className="h-auto antialiased">
       <Navbar />
       <Content data={posts}/>
     </main>
