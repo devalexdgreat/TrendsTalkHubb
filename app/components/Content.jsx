@@ -111,7 +111,7 @@ export default function Content({ data }) {
                                 <span className="font-bold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
                             </div>
                             <div>
-                                <Link href={'/signup'} className="py-1 px-7 bg-black text-white rounded-md hover:text-black/80 duration-500">Sign up</Link>
+                                <Link href={'/signup'} className="py-1 px-7 bg-black text-white rounded-md hover:bg-black/80 duration-500">Sign up</Link>
                             </div>
                             <div className="mt-7">
                                 <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black font-bold hover:text-black/80 duration-500">Sign in</Link>

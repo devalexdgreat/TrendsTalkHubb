@@ -1,14 +1,20 @@
 import Footer from "./components/Footer";
 import "./globals.css";
 import localFont from 'next/font/local';
-
-const anyFont = localFont({
-  src: [
-    {
-      path: './fonts/Poppins-Regular.ttf', // Replace with your font path for Apple devices
-    },
-  ],
+import { Poppins } from 'next/font/google'
+ 
+const anyFont = Poppins({
+  weight: '300',
+  subsets: ['latin'],
 })
+
+// const anyFont = localFont({
+//   src: [
+//     {
+//       path: './fonts/Poppins-Regular.ttf', // Replace with your font path for Apple devices
+//     },
+//   ],
+// })
 
 export const metadata = {
   title: "TrendsTalk Hubb: Explore the Latest Trends and Insights",

@@ -13,7 +13,9 @@ const getPostsByCategory = async (id) => {
         }
 
         const data = await res.json();
-        return data.posts;
+        return data;
+
+
 
     } catch (error) {
         console.log(error);
@@ -23,15 +25,15 @@ const getPostsByCategory = async (id) => {
 export default async function Categories({ params }) {
 
     const { id } = params;
-    const posts = await getPostsByCategory(id);
-    console.log('hey', posts);
+    const {posts} = await getPostsByCategory(id);
+    const {title} = await getPostsByCategory(id);
 
     return (
         <div className="w-full">
             <Navbar />
             <div className="w-full mt-20 mb-24">
                 <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
-                    <CategoryCard data={posts} tag={id}/>
+                    <CategoryCard data={posts} tag={id} title={title}/>
                     <PostSideBar />
                 </div>
             </div>

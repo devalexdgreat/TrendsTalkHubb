@@ -1,4 +1,5 @@
 "use client";
+import { delCookies } from "@/actions";
 import { useRouter } from "next/navigation";
 import { FiLogOut } from "react-icons/fi";
 
@@ -11,7 +12,7 @@ export default function LogoutBtn() {
     const Logout = () => {
         // Clear the access token from local storage
         localStorage.removeItem('accessToken');
-    
+        delCookies();
         // Redirect the user to the login page
         router.push('/login'); // Replace '/login' with the appropriate login page route
     }

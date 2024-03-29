@@ -1,8 +1,9 @@
 'use client';
 import Link from "next/link";
 import { useState } from "react";
-import { IoClose } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { setCookies } from "@/actions";
+
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -33,12 +34,16 @@ export default function LoginForm() {
                 const data = await response.json();
                 const accessToken = data.accessToken;
 
+                await setCookies(accessToken);
+
                 // Store the token in local storage or session storage
                 localStorage.setItem('accessToken', accessToken);
 
                 // Redirect to a secured page or any other page
+                
                 router.refresh();
                 router.push("/");
+                
             } else {
                 const errorData = await response.json();
                 setError(errorData.message);

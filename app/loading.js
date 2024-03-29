@@ -9,18 +9,18 @@ export default function Loading() {
             <div className="text-center flex flex-col justify-center items-center">
                 <Image src={logoDark} className="h-10 w-32" alt="" />
                 <div class="loader mt-5">
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
-                    <div class="bar4"></div>
-                    <div class="bar5"></div>
-                    <div class="bar6"></div>
-                    <div class="bar7"></div>
-                    <div class="bar8"></div>
-                    <div class="bar9"></div>
-                    <div class="bar10"></div>
-                    <div class="bar11"></div>
-                    <div class="bar12"></div>
+                    <div className="bar1"></div>
+                    <div className="bar2"></div>
+                    <div className="bar3"></div>
+                    <div className="bar4"></div>
+                    <div className="bar5"></div>
+                    <div className="bar6"></div>
+                    <div className="bar7"></div>
+                    <div className="bar8"></div>
+                    <div className="bar9"></div>
+                    <div className="bar10"></div>
+                    <div className="bar11"></div>
+                    <div className="bar12"></div>
                 </div>
             </div>
         </div>

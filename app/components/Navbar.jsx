@@ -16,6 +16,7 @@ import LogoutBtn from "./LogoutBtn";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 import { HiOutlineMenu } from "react-icons/hi";
+import { delCookies } from "@/actions";
 
 export default function Navbar() {
 
@@ -57,9 +58,8 @@ export default function Navbar() {
             console.log('Access token has expired now');
             // Clear the access token from local storage
             localStorage.removeItem('accessToken');
+            delCookies();
             return; 
-        } else {
-            console.log('Access token is still valid');
         }
     });
 
@@ -131,16 +131,31 @@ export default function Navbar() {
             alert("Error - Search field is empty!");
             return;
         } else {
-            const posts = await getPostsByQuery(query);;
-            console.log('hey', posts);
+            const posts = await getPostsByQuery(query);
             setFoundQuery(posts);
             setIsClicked(true);
         }
     }
 
+    var found;
+    var isEmpty;
+    if(foundQuery.length > 0) {
+        found = foundQuery;
+        isEmpty = true;
+    } 
+    else if (isClicked == false) {
+        isEmpty = true;
+        found = [];
+    }
+    else {
+        found = [];
+        isEmpty = false;
+    }
+
     const Logout = () => {
         // Clear the access token from local storage
         localStorage.removeItem('accessToken');
+        delCookies();
         
         // Redirect the user to the login page
         router.push('/login'); // Replace '/login' with the appropriate login page route
@@ -225,7 +240,7 @@ export default function Navbar() {
                                                 <span>{user.email}</span>
                                             </div>
                                         ):(
-                                            <span className="pt-2 px-2">Loading...</span>
+                                            <span className="pt-2 px-2">Error!...</span>
                                         )}
                                     </div>
                                 </div>
@@ -249,12 +264,38 @@ export default function Navbar() {
                     <div className="w-[95%] mx-auto flex flex-col items-end md:justify-end py-3">
                         <div className="w-full md:w-6/12 flex items-center gap-1">
                             <input onChange={(e) => setQuery(e.target.value)} value={query} type="text" className="w-full py-0.5 ps-2 rounded-sm text-black" placeholder="Search here"/>
-                            <button onClick={handleSearch} className="bg-black hover:bg-black/70 backdrop-blur-sm rounded-sm duration-500 p-2">
-                                <FiSearch />
+                            <button onClick={handleSearch} className="bg-black hover:bg-black/70 backdrop-blur-sm rounded-sm duration-500 p-2 flex items-center gap-1">
+                                <FiSearch /><span className="text-[12px]">Search</span>
                             </button>
                             <button onClick={toggleSearch} className="bg-red-500 hover:bg-red-500/90 backdrop-blur-sm rounded-sm duration-500 p-2"><IoClose /></button>
                         </div>
-                        <SearchComponent foundQuery={foundQuery} clickStatus={isClicked}/>
+                        <>
+                            {isEmpty ? (
+                                <>
+                                    <div className="w-full md:w-6/12 mt-3">
+                                        <span>Results for Search</span>
+                                    </div>
+                                    <div className="w-full md:w-6/12 flex flex-col only:md:flex-row mt-3 gap-2">
+                                        {found.map((f) => (
+                                            <div key={f.id} className="z-10">
+                                                <Link href={`/blogs/${f.id}`} onClick={toggleSearch} className="z-20 group bg-black/30 backdrop-blur-sm rounded-md p-2 flex h-24 gap-2">
+                                                    <div className="w-3/12 h-full">
+                                                        <Image src={imgOne} className="rounded-md object-cover h-full" alt="" />
+                                                    </div>
+                                                    <div className="w-9/12 h-full flex items-center">
+                                                        <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-bold">{f.title}</h1>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="w-full md:w-6/12 mt-3 bg-red-500 text-white ps-2 rounded-md">
+                                    <h1>Not Found</h1>
+                                </div>
+                            )} 
+                        </>
                     </div>
                 </div>
             )}
