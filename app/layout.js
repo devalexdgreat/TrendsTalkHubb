@@ -67,10 +67,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="">
       <Head>
-        <meta property="og:image" content="<generated>" />
-        <meta property="og:image:type" content="<generated>" />
-        <meta property="og:image:width" content="<generated>" />
-        <meta property="og:image:height" content="<generated>" />
+      
       </Head>
       <body className={anyFont.className}>
           {children}
