@@ -2,6 +2,7 @@ import Footer from "./components/Footer";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { Poppins } from 'next/font/google'
+import Head from "next/head";
  
 const anyFont = Poppins({
   weight: '300',
@@ -31,6 +32,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="">
+      <Head>
+        <meta property="og:image" content="<generated>" />
+        <meta property="og:image:type" content="<generated>" />
+        <meta property="og:image:width" content="<generated>" />
+        <meta property="og:image:height" content="<generated>" />
+      </Head>
       <body className={anyFont.className}>
           {children}
           <Footer />
