@@ -18,6 +18,40 @@ const anyFont = Poppins({
 // })
 
 export const metadata = {
+  openGraph: {
+    title: 'TrendsTalk Hubb: Explore the Latest Trends and Insights',
+    description: 'Discover insightful articles and discussions on the latest trends across various industries at TrendsTalk Hubb.',
+    url: 'https://trendstalkhubb.vercel.app/',
+    siteName: 'TrendsTalk Hubb',
+    images: [
+      {
+        url: 'https://trendstalkhubb.vercel.app/favicon.png', // Must be an absolute URL
+        width: 800,
+        height: 600,
+      },
+      {
+        url: 'https://trendstalkhubb.vercel.app/favicon.png', // Must be an absolute URL
+        width: 1800,
+        height: 1600,
+        alt: 'Trendstalk Hubb.',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   title: "TrendsTalk Hubb: Explore the Latest Trends and Insights",
   description: "Discover insightful articles and discussions on the latest trends across various industries at TrendsTalk Hubb.",
   keywords: "trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
