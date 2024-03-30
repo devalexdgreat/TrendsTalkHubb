@@ -131,7 +131,7 @@ export default function Content({ data }) {
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-5 heading mt-5">
-                            <span className="font-semibold mb-0.5 text-black text-lg md:text-xl">Trending posts</span>
+                            <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Trending posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
