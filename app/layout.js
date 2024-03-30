@@ -18,6 +18,9 @@ import Head from "next/head";
 // })
 
 export const metadata = {
+  icons: {
+    apple: '/apple-icon.png',
+  },
   metadataBase: new URL('https://trendstalkhubb.vercel.app'),
     alternates: {
       canonical: '/',
