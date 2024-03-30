@@ -115,22 +115,22 @@ export default function Content({ data }) {
 
                     <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
                         <div className="text-center rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
-                            <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-semibold" onClick={toggleMenu}><IoClose /></button>
+                            <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-medium" onClick={toggleMenu}><IoClose /></button>
                             <div className="w-full py-7">
-                                <span className="font-semibold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
+                                <span className="font-medium text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
                             </div>
                             <div>
                                 <Link href={'/signup'} className="py-1 px-7 bg-black text-white rounded-md hover:bg-black/80 duration-500">Sign up</Link>
                             </div>
                             <div className="mt-7">
-                                <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black font-semibold hover:text-black/80 duration-500">Sign in</Link>
+                                <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black font-medium hover:text-black/80 duration-500">Sign in</Link>
                             </div>
                         </div>
                     </div>
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-4 heading">
-                            <span className="font-semibold text-base mb-0.5 text-black">Trending Posts</span>
+                            <span className="font-medium text-base mb-0.5 text-black">Trending Posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
@@ -153,9 +153,9 @@ export default function Content({ data }) {
                                                     </div>
                                                 </div>
                                                 <div className="my-2">
-                                                    <h1 className="text-[15px] font-semibold duration-500">{d.title}</h1>
+                                                    <h1 className="text-[15px] font-medium duration-500">{d.title}</h1>
                                                 </div>
-                                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-medium w-11/12 justify-between">
                                                     <div className="flex gap-3">
                                                         <button className="flex gap-1.5 items-center">
                                                             <BsHandThumbsUp />

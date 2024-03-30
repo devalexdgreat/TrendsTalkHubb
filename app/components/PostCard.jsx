@@ -172,14 +172,14 @@ export default function PostCard({ post, token, postid, relatedData }) {
             <div className="w-full">       
                 <div>
                     <div className="text-[13px] flex gap-1 items-center">
-                        <Link href={'/'} className="text-black/80 rounded-md font-semibold flex gap-1 items-center">Home
+                        <Link href={'/'} className="text-black/80 rounded-md font-medium flex gap-1 items-center">Home
                         </Link>/
-                        <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-semibold flex gap-1 items-center hover:text-black/80 duration-500">
+                        <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-medium flex gap-1 items-center hover:text-black/80 duration-500">
                             <FaFolderOpen />{data.category}
                         </Link>
                     </div>
                     <div className="text-[12px] flex gap-2 items-center mt-4 overflow-x-scroll scrollbar-hide">
-                        <div className="font-semibold">
+                        <div className="font-medium">
                             #Tags
                         </div>
                         {post.tags.map((tag) => (
@@ -189,7 +189,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                             </Link>
                         ))}
                     </div>
-                    <h1 className="w-full my-4 font-semibold text-2xl md:text-4xl">{data.title}</h1>
+                    <h1 className="w-full my-4 font-medium text-2xl md:text-4xl">{data.title}</h1>
                     <div className="flex gap-2 items-center text-[12px]">
                         <FaUser className="text-[10px]"/>
                         <div className="flex gap-0.5 items-center">
@@ -241,7 +241,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
 
                 <div className="mt-12">
                     <div className="mb-4 heading">
-                        <span className="font-semibold text-base mb-0.5">Related Posts</span>
+                        <span className="font-medium text-base mb-0.5">Related Posts</span>
                         <hr className="border-2 border-black w-12 rounded-3xl"/>
                     </div>
                     <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -262,9 +262,9 @@ export default function PostCard({ post, token, postid, relatedData }) {
                                             </div>
                                         </div>
                                         <div className="my-2">
-                                            <h2 className="text-[15px] font-semibold duration-500">{r.title}</h2>
+                                            <h2 className="text-[15px] font-medium duration-500">{r.title}</h2>
                                         </div>
-                                        <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                        <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-medium w-11/12 justify-between">
                                             <div className="flex gap-3">
                                                 <button className="flex gap-1.5 items-center">
                                                     <BsHandThumbsUp />
