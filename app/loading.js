@@ -5,7 +5,7 @@ import logoDark from '@/public/logo-dark.png'
 export default function Loading() {
     // You can add any UI inside Loading, including a Skeleton.
     return (
-        <div className="h-screen w-full flex justify-center items-center bg-white text-black">
+        <div className="h-screen w-full flex justify-center items-center bg-white text-black fixed top-0">
             <div className="text-center flex flex-col justify-center items-center">
                 <Image src={logoDark} className="h-10 w-32" alt="" />
                 <div class="loader mt-5">

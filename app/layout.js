@@ -29,6 +29,15 @@ export const metadata = {
         'de-DE': '/de-DE',
       },
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: "TrendsTalk Hubb: Explore the Latest Trends and Insights",
+      description: 'Discover insightful articles and discussions on the latest trends across various industries at TrendsTalk Hubb.',
+      siteId: '@TrendsTalkHubb',
+      creator: 'TrendsTalkHubb',
+      creatorId: '@TrendsTalkHubb',
+      images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
+      },
   openGraph: {
     title: 'TrendsTalk Hubb: Explore the Latest Trends and Insights',
     description: 'Discover insightful articles and discussions on the latest trends across various industries at TrendsTalk Hubb.',

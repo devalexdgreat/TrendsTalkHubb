@@ -22,7 +22,6 @@ const getPosts = async () => {
 export default async function Home() {
 
   const posts = await getPosts();
-  console.log("heeloo", posts);
 
   return (
     <main className="h-auto antialiased">

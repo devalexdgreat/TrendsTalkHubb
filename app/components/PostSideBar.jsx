@@ -18,7 +18,7 @@ import imgFive from '@/public/5.jpg'
 import Link from "next/link";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 
-export default function PostSideBar() {
+export default function PostSideBar({ posts }) {
     return (
         <aside className="sticky top-0 w-full md:w-3/12 flex gap-3 flex-col">
             <div className="p-4 bg-black rounded-lg hover:shadow-2xl duration-500">
@@ -56,30 +56,14 @@ export default function PostSideBar() {
                     </button>
                 </div>
                 <div className="grid grid-cols-1 gap-2 items-center w-full my-3">
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
-                        <Image src={imgOne} className="w-3/12" alt="" />
-                        <div className="w-9/12">
-                            <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
-                        </div>
-                    </Link>
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
-                        <Image src={imgOne} className="w-3/12" alt="" />
-                        <div className="w-9/12">
-                            <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
-                        </div>
-                    </Link>
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
-                        <Image src={imgOne} className="w-3/12" alt="" />
-                        <div className="w-9/12">
-                            <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
-                        </div>
-                    </Link>
-                    <Link href={'#'} className="w-full flex gap-2 items-center justify-between text-[12px] group">
-                        <Image src={imgOne} className="w-3/12" alt="" />
-                        <div className="w-9/12">
-                            <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">Delight bought a new range rover velar and a sport puarsango ferrari</h1>
-                        </div>
-                    </Link>
+                    {posts.map((p) => (
+                        <Link key={p.id} href={`/blogs/${p.id}`} className="w-full flex gap-2 items-center justify-between text-[12px] group">
+                            <Image src={imgOne} className="w-3/12" alt="" />
+                            <div className="w-9/12">
+                                <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">{p.title}</h1>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
             </div>
 

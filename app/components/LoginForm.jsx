@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { setCookies } from "@/actions";
+import Image from "next/image";
 
 
 export default function LoginForm() {
@@ -56,32 +57,35 @@ export default function LoginForm() {
 
     return (
         <div className="flex justify-center items-center h-screen w-full bg-white backdrop-blur-sm fixed top-0 left-0">
-            <div className="rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
-                <div className="w-full pb-6">
-                    <h1 className="font-semibold text-xl md:text-2xl pb-0.5">Trends Talkhubb - Login</h1>
+            <div className="rounded-lg w-[95%] md:w-4/12 px-6 py-6 text-black z-40 bg-white relative">
+                <div className="w-full pb-6 flex flex-col justify-center items-center">
+                    <Link className="" href={'/'} alt="back">
+                        <Image src='/favicon.png' width={100} height={100} className="" alt="logo" />
+                    </Link>
+                    <h1 className="font-semibold text-xl md:text-2xl pb-0.5">Sign in to your account</h1>
                 </div>
                 <div className="w-full text-[12px]">
                     {error && (
-                        <div className="mb-4">
+                        <div className="mb-4 w-full flex justify-center items-center">
                             <span className="bg-red-500 text-white px-2 py-0.5 rounded-md">{error}</span>
                         </div>
                     )}
-                    <form className="w-full" onSubmit={handleSumbit}>
+                    <form className="w-full flex flex-col justify-center items-center" onSubmit={handleSumbit}>
                         <div className="flex flex-col w-full gap-2">
-                            <label>Email Address</label>
+                            <label className="font-semibold">Email Address</label>
                             <input type="email" placeholder="johndoe@gmail.com" onChange={(e) => setEmail(e.target.value)} className="text-[12px] py-2 rounded-md ps-3 border border-black" />
                         </div>
 
                         <div className="mt-5 mb-5 flex flex-col w-full gap-2">
-                            <label>Password</label>
+                            <label className="font-semibold">Password</label>
                             <input type="password" placeholder="abc1234%" onChange={(e) => setPassword(e.target.value)} className="text-[12px] py-2 rounded-md ps-3 border border-black" />
                         </div>
 
-                        <div className="mb-4">
-                            <input type="submit" className="py-2 px-5 bg-black text-white rounded-lg" value="Log in" />
+                        <div className="mb-4 w-full">
+                            <input type="submit" className="font-semibold w-full py-2 px-5 bg-black text-white rounded-lg text-sm hover:bg-black/70 duration-500" value="Log in" />
                         </div>
-                        <div className="">
-                            <span className="text-gray-500">Dont have an account? </span><Link href={'/signup'} className="text-black font-semibold">Sign up</Link>
+                        <div className="text-base">
+                            <span className="text-gray-500">Dont have an account? </span><Link href={'/signup'} className="text-black font-semibold hover:text-black/40 duration-500">Sign up</Link>
                         </div>
                     </form>
                 </div>

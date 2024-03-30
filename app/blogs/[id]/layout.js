@@ -39,10 +39,8 @@ export async function generateMetadata({params, searchParams }, parent) {
  
   // fetch data
   const posts = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`);
-    console.log('hey', posts.data);
     const ps = posts.data;
     let realPost = ps.filter(p => p.id == id);
-    console.log(realPost[0].tags.toString());
   
  
   return {
@@ -54,6 +52,15 @@ export async function generateMetadata({params, searchParams }, parent) {
         'de-DE': '/de-DE',
       },
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: realPost[0].title,
+      description: realPost[0].content,
+      siteId: '@TrendsTalkHubb',
+      creator: 'TrendsTalkHubb',
+      creatorId: '@TrendsTalkHubb',
+      images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
+      },
     openGraph: {
       title: realPost[0].title,
       description: realPost[0].content,

@@ -16,7 +16,7 @@ import LogoutBtn from "./LogoutBtn";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 import { HiOutlineMenu } from "react-icons/hi";
-import { delCookies } from "@/actions";
+import { delCookies, getCookies } from "@/actions";
 
 export default function Navbar() {
 
@@ -28,6 +28,7 @@ export default function Navbar() {
     const [isClicked, setIsClicked] = useState(false);
     const [isloggedIn, setIsLoggedIn] = useState(true);
     const [user, setUser] = useState(null);
+    const [categories, setCategories] = useState(null);
     const router = useRouter();
     const ref = useRef();
 
@@ -64,14 +65,22 @@ export default function Navbar() {
     });
 
     useEffect(() => {
-        let accessToken = localStorage.getItem('accessToken');
-        if(accessToken != null) {
-            setIsLoggedIn(true);
-            return;
-        } else {
-            setIsLoggedIn(false);
+        const fetchAt = async () => {
+            let aT = await getCookies();
+            return aT;
         }
-    }, [])
+        const checkLogin = async () => {
+            let accessToken = localStorage.getItem('accessToken');
+            let aToken = await fetchAt();
+            if(accessToken != null || aToken != null) {
+                setIsLoggedIn(true);
+                return;
+            } else {
+                setIsLoggedIn(false);
+            }
+        }
+        checkLogin();
+    })
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -97,6 +106,27 @@ export default function Navbar() {
 
         fetchUser(); // Call fetchUser() when the component mounts
     }, []);
+
+    useEffect(() => {
+        const getCategories = async () => {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/categories`, {
+                    cache: "no-store",
+                });
+                
+                if (!res.ok) {
+                    throw new Error("Failed to fetch categories");
+                }
+        
+                const data = await res.json();
+                console.log(data);
+                setCategories(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getCategories();
+    }, [])
 
     const toggleProfile = () => {
         setProfileOpen(prevProfileOpen => !prevProfileOpen);
@@ -162,6 +192,12 @@ export default function Navbar() {
         toggleMenu();
     }
 
+    const handleSelect = (e) => {
+        const link = e.target.value;
+        console.log(link);
+        router.push(link);
+    }
+
     return (
         <div className="w-full fixed top-0 z-30 bg-white shadow-md" ref={ref}>
             <div className="w-[95%] mx-auto flex items-center text-black justify-between py-3">
@@ -169,11 +205,23 @@ export default function Navbar() {
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>
                 <div className="hidden md:flex items-center gap-6">
-                    
-                    <Link href={'/'} className="hover:text-black/60 duration-500">Home</Link>
-                    <Link href={'#'} className="hover:text-black/60 duration-500">Discover</Link>
-                    <Link href={'#'} className="hover:text-black/60 duration-500">Entertainment</Link>
-                    <Link href={'#'} className="flex items-center gap-2 hover:text-black/60 duration-500">
+                    <Link href={'/'} className="hover:text-black/60 duration-500">Discover</Link>
+                    {categories ? (
+                    <select onChange={handleSelect} className="px-2">
+                        <option>Categories</option>
+                        {categories.map((cat, index) => {
+                            return (
+                                <option key={index} value={`/blogs/categories/${cat.title}`}>
+                                    {cat.title}
+                                </option>
+                            );
+                        })}
+                    </select>
+                    ):(
+                        <span>No Category</span>
+                    )}
+                    <Link href={'/about'} className="hover:text-black/60 duration-500">About Us</Link>
+                    <Link href={'/contact-us'} className="flex items-center gap-2 hover:text-black/60 duration-500">
                         <span>Advertise</span>
                         <GoMegaphone />
                     </Link>
@@ -201,10 +249,10 @@ export default function Navbar() {
 
                 <div className="flex gap-2 items-center md:hidden">
                     <button onClick={toggleSearch} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                        <FiSearch className="text-2xl" />
+                        <FiSearch className="text-xl" />
                     </button>
                     <button onClick={toggleMenu} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                        <HiOutlineMenu className="text-2xl" />
+                        <HiOutlineMenu className="text-xl" />
                     </button>
                 </div>
             </div>
@@ -216,14 +264,28 @@ export default function Navbar() {
                         </Link>
                         <div className="flex items-center md:hidden">
                             <button onClick={toggleMenu} className="text-xl hover:bg-white/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                                <IoClose className="text-2xl" />
+                                <IoClose className="text-xl" />
                             </button>
                         </div>
                     </div>
                     <div className="w-[95%] mx-auto flex flex-col">
-                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Home</Link>
-                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">News</Link>
+                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Discover</Link>
+                        {categories ? (
+                            <select onChange={handleSelect} className="bg-black hover:text-gray-400 duration-500 py-3 border-b border-gray-700">
+                                <option>Categories</option>
+                                {categories.map((cat, index) => {
+                                    return (
+                                        <option key={index} value={`/blogs/categories/${cat.title}`}>
+                                            {cat.title}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        ):(
+                            <span>No Category</span>
+                        )}
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Videos</Link>
+                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">About Us</Link>
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Contact Us</Link>
                         <Link href={'/'} onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
                             <span>Advertise</span>
@@ -311,9 +373,9 @@ export default function Navbar() {
                             </div>
                             {user ? (
                                 <div className="px-2 pt-2 text-[12px] md:text-base">
-                                    <p className="font-semibold">Username: <span className="font-semibold">@{user.username}</span></p>
-                                    <p className="font-semibold">Email: <span className="font-semibold">{user.email}</span></p>
-                                    <p className="font-semibold mb-2">Role: <span className="font-semibold">{user.role}</span></p>
+                                    <p className="font-semibold">Username: <span className="font-normal">@{user.username}</span></p>
+                                    <p className="font-semibold">Email: <span className="font-normal">{user.email}</span></p>
+                                    <p className="font-semibold mb-2">Role: <span className="font-normal">{user.role}</span></p>
                                     <LogoutBtn />
                                 </div>
                             ):(

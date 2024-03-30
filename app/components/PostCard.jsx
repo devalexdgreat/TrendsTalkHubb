@@ -171,10 +171,10 @@ export default function PostCard({ post, token, postid, relatedData }) {
         <div className="w-full md:w-9/12 text-black">
             <div className="w-full">       
                 <div>
-                    <div className="text-[13px] flex gap-1 items-center">
-                        <Link href={'/'} className="text-black/80 rounded-md font-semibold flex gap-1 items-center">Home
+                    <div className="text-[13px] flex gap-1 items-center mt-4 mb-4">
+                        <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
                         </Link>/
-                        <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-semibold flex gap-1 items-center hover:text-black/80 duration-500">
+                        <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">
                             <FaFolderOpen />{data.category}
                         </Link>
                     </div>
@@ -185,7 +185,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                         {post.tags.map((tag) => (
                             <Link key={tag} href={`/blogs/tags/${tag}`} className="py-1 px-2 rounded-md duration-500 text-[10px] flex items-center gap-2 hover:bg-black/80 backdrop-blur-sm bg-black text-white whitespace-nowrap">
                                 <AiOutlineRise />
-                                <p>{tag}</p>
+                                <p className="font-normal">{tag}</p>
                             </Link>
                         ))}
                     </div>
@@ -197,7 +197,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                             <span><BsDot /></span>
                             <span>{timeSinceCreation(data.date)}</span> 
                         </div>
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 border border-black rounded-full py-1 px-3">
                             <button onClick={() => handleLike(postid, token)} className="flex gap-1.5 items-center">
                                 {isLiked ? (
                                     <BsHandThumbsUpFill />
@@ -205,7 +205,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                                     <BsHandThumbsUp />
                                 )}
                                 <span>{formatNumber(data.likeCount)}</span>
-                            </button>
+                            </button>|
                             <button className="flex gap-1.5 items-center">
                                 <FiEye />
                                 <span>{formatNumber(data.viewCount)}</span>
@@ -244,53 +244,58 @@ export default function PostCard({ post, token, postid, relatedData }) {
                         <span className="font-semibold text-base mb-0.5">Related Posts</span>
                         <hr className="border-2 border-black w-12 rounded-3xl"/>
                     </div>
-                    <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
-                        {relatedData.map((r) => (
-                            <article className="h-72" key={r.id}>
-                                <Link href={`/blogs/${r.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                    <div className="h-3/6">
-                                        <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
-                                        <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                    </div>
-                                    <div className="bg-black p-3 t-box h-3/6 relative">
-                                        <div className="flex gap-2 items-center text-[9px]">
-                                            <span><FaUser /></span>
-                                            <div className="flex gap-0.5 items-center">
-                                                <h1>{r.author}</h1>
-                                                <span><BsDot /></span>
-                                                <span>{timeSinceCreation(r.date)}</span> 
+                    {relatedData.length !== 0 ? (
+                        <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+                            {relatedData.map((r) => (
+                                <article className="h-72" key={r.id}>
+                                    <Link href={`/blogs/${r.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
+                                        <div className="h-3/6">
+                                            <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
+                                            <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
+                                        </div>
+                                        <div className="bg-black p-3 t-box h-3/6 relative">
+                                            <div className="flex gap-2 items-center text-[9px]">
+                                                <span><FaUser /></span>
+                                                <div className="flex gap-0.5 items-center">
+                                                    <h1>{r.author}</h1>
+                                                    <span><BsDot /></span>
+                                                    <span>{timeSinceCreation(r.date)}</span> 
+                                                </div>
+                                            </div>
+                                            <div className="my-2">
+                                                <h2 className="text-[15px] font-semibold duration-500">{r.title}</h2>
+                                            </div>
+                                            <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                                <div className="flex gap-3">
+                                                    <button className="flex gap-1.5 items-center">
+                                                        <BsHandThumbsUp />
+                                                        <span>{formatNumber(r.likeCount)}</span>
+                                                    </button>
+                                                    <button className="flex gap-1.5 items-center">
+                                                        <FiEye />
+                                                        <span>{formatNumber(r.viewCount)}</span>
+                                                    </button>
+                                                </div>
+                                                <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
+                                                    {r.tags.map((tag) => (
+                                                        <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                            <AiOutlineRise />
+                                                            <span className="font-normal">{tag}</span>
+                                                        </Link>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="my-2">
-                                            <h2 className="text-[15px] font-semibold duration-500">{r.title}</h2>
-                                        </div>
-                                        <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                            <div className="flex gap-3">
-                                                <button className="flex gap-1.5 items-center">
-                                                    <BsHandThumbsUp />
-                                                    <span>{formatNumber(r.likeCount)}</span>
-                                                </button>
-                                                <button className="flex gap-1.5 items-center">
-                                                    <FiEye />
-                                                    <span>{formatNumber(r.viewCount)}</span>
-                                                </button>
-                                            </div>
-                                            <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                                {r.tags.map((tag) => (
-                                                    <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                        <AiOutlineRise />
-                                                        <span>{tag}</span>
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                                </Link>
-                            </article>
-                        ))}
-                    </div>
+                                        <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
+                                    </Link>
+                                </article>
+                            ))}
+                        </div>
+                    ):(
+                        <span className="text-black font-normal">No related posts now </span>
+                    )}
                 </div>
+                
             </div>
         </div>
     );

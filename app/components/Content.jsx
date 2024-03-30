@@ -115,22 +115,22 @@ export default function Content({ data }) {
 
                     <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
                         <div className="text-center rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
-                            <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-semibold" onClick={toggleMenu}><IoClose /></button>
-                            <div className="w-full py-7">
+                            <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-semibold text-lg" onClick={toggleMenu}><IoClose /></button>
+                            <div className="w-full py-9">
                                 <span className="font-semibold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
                             </div>
                             <div>
-                                <Link href={'/signup'} className="py-1 px-7 bg-black text-white rounded-md hover:bg-black/80 duration-500">Sign up</Link>
+                                <Link href={'/signup'} className="py-2 px-7 bg-black text-white rounded-md hover:bg-black/80 duration-500">Sign up</Link>
                             </div>
-                            <div className="mt-7">
-                                <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black font-semibold hover:text-black/80 duration-500">Sign in</Link>
+                            <div className="mt-9">
+                                <span className="text-gray-900 text-lg">Already have an account? </span><Link href={'/login'} className="text-black font-semibold hover:text-black/40 duration-500">Sign in</Link>
                             </div>
                         </div>
                     </div>
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
-                        <div className="mb-4 heading">
-                            <span className="font-semibold text-base mb-0.5 text-black">Trending Posts</span>
+                        <div className="mb-5 heading mt-5">
+                            <span className="font-semibold mb-0.5 text-black text-xl tracking-tight">Trending</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
@@ -168,7 +168,7 @@ export default function Content({ data }) {
                                                     </div>
                                                     <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
                                                         {d.tags.map((tag) => (
-                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm">
+                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
                                                                 <AiOutlineRise />
                                                                 <span>{tag}</span>
                                                             </Link>

@@ -1,6 +1,6 @@
 import { AiOutlineRise } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
-import { FaHashtag, FaUser } from "react-icons/fa6";
+import { FaFolderOpen, FaHashtag, FaRegFolderOpen, FaUser } from "react-icons/fa6";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import Image from "next/image";
@@ -58,10 +58,17 @@ export default function CategoryCard({ data, tag, title }) {
 
     return (
         <div className="w-full md:w-9/12 text-white">
-            <div className="mb-4 heading text-black">
-                <span className="flex gap-1 items-center">
-                    <FaHashtag className=""/>
-                    <h1 className="font-semibold text-base mb-0.5">{title}</h1>
+            <div className="text-[13px] flex gap-1 items-center mt-4 mb-4 text-black">
+                <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
+                </Link>/
+                <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">
+                    <FaFolderOpen />{title}
+                </Link>
+            </div>
+            <div className="mb-5 heading text-black">
+                <span className="flex gap-1 items-center text-xl">
+                    <FaRegFolderOpen />
+                    <h1 className="font-semibold mb-0.5 text-xl">{title}</h1>
                 </span>
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>

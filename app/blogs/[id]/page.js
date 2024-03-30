@@ -45,6 +45,23 @@ const fetchRelated = async (data) => {
     }
 }
 
+const getPosts = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
+            cache: "no-store",
+        });
+  
+        if (!res.ok) {
+            throw new Error("Failed to fetch Projects");
+        }
+  
+        return res.json();
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function isTokenExpired(token) {
     if (!token) {
         // If token is not provided, consider it as expired
@@ -90,16 +107,17 @@ export default async function Blog({ params }) {
     }
 
     const post = await fetchPostById(id, aT);
-    const related = await fetchRelated(post);
+    const sameTag = await fetchRelated(post);
+    const related = sameTag.filter(indPost => indPost.id !== id);
+    const posts = await getPosts();
 
-    console.log(typeof post);
     return (
         <div className="w-full">
             <Navbar />
             <div className="w-full mt-20 mb-24">
                 <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
-                    <PostCard post={post} token={aT} postid={id} relatedData={related}/>
-                    <PostSideBar />
+                    <PostCard post={post} token={aT} postid={id} relatedData={related} />
+                    <PostSideBar posts={posts} />
                 </div>
             </div>
         </div>
