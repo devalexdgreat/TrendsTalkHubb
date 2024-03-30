@@ -25,7 +25,7 @@ export default function SideBar() {
                 
                 <div className="flex justify-between">
                     <div>
-                        <span className="font-normal text-[15px]">Follow our Socials</span>
+                        <span className="font-semibold text-[15px]">Follow our Socials</span>
                     </div>
                     <button className="hover:bg-white/10 backdrop-blur-sm p-1 rounded-full duration-500">
                         <LuMoreHorizontal />
@@ -34,12 +34,12 @@ export default function SideBar() {
                 <div className="grid grid-cols-2 gap-2 items-center w-full my-3">
                     <Link href={'#'} className="rounded-md hover:bg-blue-500 duration-500 py-1 px-2 flex gap-1 items-center justify-between text-[15px] bg-blue-600" >
                         <span className="text-xl"><CiFacebook /></span>
-                        <span className="font-normal">109K</span>
+                        <span className="font-semibold">109K</span>
                         <span>Fol</span>
                     </Link>
                     <Link href={'#'} className="rounded-md hover:bg-red-500 duration-500 py-1 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
                         <span className="text-xl"><CiYoutube /></span>
-                        <span className="font-normal">310K</span>
+                        <span className="font-semibold">310K</span>
                         <span>Sub</span>
                     </Link>
                 </div>
@@ -49,7 +49,7 @@ export default function SideBar() {
                 <div className="flex justify-between">
                     <div className="flex gap-1 items-center">
                         <AiOutlineRise />
-                        <span className="text-[15px] font-normal">Finance</span>
+                        <span className="text-[15px] font-semibold">Finance</span>
                     </div>
                     <button className="hover:bg-white/10 backdrop-blur-sm p-1 rounded-full duration-500">
                         <LuMoreHorizontal />
@@ -59,7 +59,7 @@ export default function SideBar() {
                     <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full p-1">
                         <div className="w-8/12">
                             <div className="flex flex-col">
-                                <p className="font-normal text-[12px]">USD/NGN</p>
+                                <p className="font-semibold text-[12px]">USD/NGN</p>
                                 <p className="text-[8px]">United States Dollar/Nigerian Naira</p> 
                             </div>
                             
@@ -68,8 +68,8 @@ export default function SideBar() {
                             <div className="flex w-full justify-between items-center">
                                 <FcBearish className="text-xl"/>
                                 <div className="flex flex-col">
-                                    <p className="font-normal text-red-500 text-[9px]">-0.34%</p>
-                                    <p className="font-normal text-[9px]">500.60</p>
+                                    <p className="font-semibold text-red-500 text-[9px]">-0.34%</p>
+                                    <p className="font-semibold text-[9px]">500.60</p>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ export default function SideBar() {
                     <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full p-1">
                         <div className="w-8/12">
                             <div className="flex flex-col">
-                                <p className="font-normal text-[12px]">GBP/USD</p>
+                                <p className="font-semibold text-[12px]">GBP/USD</p>
                                 <p className="text-[8px]">Great Britain Pound/United States Dollar</p> 
                             </div>
                             
@@ -86,8 +86,8 @@ export default function SideBar() {
                             <div className="flex w-full justify-between items-center">
                                 <FcBullish className="text-xl"/>
                                 <div className="flex flex-col">
-                                    <p className="font-normal text-green-500 text-[9px]">+0.25%</p>
-                                    <p className="font-normal text-[9px]">1420.13</p>
+                                    <p className="font-semibold text-green-500 text-[9px]">+0.25%</p>
+                                    <p className="font-semibold text-[9px]">1420.13</p>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ export default function SideBar() {
                     <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full p-1">
                         <div className="w-8/12">
                             <div className="flex flex-col">
-                                <p className="font-normal text-[12px]">USD/NGN</p>
+                                <p className="font-semibold text-[12px]">USD/NGN</p>
                                 <p className="text-[8px]">United States Dollar/Nigerian Naira</p> 
                             </div>
                             
@@ -104,8 +104,8 @@ export default function SideBar() {
                             <div className="flex w-full justify-between items-center">
                                 <FcBearish className="text-xl"/>
                                 <div className="flex flex-col">
-                                    <p className="font-normal text-red-500 text-[9px]">-0.34%</p>
-                                    <p className="font-normal text-[9px]">500.60</p>
+                                    <p className="font-semibold text-red-500 text-[9px]">-0.34%</p>
+                                    <p className="font-semibold text-[9px]">500.60</p>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@ export default function SideBar() {
                 <div className="flex justify-between">
                     <div className="flex gap-1 items-center">
                         <GoMegaphone />
-                        <span className="text-[15px] font-normal">Ads</span>
+                        <span className="text-[15px] font-semibold">Ads</span>
                     </div>
                     <button className="hover:bg-white/10 backdrop-blur-sm p-1 rounded-full duration-500">
                         <LuMoreHorizontal />
@@ -140,7 +140,7 @@ export default function SideBar() {
                 <div className="flex justify-between">
                     <div className="flex gap-1 items-center">
                         <MdOutlineStore />
-                        <span className="text-[15px] font-normal">Shop</span>
+                        <span className="text-[15px] font-semibold">Shop</span>
                     </div>
                     <button className="hover:bg-white/10 backdrop-blur-sm p-1 rounded-full duration-500">
                         <LuMoreHorizontal />
@@ -158,7 +158,7 @@ export default function SideBar() {
                             <div className="absolute z-20 bottom-1 left-1 w-11/12 rounded-md group">
                                 <h1 className="text-[15px]">Frying pans</h1>
                                 <div className="flex justify-between mt-0.5">
-                                    <span className="text-[12px] font-normal p-0.5 px-1 rounded-full">
+                                    <span className="text-[12px] font-semibold p-0.5 px-1 rounded-full">
                                         $25.00
                                     </span>
                                     <Link href={'/'} className="p-0.5 group-hover:scale-110 rounded-full duration-500"><GoLinkExternal /></Link>
@@ -178,7 +178,7 @@ export default function SideBar() {
                             <div className="absolute z-20 bottom-1 left-1 w-11/12 rounded-md group">
                                 <h1 className="text-[15px]">Frying pans</h1>
                                 <div className="flex justify-between mt-0.5">
-                                    <span className="text-[12px] font-normal p-0.5 px-1 rounded-full">
+                                    <span className="text-[12px] font-semibold p-0.5 px-1 rounded-full">
                                         $25.00
                                     </span>
                                     <Link href={'/'} className="p-0.5 group-hover:scale-110 rounded-full duration-500"><GoLinkExternal /></Link>
@@ -198,7 +198,7 @@ export default function SideBar() {
                             <div className="absolute z-20 bottom-1 left-1 w-11/12 rounded-md group">
                                 <h1 className="text-[15px]">Frying pans</h1>
                                 <div className="flex justify-between mt-0.5">
-                                    <span className="text-[12px] font-normal p-0.5 px-1 rounded-full">
+                                    <span className="text-[12px] font-semibold p-0.5 px-1 rounded-full">
                                         $25.00
                                     </span>
                                     <Link href={'/'} className="p-0.5 group-hover:scale-110 rounded-full duration-500"><GoLinkExternal /></Link>
