@@ -207,7 +207,7 @@ export default function Navbar() {
 
     return (
         <div className="w-full fixed top-0 z-30 bg-white shadow-md" ref={ref}>
-            <div className="w-[95%] mx-auto flex items-center text-black justify-between py-3">
+            <div className="w-11/12 mx-auto flex items-center text-black justify-between py-3">
                 <Link href={'/'} className="font-semibold">
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>

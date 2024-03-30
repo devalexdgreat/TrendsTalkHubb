@@ -111,7 +111,7 @@ export default function Content({ data }) {
 
     return (
         <div className="w-full h-full mt-20 mb-24">
-            <div className="w-[95%] mx-auto h-full">
+            <div className="w-11/12 mx-auto h-full">
                 <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8 h-full">
 
                     <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
