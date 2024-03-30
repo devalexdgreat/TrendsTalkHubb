@@ -61,7 +61,7 @@ export default function CategoryCard({ data, tag, title }) {
             <div className="mb-4 heading text-black">
                 <span className="flex gap-1 items-center">
                     <FaHashtag className=""/>
-                    <h1 className="font-medium text-base mb-0.5">{title}</h1>
+                    <h1 className="font-semibold text-base mb-0.5">{title}</h1>
                 </span>
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>
@@ -84,9 +84,9 @@ export default function CategoryCard({ data, tag, title }) {
                                     </div>
                                 </div>
                                 <div className="my-2">
-                                    <p className="text-[15px] font-medium duration-500">{d.title}</p>
+                                    <p className="text-[15px] font-semibold duration-500">{d.title}</p>
                                 </div>
-                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-medium w-11/12 justify-between">
+                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                     <div className="flex gap-3">
                                         <button className="flex gap-1.5 items-center">
                                             <BsHandThumbsUp />
