@@ -7,7 +7,7 @@ import Head from "next/head";
 const anyFont = Poppins({
   subsets: ['latin'],
   display: "swap",
-  weight: "300"
+  weight: ["100", "200", "300", "400"]
 })
 
 // const Helvetica = localFont({
