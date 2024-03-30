@@ -1,21 +1,23 @@
 import Footer from "./components/Footer";
 import "./globals.css";
 import localFont from 'next/font/local';
-import { Poppins } from 'next/font/google'
+import { Inter, Poppins } from 'next/font/google'
 import Head from "next/head";
  
-// const anyFont = Poppins({
-//   weight: '300',
-//   subsets: ['latin'],
-// })
-
-const anyFont = localFont({
-  src: [
-    {
-      path: './fonts/Poppins-Regular.woff2', // Replace with your font path for Apple devices
-    },
-  ],
+const anyFont = Inter({
+  subsets: ['latin'],
+  display: "swap"
 })
+
+// const Helvetica = localFont({
+//   src: [
+//     {
+//       path: './fonts/Helvetica.woff2',
+//       weight: '400',
+//       style: 'normal'
+//     },
+//   ],
+// })
 
 export const metadata = {
   icons: {

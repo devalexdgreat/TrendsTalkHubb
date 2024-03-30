@@ -9,6 +9,7 @@ import imgOne from '@/public/1.jpg'
 import imgTwo from '@/public/2.jpg'
 import imgThr from '@/public/3.jpg'
 import imgFor from '@/public/4.jpg'
+import imgFiv from '@/public/5.jpg'
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
 import SideBar from "./SideBar";
@@ -130,21 +131,21 @@ export default function Content({ data }) {
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-5 heading mt-5">
-                            <span className="font-semibold mb-0.5 text-black text-xl tracking-tight">Trending</span>
+                            <span className="font-semibold mb-0.5 text-black text-xl tracking-normal">Trending</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
                             <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 
                                 {data.map((d) => (
-                                    <div className="h-72" key={d.id} onClick={handleClick}>
+                                    <div className="" key={d.id} onClick={handleClick}>
                                         <Link href={`/blogs/${d.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                            <div className="h-3/6">
-                                                <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
+                                            <div className="">
+                                                <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
                                                 <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                             </div>
-                                            <div className="bg-black p-3 t-box h-3/6 relative">
-                                                <div className="flex gap-2 items-center text-[9px]">
+                                            <div className="bg-black p-3 t-box relative">
+                                                <div className="flex gap-2 items-center text-[14px] md:text-[9px]">
                                                     <span><FaUser /></span>
                                                     <div className="flex gap-0.5 items-center">
                                                         <h1>{d.author}</h1>
@@ -152,10 +153,10 @@ export default function Content({ data }) {
                                                         <span>{timeSinceCreation(d.date)}</span> 
                                                     </div>
                                                 </div>
-                                                <div className="my-2">
-                                                    <h1 className="text-[15px] font-semibold duration-500">{d.title}</h1>
+                                                <div className="mb-10 mt-5">
+                                                    <h1 className="text-lg md:text-[15px] font-semibold duration-500">{d.title}</h1>
                                                 </div>
-                                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                                <div className="flex gap-4 items-center text-[15px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                                     <div className="flex gap-3">
                                                         <button className="flex gap-1.5 items-center">
                                                             <BsHandThumbsUp />
@@ -168,7 +169,7 @@ export default function Content({ data }) {
                                                     </div>
                                                     <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
                                                         {d.tags.map((tag) => (
-                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[15px] md:text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
                                                                 <AiOutlineRise />
                                                                 <span>{tag}</span>
                                                             </Link>
