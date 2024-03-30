@@ -9,15 +9,23 @@ import Head from "next/head";
 //   subsets: ['latin'],
 // })
 
-const anyFont = localFont({
-  src: [
-    {
-      path: './fonts/Poppins-Regular.woff2', // Replace with your font path for Apple devices
-    },
-  ],
-})
+// const anyFont = localFont({
+//   src: [
+//     {
+//       path: './fonts/Poppins-Regular.woff2', // Replace with your font path for Apple devices
+//     },
+//   ],
+// })
 
 export const metadata = {
+  metadataBase: new URL('https://trendstalkhubb.vercel.app'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/en-US',
+        'de-DE': '/de-DE',
+      },
+    },
   openGraph: {
     title: 'TrendsTalk Hubb: Explore the Latest Trends and Insights',
     description: 'Discover insightful articles and discussions on the latest trends across various industries at TrendsTalk Hubb.',
@@ -68,7 +76,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="">
       <Head>
       </Head>
-      <body className={anyFont.className}>
+      <body className="">
           {children}
           <Footer />
       </body>

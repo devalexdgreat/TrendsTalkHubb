@@ -46,12 +46,21 @@ export async function generateMetadata({params, searchParams }, parent) {
   
  
   return {
+    metadataBase: new URL('https://trendstalkhubb.vercel.app'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/en-US',
+        'de-DE': '/de-DE',
+      },
+    },
     openGraph: {
       title: realPost[0].title,
       description: realPost[0].content,
       type: 'article',
       publishedTime: timeSinceCreation(realPost[0].date),
       authors: 'TrendsTalk Hubb',
+      images: '/favicon.png',
     },
     title: realPost[0].title,
     description: realPost[0].content,

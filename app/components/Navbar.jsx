@@ -165,7 +165,7 @@ export default function Navbar() {
     return (
         <div className="w-full fixed top-0 z-30 bg-white shadow-md" ref={ref}>
             <div className="w-[95%] mx-auto flex items-center text-black justify-between py-3">
-                <Link href={'/'} className="font-bold">
+                <Link href={'/'} className="font-normal">
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>
                 <div className="hidden md:flex items-center gap-6">
@@ -184,7 +184,7 @@ export default function Navbar() {
                             </span>
                             <div className="h-full ps-2 pe-3 flex justify-center items-center">
                                 {user ? (
-                                    <span className="font-bold">@{user.username}</span>
+                                    <span className="font-normal">@{user.username}</span>
                                 ):(
                                     <span>Error!</span>
                                 )}
@@ -209,7 +209,7 @@ export default function Navbar() {
             {menuOpen && (
                 <div className="h-screen text-white w-full fixed top-0 bg-black backdrop-blur-sm z-30 md:hidden">
                     <div className="w-[95%] mx-auto flex items-center justify-between py-3 border-b border-gray-700">
-                        <Link href={'/'} className="font-bold">
+                        <Link href={'/'} className="font-normal">
                             <Image src={logoLight} className="h-10 w-32" alt="" />
                         </Link>
                         <div className="flex items-center md:hidden">
@@ -283,7 +283,7 @@ export default function Navbar() {
                                                         <Image src={imgOne} className="rounded-md object-cover h-full" alt="" />
                                                     </div>
                                                     <div className="w-9/12 h-full flex items-center">
-                                                        <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-bold">{f.title}</h1>
+                                                        <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-normal">{f.title}</h1>
                                                     </div>
                                                 </Link>
                                             </div>
@@ -304,14 +304,14 @@ export default function Navbar() {
                     <div className="w-full relative">
                         <div className="absolute right-8 md:right-20 top-16 md:top-20 bg-white text-black pb-2 shadow-black shadow-2xl rounded-md">
                             <div className="w-full bg-black text-white ps-2 pe-2 py-2 profile flex justify-between items-center gap-4">
-                                <h1 className="font-bold">User Profile</h1>
-                                <button onClick={toggleProfile} className="bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-bold"><IoClose /></button>
+                                <h1 className="font-normal">User Profile</h1>
+                                <button onClick={toggleProfile} className="bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-normal"><IoClose /></button>
                             </div>
                             {user ? (
                                 <div className="px-2 pt-2 text-[12px] md:text-base">
-                                    <p className="font-bold">Username: <span className="font-normal">@{user.username}</span></p>
-                                    <p className="font-bold">Email: <span className="font-normal">{user.email}</span></p>
-                                    <p className="font-bold mb-2">Role: <span className="font-normal">{user.role}</span></p>
+                                    <p className="font-normal">Username: <span className="font-normal">@{user.username}</span></p>
+                                    <p className="font-normal">Email: <span className="font-normal">{user.email}</span></p>
+                                    <p className="font-normal mb-2">Role: <span className="font-normal">{user.role}</span></p>
                                     <LogoutBtn />
                                 </div>
                             ):(
