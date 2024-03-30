@@ -207,7 +207,7 @@ export default function Navbar() {
                 <div className="hidden md:flex items-center gap-6">
                     <Link href={'/'} className="hover:text-black/60 duration-500">Discover</Link>
                     {categories ? (
-                    <select onChange={handleSelect} className="px-2">
+                    <select onChange={handleSelect} className="px-2 outline-none border-none">
                         <option>Categories</option>
                         {categories.map((cat, index) => {
                             return (
@@ -271,7 +271,7 @@ export default function Navbar() {
                     <div className="w-[95%] mx-auto flex flex-col">
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Discover</Link>
                         {categories ? (
-                            <select onChange={handleSelect} className="bg-black hover:text-gray-400 duration-500 py-3 border-b border-gray-700">
+                            <select onChange={handleSelect} className="bg-black hover:text-gray-400 duration-500 py-3 border-b border-gray-700 outline-none">
                                 <option>Categories</option>
                                 {categories.map((cat, index) => {
                                     return (
@@ -285,9 +285,9 @@ export default function Navbar() {
                             <span>No Category</span>
                         )}
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Videos</Link>
-                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">About Us</Link>
-                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Contact Us</Link>
-                        <Link href={'/'} onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
+                        <Link href={'/about'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">About Us</Link>
+                        <Link href={'/contact-us'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Contact Us</Link>
+                        <Link href={'/contact-us'} onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
                             <span>Advertise</span>
                             <GoMegaphone />
                         </Link>
