@@ -200,9 +200,11 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex gap-2 items-center md:hidden">
-                    <button onClick={toggleSearch} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2"><FiSearch /></button>
-                    <button onClick={toggleMenu} className="text-xl hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                        <HiOutlineMenu />
+                    <button onClick={toggleSearch} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
+                        <FiSearch className="text-2xl" />
+                    </button>
+                    <button onClick={toggleMenu} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
+                        <HiOutlineMenu className="text-2xl" />
                     </button>
                 </div>
             </div>
@@ -214,7 +216,7 @@ export default function Navbar() {
                         </Link>
                         <div className="flex items-center md:hidden">
                             <button onClick={toggleMenu} className="text-xl hover:bg-white/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                                <IoClose />
+                                <IoClose className="text-2xl" />
                             </button>
                         </div>
                     </div>
