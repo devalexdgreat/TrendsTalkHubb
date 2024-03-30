@@ -4,18 +4,18 @@ import localFont from 'next/font/local';
 import { Poppins } from 'next/font/google'
 import Head from "next/head";
  
-const anyFont = Poppins({
-  weight: '300',
-  subsets: ['latin'],
-})
-
-// const anyFont = localFont({
-//   src: [
-//     {
-//       path: './fonts/Poppins-Regular.ttf', // Replace with your font path for Apple devices
-//     },
-//   ],
+// const anyFont = Poppins({
+//   weight: '300',
+//   subsets: ['latin'],
 // })
+
+const anyFont = localFont({
+  src: [
+    {
+      path: './fonts/Poppins-Regular.woff2', // Replace with your font path for Apple devices
+    },
+  ],
+})
 
 export const metadata = {
   openGraph: {
@@ -67,7 +67,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="">
       <Head>
-      
       </Head>
       <body className={anyFont.className}>
           {children}
