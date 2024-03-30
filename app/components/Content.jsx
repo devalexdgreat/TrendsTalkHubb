@@ -153,7 +153,7 @@ export default function Content({ data }) {
                                                     </div>
                                                 </div>
                                                 <div className="my-2">
-                                                    <h1 className="text-[15px] font-semibold duration-500">{d.title}</h1>
+                                                    <h1 className="text-[16px] md:text-[15px] font-semibold duration-500">{d.title}</h1>
                                                 </div>
                                                 <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                                     <div className="flex gap-3">
