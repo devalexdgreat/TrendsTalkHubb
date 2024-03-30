@@ -9,13 +9,13 @@ import Head from "next/head";
 //   subsets: ['latin'],
 // })
 
-// const anyFont = localFont({
-//   src: [
-//     {
-//       path: './fonts/Poppins-Regular.woff2', // Replace with your font path for Apple devices
-//     },
-//   ],
-// })
+const anyFont = localFont({
+  src: [
+    {
+      path: './fonts/Poppins-Regular.woff2', // Replace with your font path for Apple devices
+    },
+  ],
+})
 
 export const metadata = {
   icons: {
@@ -85,7 +85,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="">
+    <html lang="en" className={anyFont.className}>
       <Head>
       </Head>
       <body className="">
