@@ -106,7 +106,7 @@ export default function CategoryCard({ data, tag, title }) {
                                     </div>
                                     <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
                                         {d.tags.map((tag) => (
-                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm">
+                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
                                                 <AiOutlineRise />
                                                 <span>{tag}</span>
                                             </Link>

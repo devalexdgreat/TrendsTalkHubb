@@ -17,6 +17,13 @@ import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 import { HiOutlineMenu } from "react-icons/hi";
 import { delCookies, getCookies } from "@/actions";
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
 
 export default function Navbar() {
 
@@ -206,20 +213,49 @@ export default function Navbar() {
                 </Link>
                 <div className="hidden md:flex items-center gap-6">
                     <Link href={'/'} className="hover:text-black/60 duration-500">Discover</Link>
-                    {categories ? (
-                    <select onChange={handleSelect} className="px-2 outline-none border-none">
-                        <option>Categories</option>
-                        {categories.map((cat, index) => {
-                            return (
-                                <option key={index} value={`/blogs/categories/${cat.title}`}>
+                    
+                    <Menu as="div" className="relative inline-block text-left">
+                        <div>
+                            <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-gray-900">
+                            Categories
+                            <ChevronDownIcon className="-mr-1 h-5 w-5 text-black" aria-hidden="true" />
+                            </Menu.Button>
+                        </div>
+
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {categories ? (
+                            <div className="py-1">
+                            {categories.map((cat, index) => (
+                                <Menu.Item key={index}>
+                                {({ active }) => (
+                                    <a
+                                    href={`/blogs/categories/${cat.title}`}
+                                    className={classNames(
+                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                        'block px-4 py-2 text-sm'
+                                    )}
+                                    >
                                     {cat.title}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    ):(
-                        <span>No Category</span>
-                    )}
+                                    </a>
+                                )}
+                                </Menu.Item>
+                                ))}
+                            </div>
+                            ):(
+                            <span>No Category</span>
+                            )}
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
                     <Link href={'/about'} className="hover:text-black/60 duration-500">About Us</Link>
                     <Link href={'/contact-us'} className="flex items-center gap-2 hover:text-black/60 duration-500">
                         <span>Advertise</span>
@@ -270,20 +306,49 @@ export default function Navbar() {
                     </div>
                     <div className="w-[95%] mx-auto flex flex-col">
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Discover</Link>
-                        {categories ? (
-                            <select onChange={handleSelect} className="bg-black hover:text-gray-400 duration-500 py-3 border-b border-gray-700 outline-none">
-                                <option>Categories</option>
-                                {categories.map((cat, index) => {
-                                    return (
-                                        <option key={index} value={`/blogs/categories/${cat.title}`}>
-                                            {cat.title}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        ):(
-                            <span>No Category</span>
-                        )}
+                        <Menu as="div" className="relative inline-block text-left">
+                            <div className="hover:text-gray-400 duration-500">
+                                <Menu.Button className="inline-flex w-full justify-start items-center gap-x-1.5 py-3 border-b border-gray-700 ">
+                                Categories
+                                <ChevronDownIcon className="-mr-1 h-5 w-5 text-white hover:text-gray-400 duration-500" aria-hidden="true" />
+                                </Menu.Button>
+                            </div>
+
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                {categories ? (
+                                <div className="py-1">
+                                {categories.map((cat, index) => (
+                                    <Menu.Item key={index}>
+                                    {({ active }) => (
+                                        <a
+                                        href={`/blogs/categories/${cat.title}`}
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                        >
+                                        {cat.title}
+                                        </a>
+                                    )}
+                                    </Menu.Item>
+                                    ))}
+                                </div>
+                                ):(
+                                <span>No Category</span>
+                                )}
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
+                        
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Videos</Link>
                         <Link href={'/about'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">About Us</Link>
                         <Link href={'/contact-us'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Contact Us</Link>
