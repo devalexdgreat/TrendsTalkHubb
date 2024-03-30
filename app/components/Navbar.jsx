@@ -294,7 +294,7 @@ export default function Navbar() {
             </div>
             {menuOpen && (
                 <div className="h-screen text-white w-full fixed top-0 bg-black backdrop-blur-sm z-30 md:hidden">
-                    <div className="w-[95%] mx-auto flex items-center justify-between py-3 border-b border-gray-700">
+                    <div className="w-11/12 mx-auto flex items-center justify-between py-3 border-b border-gray-700">
                         <Link href={'/'} className="font-semibold">
                             <Image src={logoLight} className="h-10 w-32" alt="" />
                         </Link>
@@ -304,7 +304,7 @@ export default function Navbar() {
                             </button>
                         </div>
                     </div>
-                    <div className="w-[95%] mx-auto flex flex-col">
+                    <div className="w-11/12 mx-auto flex flex-col">
                         <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Discover</Link>
                         <Menu as="div" className="relative inline-block text-left">
                             <div className="hover:text-gray-400 duration-500">
@@ -390,7 +390,7 @@ export default function Navbar() {
             )}
             {open && (
                 <div className="z-20 w-full text-white fixed top-0 h-screen bg-black/50 backdrop-blur-sm">
-                    <div className="w-[95%] mx-auto flex flex-col items-end md:justify-end py-3">
+                    <div className="w-11/12 mx-auto flex flex-col items-end md:justify-end py-3">
                         <div className="w-full md:w-6/12 flex items-center gap-1">
                             <input onChange={(e) => setQuery(e.target.value)} value={query} type="text" className="w-full py-0.5 ps-2 rounded-sm text-black" placeholder="Search here"/>
                             <button onClick={handleSearch} className="bg-black hover:bg-black/70 backdrop-blur-sm rounded-sm duration-500 p-2 flex items-center gap-1">

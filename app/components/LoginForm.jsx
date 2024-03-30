@@ -57,7 +57,7 @@ export default function LoginForm() {
 
     return (
         <div className="flex justify-center items-center h-screen w-full bg-white backdrop-blur-sm fixed top-0 left-0">
-            <div className="rounded-lg w-[95%] md:w-4/12 px-6 py-6 text-black z-40 bg-white relative">
+            <div className="rounded-lg w-11/12 md:w-4/12 px-6 py-6 text-black z-40 bg-white relative">
                 <div className="w-full pb-6 flex flex-col justify-center items-center">
                     <Link className="" href={'/'} alt="back">
                         <Image src='/favicon.png' width={100} height={100} className="" alt="logo" />

@@ -124,7 +124,7 @@ body {
   * {
     -webkit-font-smoothing: antialiased;
     font-style: normal;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.025em;
   }
 
   .make-bold {

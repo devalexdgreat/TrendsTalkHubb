@@ -115,7 +115,7 @@ export default function Content({ data }) {
                 <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8 h-full">
 
                     <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
-                        <div className="text-center rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
+                        <div className="text-center rounded-lg w-11/12 md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
                             <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-semibold text-lg" onClick={toggleMenu}><IoClose /></button>
                             <div className="w-full py-9">
                                 <span className="font-semibold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>

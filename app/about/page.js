@@ -5,7 +5,6 @@ const links = [
     { name: 'Open roles', href: '#' },
     { name: 'Ads Policy', href: '#' },
     { name: 'Our values', href: '#' },
-    { name: 'Meet our leadership', href: '#' },
   ]
   const stats = [
     { name: 'Users', value: '10K+' },

@@ -28,7 +28,7 @@ export default async function Tags({ params }) {
         <div className="w-full">
             <Navbar />
             <div className="w-full mt-20 mb-24">
-                <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
+                <div className="w-11/12 mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
                     <TagPostsCard data={posts} tag={id}/>
                     <SideBar />
                 </div>

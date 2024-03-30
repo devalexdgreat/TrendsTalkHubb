@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import { Inter, Poppins } from 'next/font/google'
 import Head from "next/head";
  
-const anyFont = Poppins({
+const anyFont = Inter({
   subsets: ['latin'],
   display: "swap",
   weight: ["100", "200", "300"]

@@ -12,7 +12,7 @@ import Image from "next/image";
 export default function Footer() {
     return (
         <div className="w-full bg-black text-white py-6">
-            <div className="w-[95%] mx-auto flex flex-col md:flex-row justify-between items-center md:items-center text-center md:text-left gap-7">
+            <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center md:items-center text-center md:text-left gap-7">
                 <Link href={'/'} className="duration-500">
                     <Image src={logoLight} className="h-10 w-32" alt="" />
                 </Link>
