@@ -131,7 +131,7 @@ export default function Content({ data }) {
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-5 heading mt-5">
-                            <span className="font-semibold mb-0.5 text-black text-xl tracking-normal">Trending</span>
+                            <span className="font-semibold mb-0.5 text-black text-xl">Trending</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
@@ -145,7 +145,7 @@ export default function Content({ data }) {
                                                 <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                             </div>
                                             <div className="bg-black p-3 t-box relative">
-                                                <div className="flex gap-2 items-center text-[14px] md:text-[9px]">
+                                                <div className="flex gap-2 items-center text-[13px] md:text-[9px]">
                                                     <span><FaUser /></span>
                                                     <div className="flex gap-0.5 items-center">
                                                         <h1>{d.author}</h1>
