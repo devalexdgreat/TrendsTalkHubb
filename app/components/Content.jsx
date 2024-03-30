@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { MdRefresh } from "react-icons/md";
+import { getCookies } from "@/actions";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -76,13 +77,21 @@ export default function Content({ data }) {
     }, [data])
 
     useEffect(() => {
-        let accessToken = localStorage.getItem('accessToken');
-        if(accessToken != null) {
-            setIsLogIn(true);
-            return;
-        } else {
-            setIsLogIn(false);
+        const fetchAt = async () => {
+            let aT = await getCookies();
+            return aT;
         }
+        const checkLogin = async () => {
+            let accessToken = localStorage.getItem('accessToken');
+            let aToken = await fetchAt();
+            if(accessToken != null || aToken != null) {
+                setIsLogIn(true);
+                return;
+            } else {
+                setIsLogIn(false);
+            }
+        }
+        checkLogin();
     }, [])
 
     const handleClick = () => {
@@ -106,22 +115,22 @@ export default function Content({ data }) {
 
                     <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
                         <div className="text-center rounded-lg w-[95%] md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
-                            <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-bold" onClick={toggleMenu}><IoClose /></button>
+                            <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md make-bold" onClick={toggleMenu}><IoClose /></button>
                             <div className="w-full py-7">
-                                <span className="font-bold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
+                                <span className="make-bold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
                             </div>
                             <div>
                                 <Link href={'/signup'} className="py-1 px-7 bg-black text-white rounded-md hover:bg-black/80 duration-500">Sign up</Link>
                             </div>
                             <div className="mt-7">
-                                <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black font-bold hover:text-black/80 duration-500">Sign in</Link>
+                                <span className="text-gray-900">Already have an account? </span><Link href={'/login'} className="text-black make-bold hover:text-black/80 duration-500">Sign in</Link>
                             </div>
                         </div>
                     </div>
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-4 heading">
-                            <span className="font-bold text-base mb-0.5 text-black">Trending Posts</span>
+                            <span className="make-bold text-base mb-0.5 text-black">Trending Posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
                         {postdata ? (
@@ -144,9 +153,9 @@ export default function Content({ data }) {
                                                     </div>
                                                 </div>
                                                 <div className="my-2">
-                                                    <h1 className="text-[15px] font-bold duration-500">{d.title}</h1>
+                                                    <h1 className="text-[15px] make-bold duration-500">{d.title}</h1>
                                                 </div>
-                                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-bold w-11/12 justify-between">
+                                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 make-bold w-11/12 justify-between">
                                                     <div className="flex gap-3">
                                                         <button className="flex gap-1.5 items-center">
                                                             <BsHandThumbsUp />

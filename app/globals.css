@@ -125,3 +125,7 @@ body {
   * {
     -webkit-font-smoothing: antialiased;
   }
+
+  .make-bold {
+    font-weight: bold;
+  }
