@@ -46,7 +46,7 @@ export async function generateMetadata({params, searchParams }, parent) {
   return {
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
     alternates: {
-      canonical: '/',
+      canonical: `/blogs/${id}`,
       languages: {
         'en-US': '/en-US',
         'de-DE': '/de-DE',
@@ -69,12 +69,25 @@ export async function generateMetadata({params, searchParams }, parent) {
       authors: 'TrendsTalk Hubb',
       images: '/favicon.png',
     },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     title: realPost[0].title,
     description: realPost[0].content,
     keywords: convertArrayToStringWithCommas(realPost[0].tags),
     author: "TrendsTalk Hubb",
     url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
-    image: "https://res.cloudinary.com/dew0omszx/image/upload/v1711453760/Trendstalkhubb/r9rljti0ox7epq9x8pss.png",
+    image: "https://trendstalkhubb.vercel.app/favicon.png",
     siteName: "TrendsTalk Hubb",
     type: "website",
   }

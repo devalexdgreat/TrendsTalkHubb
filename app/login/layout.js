@@ -4,7 +4,7 @@ export const metadata = {
     },
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
       alternates: {
-        canonical: '/about',
+        canonical: '/login',
         languages: {
           'en-US': '/en-US',
           'de-DE': '/de-DE',
@@ -12,17 +12,17 @@ export const metadata = {
       },
     twitter: {
     card: 'summary_large_image',
-    title: 'About Us - TrendsTalk Hubb',
-    description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
+    title: 'Login - TrendsTalk Hubb',
+    description: "Sign in to TrendsTalk Hubb and join the conversation on the latest trends and insights across various industries.",
     siteId: '@TrendsTalkHubb',
     creator: 'TrendsTalkHubb',
     creatorId: '@TrendsTalkHubb',
     images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
     },
     openGraph: {
-      title: 'About Us - TrendsTalk Hubb',
-      description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
-      url: 'https://trendstalkhubb.vercel.app/about',
+      title: 'Login - TrendsTalk Hubb',
+      description: "Sign in to TrendsTalk Hubb and join the conversation on the latest trends and insights across various industries.",
+      url: 'https://trendstalkhubb.vercel.app/login',
       siteName: 'TrendsTalk Hubb',
       images: [
         {
@@ -53,11 +53,11 @@ export const metadata = {
         'max-snippet': -1,
       },
     },
-    title: "About Us - TrendsTalk Hubb",
-    description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
-    keywords: "about us, about, TrendsTalk Hubb, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
+    title: "Login - TrendsTalk Hubb",
+    description: "Sign in to TrendsTalk Hubb and join the conversation on the latest trends and insights across various industries.",
+    keywords: "login, sign in, authentication, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     author: "TrendsTalk Hubb",
-    url: "https://trendstalkhubb.vercel.app/about",
+    url: "https://trendstalkhubb.vercel.app/login",
     image: "https://trendstalkhubb.vercel.app/favicon.png",
     siteName: "TrendsTalk Hubb",
     type: "website"
