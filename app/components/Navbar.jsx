@@ -33,6 +33,7 @@ export default function Navbar() {
     const [query, setQuery] = useState("");
     const [foundQuery, setFoundQuery] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(false);
     const [isloggedIn, setIsLoggedIn] = useState(true);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState(null);
@@ -169,25 +170,20 @@ export default function Navbar() {
             return;
         } else {
             const posts = await getPostsByQuery(query);
-            setFoundQuery(posts);
             setIsClicked(true);
+            if(posts !== undefined) {
+                setFoundQuery(posts);
+                setIsEmpty(true);
+                return;
+            }
+            else {
+                setIsEmpty(false);
+                setFoundQuery(null);
+            }
         }
     }
 
-    var found;
-    var isEmpty;
-    if(foundQuery) {
-        found = foundQuery;
-        isEmpty = true;
-    } 
-    else if (isClicked == false) {
-        isEmpty = true;
-        found = [];
-    }
-    else {
-        found = [];
-        isEmpty = false;
-    }
+    
 
     const Logout = () => {
         // Clear the access token from local storage
@@ -285,10 +281,10 @@ export default function Navbar() {
 
                 <div className="flex gap-2 items-center md:hidden">
                     <button onClick={toggleSearch} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                        <FiSearch className="text-2xl" />
+                        <FiSearch className="text-xl" />
                     </button>
                     <button onClick={toggleMenu} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                        <HiOutlineMenu className="text-2xl" />
+                        <HiOutlineMenu className="text-xl" />
                     </button>
                 </div>
             </div>
@@ -300,7 +296,7 @@ export default function Navbar() {
                         </Link>
                         <div className="flex items-center md:hidden">
                             <button onClick={toggleMenu} className="text-xl hover:bg-white/10 backdrop-blur-sm rounded-sm duration-500 p-2">
-                                <IoClose className="text-2xl" />
+                                <IoClose className="text-xl" />
                             </button>
                         </div>
                     </div>
@@ -398,33 +394,44 @@ export default function Navbar() {
                             </button>
                             <button onClick={toggleSearch} className="bg-red-500 hover:bg-red-500/90 backdrop-blur-sm rounded-sm duration-500 p-2"><IoClose /></button>
                         </div>
+                        {isClicked ? (
                         <>
                             {isEmpty ? (
                                 <>
-                                    <div className="w-full md:w-6/12 mt-3">
-                                        <span>Results for Search</span>
-                                    </div>
-                                    <div className="w-full md:w-6/12 flex flex-col only:md:flex-row mt-3 gap-2">
-                                        {found.map((f) => (
-                                            <div key={f.id} className="z-10">
-                                                <Link href={`/blogs/${f.id}`} onClick={toggleSearch} className="z-20 group bg-black/30 backdrop-blur-sm rounded-md p-2 flex h-24 gap-2">
-                                                    <div className="w-3/12 h-full">
-                                                        <Image src={imgOne} className="rounded-md object-cover h-full" alt="" />
-                                                    </div>
-                                                    <div className="w-9/12 h-full flex items-center">
-                                                        <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-semibold">{f.title}</h1>
-                                                    </div>
-                                                </Link>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </>
+                                {foundQuery ? (
+                                    <>  
+                                        <div className="w-full md:w-6/12 mt-3">
+                                            <span>Results for Search</span>
+                                        </div>
+                                        <div className="w-full md:w-6/12 flex flex-col only:md:flex-row mt-3 gap-2">
+                                            {foundQuery.map((f) => (
+                                                <div key={f.id} className="z-10">
+                                                    <Link href={`/blogs/${f.id}`} onClick={toggleSearch} className="z-20 group bg-black/30 backdrop-blur-sm rounded-md p-2 flex h-24 gap-2">
+                                                        <div className="w-3/12 h-full">
+                                                            <Image src={imgOne} className="rounded-md object-cover h-full" alt="" />
+                                                        </div>
+                                                        <div className="w-9/12 h-full flex items-center">
+                                                            <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-semibold">{f.title}</h1>
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            ))}
+                                        </div>
+                                
+                                    </>
+                                ):(
+                                    <div></div>
+                                )}
+                            </>
                             ) : (
                                 <div className="w-full md:w-6/12 mt-3 bg-red-500 text-white ps-2 rounded-md">
                                     <h1>Not Found</h1>
                                 </div>
                             )} 
                         </>
+                        ):(
+                            <div></div>
+                        )}
                     </div>
                 </div>
             )}
