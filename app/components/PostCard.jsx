@@ -10,6 +10,7 @@ import { AiOutlineRise } from "react-icons/ai";
 import { FiEye, FiInfo } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import CommentBox from "./CommentBox";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -221,7 +222,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                             {data.content}
                         </p>
                     </article>
-                    <div className="mt-5 border-y border-black py-2 flex justify-between items-center">
+                    <div className="w-full mt-5 border-y border-black py-2 flex justify-between items-center">
                         <div className="flex gap-1 items-center">
                             <IoShareSocialOutline />
                             <span>Share <span className="hidden md:inline-block">this Article</span></span>
@@ -238,6 +239,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                             </Link>
                         </div>
                     </div>
+                    <CommentBox />
                 </div>
 
                 <div className="mt-12">
