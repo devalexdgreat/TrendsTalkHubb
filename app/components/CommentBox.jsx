@@ -33,7 +33,7 @@ export default function CommentBox() {
                             <span className="text-[13px]">19-04-2024</span>
                         </div>
                         <div>
-                            <span>Wizkid is a perfect example of a true successful great man. He's always humble thats why I love him</span>
+                            <span>Wizkid is a perfect example of a true successful great man. He is alway humble thats why I love him</span>
                         </div>
                     </div>
                     <div className="w-full p-2 bg-black/5 rounded-md">
