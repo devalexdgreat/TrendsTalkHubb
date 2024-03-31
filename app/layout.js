@@ -4,21 +4,21 @@ import localFont from 'next/font/local';
 import { Inter, Poppins } from 'next/font/google'
 import Head from "next/head";
  
-const anyFont = Poppins({
-  subsets: ['latin'],
-  display: "swap",
-  weight: ["100", "200", "300"]
-})
-
-// const Helvetica = localFont({
-//   src: [
-//     {
-//       path: './fonts/Helvetica.woff2',
-//       weight: '400',
-//       style: 'normal'
-//     },
-//   ],
+// const anyFont = Poppins({
+//   subsets: ['latin'],
+//   display: "swap",
+//   weight: ["100", "200", "300"]
 // })
+
+const anyFont = localFont({
+  src: [
+    {
+      path: './fonts/Poppins-Regular.ttf',
+      weight: '400',
+      style: 'normal'
+    },
+  ],
+})
 
 export const metadata = {
   icons: {

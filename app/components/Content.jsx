@@ -70,12 +70,12 @@ export default function Content({ data }) {
 
     const router = useRouter();
 
-    useEffect(() => {
-        if(data) {
-            setPostData(data);
-            return;
-        }
-    }, [data])
+    // useEffect(() => {
+    //     if(data) {
+    //         setPostData(data);
+    //         return;
+    //     }
+    // }, [data])
 
     useEffect(() => {
         const fetchAt = async () => {
@@ -134,7 +134,6 @@ export default function Content({ data }) {
                             <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Trending posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
-                        {postdata ? (
                             <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 
                                 {data.map((d) => (
@@ -144,8 +143,8 @@ export default function Content({ data }) {
                                                 <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
                                                 <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                             </div>
-                                            <div className="bg-black p-3 t-box relative">
-                                                <div className="flex gap-2 items-center text-[13px] md:text-[9px]">
+                                            <div className="bg-black p-3 t-box h-36 md:h-36 relative">
+                                                <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
                                                     <span><FaUser /></span>
                                                     <div className="flex gap-0.5 items-center">
                                                         <h1>{d.author}</h1>
@@ -153,10 +152,10 @@ export default function Content({ data }) {
                                                         <span>{timeSinceCreation(d.date)}</span> 
                                                     </div>
                                                 </div>
-                                                <div className="mb-10 mt-5">
-                                                    <h1 className="text-lg md:text-[15px] font-semibold duration-500">{d.title}</h1>
+                                                <div className="my-2">
+                                                    <p className="text-[16px] md:text-[15px] font-semibold duration-500">{d.title}</p>
                                                 </div>
-                                                <div className="flex gap-4 items-center text-[15px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                                <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                                     <div className="flex gap-3">
                                                         <button className="flex gap-1.5 items-center">
                                                             <BsHandThumbsUp />
@@ -169,7 +168,7 @@ export default function Content({ data }) {
                                                     </div>
                                                     <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
                                                         {d.tags.map((tag) => (
-                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[15px] md:text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
                                                                 <AiOutlineRise />
                                                                 <span>{tag}</span>
                                                             </Link>
@@ -182,18 +181,6 @@ export default function Content({ data }) {
                                     </div>
                                 ))}
                             </section>
-                        ):(
-                            <div className="h-[63vh] text-black w-full flex justify-center items-center">
-                                <div  className="flex flex-col justify-center text-center">
-                                    <span className="font-bol text-xl md:text-2xl">Loading posts...</span>
-                                    <div className="flex justify-center mt-3">
-                                        <button onClick={() => window.location.reload(false)} className="bg-black text-white py-1 px-3 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center">
-                                            <MdRefresh />Refresh<span></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                     </div>
                     <SideBar />
                 </div>
