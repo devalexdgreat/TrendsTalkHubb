@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BsDot, BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
 import { FaFacebook, FaFolderOpen, FaTwitter, FaUser, FaWhatsapp } from "react-icons/fa6";
 import imgOne from '@/public/5.jpg'
+import imgFiv from '@/public/1.jpg'
 import { IoShareSocialOutline } from "react-icons/io5";
 import Link from "next/link";
 import { AiOutlineRise } from "react-icons/ai";
@@ -247,14 +248,14 @@ export default function PostCard({ post, token, postid, relatedData }) {
                     {relatedData.length !== 0 ? (
                         <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                             {relatedData.map((r) => (
-                                <article className="h-72" key={r.id}>
+                                <div className="" key={r.id}>
                                     <Link href={`/blogs/${r.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                        <div className="h-3/6">
-                                            <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
+                                        <div className="">
+                                            <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
                                             <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                         </div>
-                                        <div className="bg-black p-3 t-box h-3/6 relative">
-                                            <div className="flex gap-2 items-center text-[9px]">
+                                        <div className="bg-black p-3 t-box h-36 md:h-36 relative">
+                                            <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
                                                 <span><FaUser /></span>
                                                 <div className="flex gap-0.5 items-center">
                                                     <h1>{r.author}</h1>
@@ -263,9 +264,9 @@ export default function PostCard({ post, token, postid, relatedData }) {
                                                 </div>
                                             </div>
                                             <div className="my-2">
-                                                <h2 className="text-[15px] font-semibold duration-500">{r.title}</h2>
+                                                <p className="text-[16px] md:text-[15px] font-semibold duration-500">{r.title}</p>
                                             </div>
-                                            <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                            <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                                 <div className="flex gap-3">
                                                     <button className="flex gap-1.5 items-center">
                                                         <BsHandThumbsUp />
@@ -280,7 +281,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                                                     {r.tags.map((tag) => (
                                                         <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
                                                             <AiOutlineRise />
-                                                            <span className="font-normal">{tag}</span>
+                                                            <span>{tag}</span>
                                                         </Link>
                                                     ))}
                                                 </div>
@@ -288,7 +289,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                                         </div>
                                         <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
                                     </Link>
-                                </article>
+                                </div>
                             ))}
                         </div>
                     ):(

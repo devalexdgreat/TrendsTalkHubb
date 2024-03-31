@@ -20,10 +20,10 @@ export default function Footer() {
                     <Link href={'/about'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
                         <span>About Us</span><FiInfo />
                     </Link>
-                    <Link href={'/'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
+                    <Link href={'/contact-us'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
                         <span>Contact Us</span><RiContactsLine />
                     </Link>
-                    <Link href={'/'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
+                    <Link href={'/policy'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
                         <span>Policy</span><GoLaw />
                     </Link>
                 </div>

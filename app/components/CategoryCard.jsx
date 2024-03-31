@@ -8,6 +8,7 @@ import imgOne from '@/public/1.jpg'
 import imgTwo from '@/public/2.jpg'
 import imgThr from '@/public/3.jpg'
 import imgFor from '@/public/4.jpg'
+import imgFiv from '@/public/5.jpg'
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
 
@@ -75,14 +76,14 @@ export default function CategoryCard({ data, tag, title }) {
             <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                 
                 {data.map((d) => (
-                    <div className="h-72" key={d.id}>
+                    <div className="" key={d.id}>
                         <Link href={`/blogs/${d.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                            <div className="h-3/6">
-                                <Image src={imgOne} alt="" className="post-img h-full object-cover object-center" />
+                            <div className="">
+                                <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
                                 <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                             </div>
-                            <div className="bg-black p-3 t-box h-3/6 relative">
-                                <div className="flex gap-2 items-center text-[9px]">
+                            <div className="bg-black p-3 t-box h-36 md:h-36 relative">
+                                <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
                                     <span><FaUser /></span>
                                     <div className="flex gap-0.5 items-center">
                                         <h1>{d.author}</h1>
@@ -91,9 +92,9 @@ export default function CategoryCard({ data, tag, title }) {
                                     </div>
                                 </div>
                                 <div className="my-2">
-                                    <p className="text-[15px] font-semibold duration-500">{d.title}</p>
+                                    <p className="text-[16px] md:text-[15px] font-semibold duration-500">{d.title}</p>
                                 </div>
-                                <div className="flex gap-4 items-center text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                     <div className="flex gap-3">
                                         <button className="flex gap-1.5 items-center">
                                             <BsHandThumbsUp />
