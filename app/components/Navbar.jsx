@@ -360,7 +360,7 @@ export default function Navbar() {
                                     </span>
                                     <div className="h-full ps-2 pe-3 flex justify-center items-center">
                                         {user ? (
-                                            <div className="text-[12px] md:text-base flex flex-col">
+                                            <div className="text-[13px] md:text-base flex flex-col">
                                                 <span>@{user.username}</span>
                                                 <span>{user.email}</span>
                                             </div>

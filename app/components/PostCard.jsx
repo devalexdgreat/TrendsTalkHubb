@@ -175,7 +175,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                     <div className="text-[13px] flex gap-1 items-center mt-4 mb-4">
                         <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
                         </Link>/
-                        <Link href={`/blogs/categories/${data.categoryId}`} className="rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">
+                        <Link href={`/blogs/categories/${data.category}`} className="rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">
                             <FaFolderOpen />{data.category}
                         </Link>
                     </div>
