@@ -31,7 +31,7 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
     const [query, setQuery] = useState("");
-    const [foundQuery, setFoundQuery] = useState([]);
+    const [foundQuery, setFoundQuery] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
     const [isloggedIn, setIsLoggedIn] = useState(true);
     const [user, setUser] = useState(null);
@@ -176,7 +176,7 @@ export default function Navbar() {
 
     var found;
     var isEmpty;
-    if(foundQuery.length > 0) {
+    if(foundQuery) {
         found = foundQuery;
         isEmpty = true;
     } 
