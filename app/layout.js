@@ -13,7 +13,7 @@ import Head from "next/head";
 const anyFont = localFont({
   src: [
     {
-      path: './fonts/Poppins-Regular.ttf',
+      path: './fonts/Poppins-Regular.woff2',
       weight: '400',
       style: 'normal',
       variable: '--font-poppins',
