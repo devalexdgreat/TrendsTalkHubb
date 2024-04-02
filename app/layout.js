@@ -15,7 +15,8 @@ const anyFont = localFont({
     {
       path: './fonts/Poppins-Regular.ttf',
       weight: '400',
-      style: 'normal'
+      style: 'normal',
+      variable: '--font-poppins',
     },
   ],
 })
