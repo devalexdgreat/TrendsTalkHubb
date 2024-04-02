@@ -17,6 +17,7 @@ const anyFont = localFont({
       weight: '400',
       style: 'normal',
       variable: '--font-poppins',
+      fallback: ['system-ui', 'arial']
     },
   ],
 })
