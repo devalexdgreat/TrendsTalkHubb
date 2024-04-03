@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function truncateString(str, num) {
     if (str.length > num) {
@@ -43,8 +44,10 @@ export default function CommentBox({ token, postid, user, comments }) {
             if (response.ok) {
                 const data = await response.json();
                 const successMsg = data.message;
-                setMsg(successMsg);
-                // router.refresh();
+                toast.success(successMsg, {
+                    position: "bottom-center"
+                  })
+                router.refresh();
             } else {
                 const errorData = await response.json();
                 setError(errorData.message);
@@ -59,12 +62,11 @@ export default function CommentBox({ token, postid, user, comments }) {
         e.preventDefault();
         await postComment(postid, token);
         setContent('');
-        setMsg('');
-        router.refresh();
     }
 
     return (
         <div>
+            <Toaster />
             <form className="w-full py-4" onSubmit={handleSubmit}>
                 <div className="flex gap-1 items-center mb-2">
                     <span className="font-semibold">Comments</span>

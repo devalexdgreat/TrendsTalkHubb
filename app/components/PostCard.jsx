@@ -11,6 +11,7 @@ import { FiEye, FiInfo } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CommentBox from "./CommentBox";
+import toast, { Toaster } from "react-hot-toast";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -27,15 +28,19 @@ function timeSinceCreation(createdDate) {
 
     // Determine the appropriate time unit
     if (differenceInSeconds < 60) {
-        return Math.floor(differenceInSeconds) + " seconds ago";
+        return Math.floor(differenceInSeconds) + " second" + (Math.floor(differenceInSeconds) === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 3600) {
-        return Math.floor(differenceInSeconds / 60) + " minutes ago";
+        var minutes = Math.floor(differenceInSeconds / 60);
+        return minutes + " minute" + (minutes === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 86400) {
-        return Math.floor(differenceInSeconds / 3600) + " hours ago";
+        var hours = Math.floor(differenceInSeconds / 3600);
+        return hours + " hour" + (hours === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 604800) {
-        return Math.floor(differenceInSeconds / 86400) + " days ago";
+        var days = Math.floor(differenceInSeconds / 86400);
+        return days + " day" + (days === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 2419200) { // Assuming 7 days as a week
-        return Math.floor(differenceInSeconds / 604800) + " weeks ago";
+        var weeks = Math.floor(differenceInSeconds / 604800);
+        return weeks + " week" + (weeks === 1 ? "" : "s") + " ago";
     } else {
         return "more than a month ago";
     }
@@ -171,10 +176,13 @@ export default function PostCard({ post, token, postid, relatedData, comments })
         }
     }
 
+    const notify = () => toast('Here is your toast.');
+
     return (
         <div className="w-full md:w-9/12 text-black">
             <div className="w-full">       
                 <div>
+                    <Toaster />
                     <div className="text-[13px] flex gap-1 items-center mt-4 mb-4">
                         <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
                         </Link>/
@@ -230,9 +238,9 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                             <span>Share <span className="hidden md:inline-block">this Article</span></span>
                         </div>
                         <div className="flex gap-3 items-center">
-                            <Link href={'/share#'} className="flex items-center gap-1 bg-blue-600 text-white py-1 px-2 rounded-md">
+                            <button className="flex items-center gap-1 bg-blue-600 text-white py-1 px-2 rounded-md">
                                 <FaFacebook /><span>Facebook</span>
-                            </Link>
+                            </button>
                             <Link href={'/share#'} className="flex items-center gap-1 bg-blue-500 text-white py-1 px-2 rounded-md">
                                 <FaTwitter /><span>Twitter</span>
                             </Link>

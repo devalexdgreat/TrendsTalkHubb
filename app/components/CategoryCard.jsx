@@ -27,15 +27,19 @@ function timeSinceCreation(createdDate) {
 
     // Determine the appropriate time unit
     if (differenceInSeconds < 60) {
-        return Math.floor(differenceInSeconds) + " seconds ago";
+        return Math.floor(differenceInSeconds) + " second" + (Math.floor(differenceInSeconds) === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 3600) {
-        return Math.floor(differenceInSeconds / 60) + " minutes ago";
+        var minutes = Math.floor(differenceInSeconds / 60);
+        return minutes + " minute" + (minutes === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 86400) {
-        return Math.floor(differenceInSeconds / 3600) + " hours ago";
+        var hours = Math.floor(differenceInSeconds / 3600);
+        return hours + " hour" + (hours === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 604800) {
-        return Math.floor(differenceInSeconds / 86400) + " days ago";
+        var days = Math.floor(differenceInSeconds / 86400);
+        return days + " day" + (days === 1 ? "" : "s") + " ago";
     } else if (differenceInSeconds < 2419200) { // Assuming 7 days as a week
-        return Math.floor(differenceInSeconds / 604800) + " weeks ago";
+        var weeks = Math.floor(differenceInSeconds / 604800);
+        return weeks + " week" + (weeks === 1 ? "" : "s") + " ago";
     } else {
         return "more than a month ago";
     }

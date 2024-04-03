@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { setCookies } from "@/actions";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 
 
 export default function LoginForm() {
@@ -34,14 +35,16 @@ export default function LoginForm() {
             if (response.ok) {
                 const data = await response.json();
                 const accessToken = data.accessToken;
-
+                const successMsg = data.message;
+                toast.success(successMsg, {
+                    position: "bottom-center"
+                  })
                 await setCookies(accessToken);
 
                 // Store the token in local storage or session storage
                 localStorage.setItem('accessToken', accessToken);
 
                 // Redirect to a secured page or any other page
-                
                 router.refresh();
                 router.push("/");
                 
@@ -59,6 +62,7 @@ export default function LoginForm() {
         <div className="flex justify-center items-center h-screen w-full bg-white backdrop-blur-sm fixed top-0 left-0">
             <div className="rounded-lg w-11/12 md:w-4/12 px-6 py-6 text-black z-40 bg-white relative">
                 <div className="w-full pb-6 flex flex-col justify-center items-center">
+                    <Toaster/>
                     <Link className="" href={'/'} alt="back">
                         <Image src='/favicon.png' width={100} height={100} className="" alt="logo" />
                     </Link>
