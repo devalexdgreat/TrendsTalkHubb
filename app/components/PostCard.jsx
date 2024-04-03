@@ -55,9 +55,10 @@ function formatNumber(number) {
     }
 }
 
-export default function PostCard({ post, token, postid, relatedData }) {
+export default function PostCard({ post, token, postid, relatedData, comments }) {
     const data = post;
     const [isLiked, setIsLiked] = useState(false);
+    const [user, setUser] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -73,6 +74,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
         
                 if (response.ok) {
                     const userData = await response.json();
+                    setUser(userData.user.username);
                     return userData.user.id;
                 } else {
                     console.error('Failed to fetch user data');
@@ -239,7 +241,7 @@ export default function PostCard({ post, token, postid, relatedData }) {
                             </Link>
                         </div>
                     </div>
-                    <CommentBox />
+                    <CommentBox token={token} postid={postid} user={user} comments={comments} />
                 </div>
 
                 <div className="mt-12">

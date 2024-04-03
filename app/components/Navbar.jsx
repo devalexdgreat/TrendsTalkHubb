@@ -127,7 +127,6 @@ export default function Navbar() {
                 }
         
                 const data = await res.json();
-                console.log(data);
                 setCategories(data);
             } catch (error) {
                 console.log(error);

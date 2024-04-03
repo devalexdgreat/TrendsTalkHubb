@@ -26,6 +26,27 @@ const fetchPostById = async (id, accessToken) => {
     }
 };
 
+const fetchComments = async (id, accessToken) => {
+    try {
+        // Fetch post data from the protected endpoint
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}/comments`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            },
+            cache: "no-store",
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch comments");
+        }
+
+        const comments = await response.json();
+        return comments;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const fetchRelated = async (data) => {
     try {
         // Fetch post data from the protected endpoint
@@ -100,7 +121,7 @@ export default async function Blog({ params }) {
     
     if (isTokenExpired(aT)) {
         console.log('Access token has expired');
-        router.push('/login');
+        redirect('/login');
         return;
     } else {
         console.log('Access token is still valid');
@@ -110,13 +131,15 @@ export default async function Blog({ params }) {
     const sameTag = await fetchRelated(post);
     const related = sameTag.filter(indPost => indPost.id !== id);
     const posts = await getPosts();
+    const com = await fetchComments(id, aT);
+    const comments = com.reverse();
 
     return (
         <div className="w-full">
             <Navbar />
             <div className="w-full mt-20 mb-24">
                 <div className="w-11/12 mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
-                    <PostCard post={post} token={aT} postid={id} relatedData={related} />
+                    <PostCard post={post} token={aT} postid={id} relatedData={related} comments={comments} />
                     <PostSideBar posts={posts} />
                 </div>
             </div>
