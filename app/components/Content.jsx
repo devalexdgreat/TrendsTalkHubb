@@ -18,6 +18,8 @@ import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { MdRefresh } from "react-icons/md";
 import { getCookies } from "@/actions";
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -135,9 +137,59 @@ export default function Content({ data }) {
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
                         <div className="mb-5 heading mt-5">
-                            <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Trending posts</span>
+                            <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Feed</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
+                            <div className="w-full md:w-full mb-12 bg-black b-rad">
+                                <Splide 
+                                options={ {
+                                    rewind: true,
+                                    autoplay: true,
+                                    gap   : '1rem',
+                                    arrows: false,
+                                } }
+                                hasTrack={ false } aria-label="...">
+                                    <div className="custom-wrapper">
+
+
+                                        <div className="splide__progress">
+                                            <div className="splide__progress__bar" />
+                                        </div>
+
+
+                                        <SplideTrack className="h-52 md:h-[26rem] b-rad">
+                                            <SplideSlide className="h-full relative">
+                                                <Image src={imgOne} alt="Image 1" className="object-cover object-top w-full b-rad" />
+                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
+                                                    <span className="text-base md:text-xl font-semibold">News 1</span>
+                                                </div>
+                                            </SplideSlide>
+                                            <SplideSlide className="h-full relative">
+                                                <Image src={imgTwo} alt="Image 1" className="object-cover object-top w-full b-rad" />
+                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
+                                                    <span className="text-base md:text-xl font-semibold">News 2</span>
+                                                </div>
+                                            </SplideSlide>
+                                            <SplideSlide className="h-full relative">
+                                                <Image src={imgThr} alt="Image 1" className="object-cover object-top w-full b-rad" />
+                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
+                                                    <span className="text-base md:text-xl font-semibold">News 3</span>
+                                                </div>
+                                            </SplideSlide>
+                                            <SplideSlide className="h-full relative">
+                                                <Image src={imgFor} alt="Image 1" className="object-cover object-top w-full b-rad" />
+                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
+                                                    <span className="text-base md:text-xl font-semibold">News 4</span>
+                                                </div>
+                                            </SplideSlide>
+                                        </SplideTrack>
+                                    </div>
+                                </Splide>
+                            </div>
+                            <div className="mb-5 heading mt-5">
+                                <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Trending posts</span>
+                                <hr className="border-2 border-black w-12 rounded-3xl"/>
+                            </div>
                             <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 
                                 {data.map((d) => (

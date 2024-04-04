@@ -32,12 +32,12 @@ export default function SideBar() {
                     </button>
                 </div>
                 <div className="grid grid-cols-2 gap-2 items-center w-full my-3">
-                    <Link href={'#'} className="rounded-md hover:bg-blue-500 duration-500 py-1 px-2 flex gap-1 items-center justify-between text-[15px] bg-blue-600" >
+                    <Link href={'#'} className="rounded-md hover:bg-blue-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-blue-600" >
                         <span className="text-xl"><CiFacebook /></span>
                         <span className="font-semibold">109K</span>
                         <span>Fol</span>
                     </Link>
-                    <Link href={'#'} className="rounded-md hover:bg-red-500 duration-500 py-1 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
+                    <Link href={'#'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
                         <span className="text-xl"><CiYoutube /></span>
                         <span className="font-semibold">310K</span>
                         <span>Sub</span>
