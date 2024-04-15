@@ -37,7 +37,7 @@ export default function SideBar() {
                         <span className="font-semibold">109K</span>
                         <span>Fol</span>
                     </Link>
-                    <Link href={'#'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
+                    <Link href={'https://youtube.com/@trendstalkhubb?si=2PqtzRCqk7MvnJlX'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
                         <span className="text-xl"><CiYoutube /></span>
                         <span className="font-semibold">310K</span>
                         <span>Sub</span>

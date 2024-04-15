@@ -4,7 +4,7 @@ export const metadata = {
     },
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
       alternates: {
-        canonical: '/about',
+        canonical: '/admin',
         languages: {
           'en-US': '/en-US',
           'de-DE': '/de-DE',
@@ -53,7 +53,7 @@ export const metadata = {
         'max-snippet': -1,
       },
     },
-    title: "About Us - TrendsTalk Hubb",
+    title: "Admin - TrendsTalk Hubb",
     description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
     keywords: "about us, about, TrendsTalk Hubb, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     author: "TrendsTalk Hubb",

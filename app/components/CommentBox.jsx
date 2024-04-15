@@ -17,6 +17,7 @@ function capString(str) {
 export default function CommentBox({ token, postid, user, comments }) {
 
     // const [comments, setComments] = useState(null);
+    console.log(comments);
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
     const [msg, setMsg] = useState('');

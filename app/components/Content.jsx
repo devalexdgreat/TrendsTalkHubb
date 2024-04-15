@@ -68,7 +68,15 @@ function formatNumber(number) {
     }
 }
 
-export default function Content({ data }) {
+function truncateString(str, num) {
+    if (str.length > num) {
+        return str.slice(0, num) + "...";
+    } else {
+        return str;
+    }
+}
+
+export default function Content({ feed, data }) {
 
     const [dData, setDData] = useState('none');
     const [postdata, setPostData] = useState(null);
@@ -136,56 +144,50 @@ export default function Content({ data }) {
                     </div>
 
                     <div className="overflow-y-scroll w-full md:w-9/12 scrollbar-hide">
-                        <div className="mb-5 heading mt-5">
-                            <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Feed</span>
-                            <hr className="border-2 border-black w-12 rounded-3xl"/>
-                        </div>
-                            <div className="w-full md:w-full mb-12 bg-black b-rad">
-                                <Splide 
-                                options={ {
-                                    rewind: true,
-                                    autoplay: true,
-                                    gap   : '1rem',
-                                    arrows: false,
-                                } }
-                                hasTrack={ false } aria-label="...">
-                                    <div className="custom-wrapper">
+                            {feed ? (
+                            <div className="w-full">
+                                <div className="mb-5 heading mt-5">
+                                    <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Feed</span>
+                                    <hr className="border-2 border-black w-12 rounded-3xl"/>
+                                </div>
+                                <div className="w-full md:w-full mb-12 bg-black b-rad">
+                                    <Splide 
+                                    options={ {
+                                        rewind: true,
+                                        autoplay: true,
+                                        gap   : '1rem',
+                                        arrows: false,
+                                    } }
+                                    hasTrack={ false } aria-label="...">
+                                        <div className="custom-wrapper">
 
 
-                                        <div className="splide__progress">
-                                            <div className="splide__progress__bar" />
+                                            <div className="splide__progress">
+                                                <div className="splide__progress__bar" />
+                                            </div>
+
+
+                                            <SplideTrack className="h-60 md:h-[26rem] b-rad">
+                                                {feed.map((f) => (
+                                                    <SplideSlide key={f.id} className="h-full relative">
+                                                        <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full b-rad" />
+                                                        <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
+                                                            <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.title, 70)}</span>
+                                                            <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.title}</span>
+                                                        </div>
+                                                    </SplideSlide>
+                                                ))}
+                                            </SplideTrack>
                                         </div>
-
-
-                                        <SplideTrack className="h-52 md:h-[26rem] b-rad">
-                                            <SplideSlide className="h-full relative">
-                                                <Image src={imgOne} alt="Image 1" className="object-cover object-top w-full b-rad" />
-                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
-                                                    <span className="text-base md:text-xl font-semibold">News 1</span>
-                                                </div>
-                                            </SplideSlide>
-                                            <SplideSlide className="h-full relative">
-                                                <Image src={imgTwo} alt="Image 1" className="object-cover object-top w-full b-rad" />
-                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
-                                                    <span className="text-base md:text-xl font-semibold">News 2</span>
-                                                </div>
-                                            </SplideSlide>
-                                            <SplideSlide className="h-full relative">
-                                                <Image src={imgThr} alt="Image 1" className="object-cover object-top w-full b-rad" />
-                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
-                                                    <span className="text-base md:text-xl font-semibold">News 3</span>
-                                                </div>
-                                            </SplideSlide>
-                                            <SplideSlide className="h-full relative">
-                                                <Image src={imgFor} alt="Image 1" className="object-cover object-top w-full b-rad" />
-                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2">
-                                                    <span className="text-base md:text-xl font-semibold">News 4</span>
-                                                </div>
-                                            </SplideSlide>
-                                        </SplideTrack>
-                                    </div>
-                                </Splide>
+                                    </Splide>
+                                </div>
                             </div>
+                            ):(
+                                <div>
+                                    <span></span>
+                                </div>
+                            )}
+                            
                             <div className="mb-5 heading mt-5">
                                 <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Trending posts</span>
                                 <hr className="border-2 border-black w-12 rounded-3xl"/>
@@ -193,14 +195,14 @@ export default function Content({ data }) {
                             <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                                 
                                 {data.map((d) => (
-                                    <div className="" key={d.id} onClick={handleClick}>
-                                        <Link href={`/blogs/${d.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                            <div className="">
-                                                <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
+                                    <div className="h-80" key={d.id} onClick={handleClick}>
+                                        <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                            <div className="h-3/6">
+                                                <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-center" />
                                                 <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                             </div>
-                                            <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                                <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
+                                            <div className="bg-black p-3 t-box h-3/6 relative">
+                                                <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
                                                     <span><FaUser /></span>
                                                     <div className="flex gap-0.5 items-center">
                                                         <h1>{d.author}</h1>
@@ -209,7 +211,7 @@ export default function Content({ data }) {
                                                     </div>
                                                 </div>
                                                 <div className="my-2">
-                                                    <p className="text-[16px] md:text-[15px] font-semibold duration-500">{d.title}</p>
+                                                    <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
                                                 </div>
                                                 <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                                     <div className="flex gap-3">
@@ -237,7 +239,7 @@ export default function Content({ data }) {
                                     </div>
                                 ))}
                             </section>
-                    </div>
+                        </div>
                     <SideBar />
                 </div>
             </div>

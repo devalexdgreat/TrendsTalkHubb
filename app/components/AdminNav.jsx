@@ -204,13 +204,13 @@ export default function AdminNav() {
     return (
         <div className="w-full fixed top-0 z-30 bg-white shadow-md" ref={ref}>
             <div className="w-11/12 mx-auto flex items-center text-black justify-between py-3">
-                <Link href={'/'} className="font-semibold">
+                <Link href={'/admin'} className="font-semibold">
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>
                 <div className="hidden md:flex items-center gap-6">
-                    <Link href={'/'} className="hover:text-black/60 duration-500">Dashboard</Link>
+                    <Link href={'/admin'} className="hover:text-black/60 duration-500">Dashboard</Link>
                     
-                    <Menu as="div" className="relative inline-block text-left">
+                    {/* <Menu as="div" className="relative inline-block text-left">
                         <div>
                             <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-gray-900">
                             Categories
@@ -249,10 +249,16 @@ export default function AdminNav() {
                             ):(
                             <span>No Category</span>
                             )}
+                            <a
+                                href={`/blogs/categories/create-category`}
+                                className='text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900'
+                                >
+                                New Category
+                            </a>
                             </Menu.Items>
                         </Transition>
-                    </Menu>
-                    <Link href={'/create-post'} className="hover:text-black/60 duration-500">Posts</Link>
+                    </Menu> */}
+                    <Link href={'/admin/all-posts'} className="hover:text-black/60 duration-500">Posts</Link>
                     {isloggedIn ? (
                         <button onClick={toggleProfile} className="flex rounded-full h-9 justify-center items-center bg-black text-white p-0.5">
                             <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
@@ -293,8 +299,8 @@ export default function AdminNav() {
                         </div>
                     </div>
                     <div className="w-11/12 mx-auto flex flex-col">
-                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Dashboard</Link>
-                        <Menu as="div" className="relative inline-block text-left">
+                        <Link href={'/admin'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Dashboard</Link>
+                        {/* <Menu as="div" className="relative inline-block text-left">
                             <div className="hover:text-gray-400 duration-500">
                                 <Menu.Button className="inline-flex w-full justify-start items-center gap-x-1.5 py-3 border-b border-gray-700 ">
                                 Categories
@@ -314,6 +320,12 @@ export default function AdminNav() {
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 {categories ? (
                                 <div className="py-1">
+                                <a href={`/blogs/categories/create-category`} className={classNames(
+                                        active ? 'bg-black text-gray-900' : 'text-gray-700',
+                                        'block px-4 py-2 text-sm'
+                                    )}
+                                    >
+                                    Add Category</a>
                                 {categories.map((cat, index) => (
                                     <Menu.Item key={index}>
                                     {({ active }) => (
@@ -335,9 +347,9 @@ export default function AdminNav() {
                                 )}
                                 </Menu.Items>
                             </Transition>
-                        </Menu>
+                        </Menu> */}
                         
-                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Posts</Link>
+                        <Link href={'/all-posts'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Posts</Link>
                         {isloggedIn ? (
                             <div className="flex justify-between items-center py-2">
                                 <div className="flex rounded-full h-9 justify-center items-center text-[12px] bg-black text-white p-0.5 md:hidden">

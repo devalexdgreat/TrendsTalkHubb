@@ -10,43 +10,133 @@ import { IoChatboxOutline } from "react-icons/io5";
 import { LiaEdit } from "react-icons/lia";
 import { IoIosMore } from "react-icons/io";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import SimpleLineChart from "../components/SimpleLineChart";
+
+function timeSinceCreation(createdDate) {
+    // Get the current date
+    var currentDate = new Date();
+
+    // Convert the createdDate string to a Date object
+    var createdDateObj = new Date(createdDate);
+
+    // Calculate the difference in milliseconds
+    var differenceInMs = currentDate - createdDateObj;
+
+    // Convert milliseconds to seconds
+    var differenceInSeconds = differenceInMs / 1000;
+
+    // Determine the appropriate time unit
+    if (differenceInSeconds < 60) {
+        return Math.floor(differenceInSeconds) + " second" + (Math.floor(differenceInSeconds) === 1 ? "" : "s") + " ago";
+    } else if (differenceInSeconds < 3600) {
+        var minutes = Math.floor(differenceInSeconds / 60);
+        return minutes + " minute" + (minutes === 1 ? "" : "s") + " ago";
+    } else if (differenceInSeconds < 86400) {
+        var hours = Math.floor(differenceInSeconds / 3600);
+        return hours + " hour" + (hours === 1 ? "" : "s") + " ago";
+    } else if (differenceInSeconds < 604800) {
+        var days = Math.floor(differenceInSeconds / 86400);
+        return days + " day" + (days === 1 ? "" : "s") + " ago";
+    } else if (differenceInSeconds < 2419200) { // Assuming 7 days as a week
+        var weeks = Math.floor(differenceInSeconds / 604800);
+        return weeks + " week" + (weeks === 1 ? "" : "s") + " ago";
+    } else {
+        return "more than a month ago";
+    }
+}
+
+function formatNumber(number) {
+    if (number >= 1000000000000) {
+        return (number / 1000000000000).toFixed(1) + ' T';
+    } else if (number >= 1000000000) {
+        return (number / 1000000000).toFixed(1) + ' B';
+    } else if (number >= 1000000) {
+        return (number / 1000000).toFixed(1) + ' M';
+    } else if (number >= 1000) {
+        return (number / 1000).toFixed(1) + ' K';
+    } else {
+        return number.toString();
+    }
+}
 
 function truncateString(str, num) {
     if (str.length > num) {
-      return str.slice(0, num) + "...";
+        return str.slice(0, num) + "...";
     } else {
-      return str;
+        return str;
     }
-  }
+}
 
 function capString(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function getTimeOfDay() {
+    // Get the current date
+    var currentDate = new Date();
+
+    // Get the current hour
+    var currentHour = currentDate.getHours();
+
+    // Define the time ranges
+    var morningStart = 5; // 5:00 AM
+    var afternoonStart = 12; // 12:00 PM (noon)
+    var eveningStart = 18; // 6:00 PM
+
+    // Determine the time of day
+    if (currentHour >= morningStart && currentHour < afternoonStart) {
+        return "morning";
+    } else if (currentHour >= afternoonStart && currentHour < eveningStart) {
+        return "afternoon";
+    } else {
+        return "evening";
+    }
+}
+
+const data = [
+    { name: 'Jan', sales: 400, expenses: 240 },
+    { name: 'Feb', sales: 300, expenses: 139 },
+    { name: 'Mar', sales: 200, expenses: 280 },
+    { name: 'Apr', sales: 278, expenses: 390 },
+    { name: 'May', sales: 189, expenses: 480 },
+    { name: 'Jun', sales: 239, expenses: 430 },
+    { name: 'Jul', sales: 349, expenses: 310 },
+    { name: 'Aug', sales: 349, expenses: 210 },
+    { name: 'Sep', sales: 349, expenses: 210 },
+    { name: 'Oct', sales: 349, expenses: 210 },
+    { name: 'Nov', sales: 349, expenses: 210 },
+    { name: 'Dec', sales: 349, expenses: 210 },
+  ];
+  
+
 export default function AdminPage() {
+
+    var greeting = getTimeOfDay();
+
     return (
         <div className="w-full">
             <AdminNav />
             <div className="w-11/12 mx-auto mt-24 mb-24 text-black">
                 <div className="w-full">
                     <span className="text-base md:text-lg flex flex-col">
-                        <span className="font-medium">Welcome Back!👋</span>
-                        <span className="text-[12px]">Good evening</span>
+                        <span className="font-semibold">Welcome Back!👋</span>
+                        <span className="text-[12px]">Good {capString(greeting)}</span>
                     </span>
                 </div>
                 <div className="flex flex-col md:flex-row mt-4 w-full gap-4">
                     <div className="bg-slate-100 p-3 rounded-md shadow w-full md:w-3/12 flex flex-col justify-between gap-4">
                         <div className="flex flex-col">
-                            <span className="font-medium">@Excelwrites</span>
-                            <span className="text-[12px] font-normal">Author</span>
+                            <span className="font-semibold">@Excelwrites</span>
+                            <span className="text-[12px]">Author</span>
                         </div>
                         <div className="flex gap-3 items-center">
                             <div className="flex gap-1 items-baseline">
-                                <span className="font-medium text-lg">91th</span>
+                                <span className="font-semibold text-lg">91th</span>
                                 <span className="text-[12px] font-normal">Rank</span>
                             </div>
                             <div className="flex gap-1 items-baseline">
-                                <span className="font-medium text-lg">129</span>
+                                <span className="font-semibold text-lg">129</span>
                                 <span className="text-[12px] font-normal">Total Post</span>
                             </div>
                         </div>
@@ -59,7 +149,7 @@ export default function AdminPage() {
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap">
                                     <span className="font-medium text-[12px]">Comments</span>
-                                    <span className="text-lg font-medium">12K</span>
+                                    <span className="text-lg font-semibold">12K</span>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +160,7 @@ export default function AdminPage() {
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap">
                                     <span className="font-medium text-[12px]">Total Likes</span>
-                                    <span className="text-lg font-medium">15M</span>
+                                    <span className="text-lg font-semibold">15M</span>
                                 </div>
                             </div>
                         </div> 
@@ -80,7 +170,7 @@ export default function AdminPage() {
                     <div className="bg-slate-100 rounded-md shadow p-3 w-full md:w-7/12">
                         <div className="flex justify-between">
                             <div>
-                                <span className="font-medium">Visitors</span>
+                                <span className="font-semibold">Visitors</span>
                             </div>
                             <div className="flex gap-1">
                                 <div className=" bg-slate-300 rounded-sm flex items-center px-2">
@@ -94,19 +184,19 @@ export default function AdminPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="py-32 bg-slate-200 mt-4 rounded-md">
-
+                        <div className="flex justify-center items-center md:pt-7 md:pb-3 bg-white mt-4 rounded-md">
+                            <SimpleLineChart data={data} />
                         </div>
                     </div>
                     <div className="w-full md:w-5/12 bg-slate-100 p-3 rounded-md">
                         <div className="w-full flex justify-between items-center">
-                            <span className="font-medium">Recent Blogs</span>
-                            <Link href={'/create-post'} className="bg-black text-white py-1 px-2 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center text-sm">
+                            <span className="font-semibold">Recent Blogs</span>
+                            <Link href={'/admin/create-post'} className="bg-black text-white py-1 px-2 rounded-md hover:bg-black/80 duration-500 flex gap-1 items-center text-sm">
                                 <FiPlus />
                                 <span>Add New</span>
                             </Link>
                         </div>
-                        <div className="flex mt-4 w-full">
+                        <div className="flex flex-col mt-4 w-full gap-4">
                             <div className="flex gap-2 items-center w-full">
                                 <div className="w-28 h-14 flex items-center justify-center">
                                     <Image src={imgOne} className="rounded-md" alt="" />
@@ -118,22 +208,25 @@ export default function AdminPage() {
                                     <div className="flex gap-2 items-center">
                                         <div className="flex gap-1 text-[12px] items-center">
                                             <IoChatboxOutline />
-                                            <span className=""><span>545</span> Comments</span>
+                                            <span className="">545</span>
                                         </div>
                                         <div className="flex gap-1 text-[12px] items-center">
                                             <FiEye />
-                                            <span className=""><span>1.6M</span> Views</span>
+                                            <span className="">1.6M</span>
                                         </div>
-                                        <Link href={'/edit-post'} className="flex gap-1 text-[12px] items-center">
+                                        <Link href={'/admin/edit-post'} className="flex gap-1 text-[12px] items-center hover:text-black/60 duration-500">
                                             <LiaEdit />
                                             <span className="">Edit</span>
                                         </Link>
-                                        <div className="flex gap-1 text-[12px] items-center">
+                                        <button className="flex gap-1 text-[12px] items-center hover:text-black/60 duration-500">
                                             <RiDeleteBinLine />
                                             <span className="">Delete</span>
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="flex justify-center pt-2">
+                                <Link href={'/admin/all-posts'} className="bg-black text-white py-1 px-4 rounded-md hover:bg-black/70 duration-500">See More</Link>
                             </div>
                         </div>
                     </div>

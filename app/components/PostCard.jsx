@@ -260,13 +260,13 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                     {relatedData.length !== 0 ? (
                         <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
                             {relatedData.map((r) => (
-                                <div className="" key={r.id}>
-                                    <Link href={`/blogs/${r.id}`} className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                        <div className="">
-                                            <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
+                                <div className="h-80" key={r.id}>
+                                    <Link href={`/blogs/${r.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                        <div className="h-3/6">
+                                            <Image src={r.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-contain object-center" />
                                             <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                         </div>
-                                        <div className="bg-black p-3 t-box h-36 md:h-36 relative">
+                                        <div className="bg-black p-3 t-box h-3/6  relative">
                                             <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
                                                 <span><FaUser /></span>
                                                 <div className="flex gap-0.5 items-center">

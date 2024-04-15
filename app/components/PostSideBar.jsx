@@ -18,6 +18,14 @@ import imgFive from '@/public/5.jpg'
 import Link from "next/link";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
 
+function truncateString(str, num) {
+    if (str.length > num) {
+        return str.slice(0, num) + "...";
+    } else {
+        return str;
+    }
+}
+
 export default function PostSideBar({ posts }) {
     return (
         <aside className="sticky top-0 w-full md:w-3/12 flex gap-3 flex-col">
@@ -37,7 +45,7 @@ export default function PostSideBar({ posts }) {
                         <span className="font-semibold">109K</span>
                         <span>Fol</span>
                     </Link>
-                    <Link href={'#'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
+                    <Link href={'https://youtube.com/@trendstalkhubb?si=2PqtzRCqk7MvnJlX'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
                         <span className="text-xl"><CiYoutube /></span>
                         <span className="font-semibold">310K</span>
                         <span>Sub</span>
@@ -58,9 +66,12 @@ export default function PostSideBar({ posts }) {
                 <div className="grid grid-cols-1 gap-2 items-center w-full my-3">
                     {posts.map((p) => (
                         <Link key={p.id} href={`/blogs/${p.id}`} className="w-full flex gap-2 items-center justify-between text-[12px] group">
-                            <Image src={imgOne} className="w-3/12" alt="" />
-                            <div className="w-9/12">
-                                <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">{p.title}</h1>
+                            <div className="w-4/12 h-14 bg-white rounded-md">
+                               <Image src={p.images[0].url} width={1000} height={1000} className="object-cover object-center h-full rounded-md" alt="" /> 
+                            </div>
+                            
+                            <div className="w-8/12">
+                                <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">{truncateString(p.title, 70)}</h1>
                             </div>
                         </Link>
                     ))}
