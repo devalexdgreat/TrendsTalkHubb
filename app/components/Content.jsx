@@ -147,7 +147,7 @@ export default function Content({ feed, data }) {
                             {feed ? (
                             <div className="w-full">
                                 <div className="mb-5 heading mt-5">
-                                    <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Feed</span>
+                                    <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Posts</span>
                                     <hr className="border-2 border-black w-12 rounded-3xl"/>
                                 </div>
                                 <div className="w-full md:w-full mb-12 bg-black b-rad">
@@ -170,7 +170,7 @@ export default function Content({ feed, data }) {
                                             <SplideTrack className="h-60 md:h-[26rem] b-rad">
                                                 {feed.map((f) => (
                                                     <SplideSlide key={f.id} className="h-full relative">
-                                                        <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full b-rad" />
+                                                        <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full h-full b-rad" />
                                                         <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
                                                             <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.title, 70)}</span>
                                                             <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.title}</span>

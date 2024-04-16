@@ -1,7 +1,31 @@
 import AdminNav from "@/app/components/AdminNav";
 import CreatePostForm from "@/app/components/CreatePostForm";
 
-export default function CreatePost() {
+const getCategories = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/categories`, {
+            cache: "no-store",
+        });
+        
+        if (!res.ok) {
+            throw new Error("Failed to fetch Posts under category");
+        }
+
+        const data = await res.json();
+        return data;
+
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export default async function CreatePost() {
+
+    const categories = await getCategories();
+    console.log(categories);
+
     return (
         <div className="w-full">
             <AdminNav />
@@ -9,7 +33,7 @@ export default function CreatePost() {
                 <div className="mb-5">
                     <h1 className="font-semibold text-lg md:text-xl">Create Post</h1>
                 </div>
-                <CreatePostForm />
+                <CreatePostForm data={categories} />
             </div>
         </div>
     );

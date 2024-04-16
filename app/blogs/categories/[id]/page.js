@@ -24,7 +24,7 @@ const getPostsByCategory = async (el) => {
 
 const getPosts = async () => {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${4}`, {
             cache: "no-store",
         });
   

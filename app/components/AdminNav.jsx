@@ -64,7 +64,6 @@ export default function AdminNav() {
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (isTokenExpired(accessToken)) {
-            console.log('Access token has expired now');
             // Clear the access token from local storage
             localStorage.removeItem('accessToken');
             delCookies();

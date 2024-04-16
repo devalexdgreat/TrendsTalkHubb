@@ -12,6 +12,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CommentBox from "./CommentBox";
 import toast, { Toaster } from "react-hot-toast";
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -57,6 +59,14 @@ function formatNumber(number) {
         return (number / 1000).toFixed(1) + ' K';
     } else {
         return number.toString();
+    }
+}
+
+function truncateString(str, num) {
+    if (str.length > num) {
+        return str.slice(0, num) + "...";
+    } else {
+        return str;
     }
 }
 
@@ -225,7 +235,31 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                         </div>
                     </div>
                     <div className="w-full mt-5 mb-5 h-64 md:h-[26rem] rounded-lg">
-                        <Image src={imgOne} alt="" className="rounded-lg object-cover object-center h-full w-full"/>
+                        <Splide 
+                        options={ {
+                            rewind: true,
+                            autoplay: true,
+                            gap   : '1rem',
+                            arrows: false,
+                        } }
+                        hasTrack={ false } aria-label="...">
+                            <div className="custom-wrapper">
+                                <div className="splide__progress">
+                                    <div className="splide__progress__bar" />
+                                </div>
+                                <SplideTrack className="h-60 md:h-[26rem] b-rad">
+                                    {post.images.map((f) => (
+                                        <SplideSlide key={f.caption} className="h-full relative">
+                                            <Image src={f.url} width={1000} height={1000} alt="Image 1" className="object-cover object-top h-full w-full b-rad" />
+                                            <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
+                                                <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.caption, 70)}</span>
+                                                <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.caption}</span>
+                                            </div>
+                                        </SplideSlide>
+                                    ))}
+                                </SplideTrack>
+                            </div>
+                        </Splide>
                     </div>
                     <article>
                         <p>

@@ -12,6 +12,7 @@ import { IoIosMore } from "react-icons/io";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import SimpleLineChart from "../components/SimpleLineChart";
+import { getCookies } from "@/actions";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -107,12 +108,56 @@ const data = [
     { name: 'Oct', sales: 349, expenses: 210 },
     { name: 'Nov', sales: 349, expenses: 210 },
     { name: 'Dec', sales: 349, expenses: 210 },
-  ];
-  
+];
 
-export default function AdminPage() {
+const fetchUser = async (token) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            cache: "no-store"
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            return userData.user;
+        } else {
+            console.error('Failed to fetch user data');
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+    }
+};
+
+const getPosts = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${5}`, {
+            cache: "no-store",
+        });
+  
+        if (!res.ok) {
+            throw new Error("Failed to fetch Projects");
+        }
+  
+        return res.json();
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+  
+export default async function AdminPage() {
 
     var greeting = getTimeOfDay();
+    const tokenRaw = await getCookies();
+    const token = tokenRaw.value;
+    const user = await fetchUser(token);
+    console.log(user);
+
+    const posts = await getPosts(user.username);
+    console.log(posts);
 
     return (
         <div className="w-full">
@@ -127,7 +172,7 @@ export default function AdminPage() {
                 <div className="flex flex-col md:flex-row mt-4 w-full gap-4">
                     <div className="bg-slate-100 p-3 rounded-md shadow w-full md:w-3/12 flex flex-col justify-between gap-4">
                         <div className="flex flex-col">
-                            <span className="font-semibold">@Excelwrites</span>
+                            <span className="font-semibold">@{capString(user.username)}</span>
                             <span className="text-[12px]">Author</span>
                         </div>
                         <div className="flex gap-3 items-center">
@@ -170,7 +215,7 @@ export default function AdminPage() {
                     <div className="bg-slate-100 rounded-md shadow p-3 w-full md:w-7/12">
                         <div className="flex justify-between">
                             <div>
-                                <span className="font-semibold">Visitors</span>
+                                <span className="font-semibold">Analytics</span>
                             </div>
                             <div className="flex gap-1">
                                 <div className=" bg-slate-300 rounded-sm flex items-center px-2">
@@ -197,34 +242,37 @@ export default function AdminPage() {
                             </Link>
                         </div>
                         <div className="flex flex-col mt-4 w-full gap-4">
-                            <div className="flex gap-2 items-center w-full">
-                                <div className="w-28 h-14 flex items-center justify-center">
-                                    <Image src={imgOne} className="rounded-md" alt="" />
-                                </div>
-                                <div className="flex flex-col justify-center h-full gap-1">
-                                    <div>
-                                        <p className="font-medium leading-tight text-sm">Blord causes a buzz after being spotted eating at a local restaurant</p>
+
+                            {posts.map((d) => (
+                                <div key={d.id} className="flex gap-2 items-center w-full">
+                                    <div className="w-3/12 h-14 flex items-center justify-center">
+                                        <Image src={imgOne} className="rounded-md" alt="" />
                                     </div>
-                                    <div className="flex gap-2 items-center">
-                                        <div className="flex gap-1 text-[12px] items-center">
-                                            <IoChatboxOutline />
-                                            <span className="">545</span>
+                                    <div className="w-9/12 flex flex-col justify-center h-full gap-1">
+                                        <div>
+                                            <p className="font-medium leading-tight text-sm">{d.title}</p>
                                         </div>
-                                        <div className="flex gap-1 text-[12px] items-center">
-                                            <FiEye />
-                                            <span className="">1.6M</span>
+                                        <div className="flex gap-2 items-center">
+                                            <div className="flex gap-1 text-[12px] items-center">
+                                                <IoChatboxOutline />
+                                                <span className="">{d.commentsCount}</span>
+                                            </div>
+                                            <div className="flex gap-1 text-[12px] items-center">
+                                                <FiEye />
+                                                <span className="">{d.viewsCount}</span>
+                                            </div>
+                                            <Link href={'/admin/edit-post'} className="flex gap-1 text-[12px] items-center hover:text-black/60 duration-500">
+                                                <LiaEdit />
+                                                <span className="">Edit</span>
+                                            </Link>
+                                            <button className="flex gap-1 text-[12px] items-center hover:text-black/60 duration-500">
+                                                <RiDeleteBinLine />
+                                                <span className="">Delete</span>
+                                            </button>
                                         </div>
-                                        <Link href={'/admin/edit-post'} className="flex gap-1 text-[12px] items-center hover:text-black/60 duration-500">
-                                            <LiaEdit />
-                                            <span className="">Edit</span>
-                                        </Link>
-                                        <button className="flex gap-1 text-[12px] items-center hover:text-black/60 duration-500">
-                                            <RiDeleteBinLine />
-                                            <span className="">Delete</span>
-                                        </button>
                                     </div>
                                 </div>
-                            </div>
+                            ))}
                             <div className="flex justify-center pt-2">
                                 <Link href={'/admin/all-posts'} className="bg-black text-white py-1 px-4 rounded-md hover:bg-black/70 duration-500">See More</Link>
                             </div>

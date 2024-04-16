@@ -13,6 +13,7 @@ import imgThr from '@/public/3.jpg'
 import imgFor from '@/public/4.jpg'
 import imgFiv from '@/public/5.jpg'
 import { FiInfo } from "react-icons/fi";
+import { getCookies } from "@/actions";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -95,9 +96,54 @@ function getTimeOfDay() {
     }
 }
 
-export default function AllPosts() {
+const fetchUser = async (token) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            cache: "no-store"
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            return userData.user;
+        } else {
+            console.error('Failed to fetch user data');
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+    }
+};
+
+const getPosts = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${8}`, {
+            cache: "no-store",
+        });
+  
+        if (!res.ok) {
+            throw new Error("Failed to fetch Projects");
+        }
+  
+        return res.json();
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export default async function AllPosts() {
 
     var greeting = getTimeOfDay();
+
+    const tokenRaw = await getCookies();
+    const token = tokenRaw.value;
+    const user = await fetchUser(token);
+
+    const posts = await getPosts(user.username);
+    console.log(posts);
 
     return (
         <div className="w-full">
@@ -106,7 +152,7 @@ export default function AllPosts() {
                 <div className="w-full">
                     <span className="text-base md:text-lg flex flex-col">
                         <span className="font-semibold">Welcome Back!👋</span>
-                        <span className="text-[12px]">Good {capString(greeting)} Charles</span>
+                        <span className="text-[12px]">Good {capString(greeting)} {capString(user.username)}</span>
                     </span>
                 </div>
                 <div className="w-full my-12">
@@ -118,427 +164,50 @@ export default function AllPosts() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-white mt-4">
-
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
+                        {posts.map((d) => (
+                            <div className="h-80" key={d.id}>
+                                <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                    <div className="h-3/6">
+                                        <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-center" />
+                                        <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
+                                    </div>
+                                    <div className="bg-black p-3 t-box h-3/6 relative">
+                                        <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
+                                            <span><FaUser /></span>
+                                            <div className="flex gap-0.5 items-center">
+                                                <h1>{d.author}</h1>
+                                                <span><BsDot /></span>
+                                                <span>{timeSinceCreation(d.date)}</span> 
+                                            </div>
+                                        </div>
+                                        <div className="my-2">
+                                            <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
+                                        </div>
+                                        <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                            <div className="flex gap-3">
+                                                <button className="flex gap-1.5 items-center">
+                                                    <BsHandThumbsUp />
+                                                    <span>{formatNumber(d.likesCount)}</span>
+                                                </button>
+                                                <button className="flex gap-1.5 items-center">
+                                                    <FiEye />
+                                                    <span>{formatNumber(d.viewsCount)}</span>
+                                                </button>
+                                            </div>
+                                            <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
+                                                {d.tags.map((tag) => (
+                                                    <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                        <AiOutlineRise />
+                                                        <span>{tag}</span>
+                                                    </Link>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
-                        <div className="">
-                            <Link href='' className="group rounded-lg h-72 hover:shadow-2xl shadow-black duration-500 relative">
-                                <div className="">
-                                    <Image src={imgFiv} alt="" className="post-img h-full w-full object-contain object-center" />
-                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                </div>
-                                <div className="bg-black p-3 t-box h-36 md:h-36 relative">
-                                    <div className="flex gap-2 items-center text-[10px] md:text-[9px]">
-                                        <span><FaUser /></span>
-                                        <div className="flex gap-0.5 items-center">
-                                            <h1>Alexander</h1>
-                                            <span><BsDot /></span>
-                                            <span>{timeSinceCreation(300000)}</span> 
-                                        </div>
-                                    </div>
-                                    <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500"> object, and see if the error persists. If you encounter any issues or errors, please let me know.</p>
-                                    </div>
-                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                        <div className="flex gap-3">
-                                            <button className="flex gap-1.5 items-center">
-                                                <BsHandThumbsUp />
-                                                <span>{formatNumber(219900)}</span>
-                                            </button>
-                                            <button className="flex gap-1.5 items-center">
-                                                <FiEye />
-                                                <span>{formatNumber(993790)}</span>
-                                            </button>
-                                        </div>
-                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                            {/* {d.tags.map((tag) => (
-                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                    <AiOutlineRise />
-                                                    <span>{tag}</span>
-                                                </Link>
-                                            ))} */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
-                        </div>
+                                    <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
+                                </Link>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

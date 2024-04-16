@@ -18,10 +18,11 @@ export default function LoginForm() {
         e.preventDefault();
 
         if (!email || !password) {
-            setError("All fields are necessary!");
+            toast.error('All fields are necessary!', {
+                position: "top-center"
+              })
             return;
         }
-        setError("");
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`, {
@@ -37,7 +38,7 @@ export default function LoginForm() {
                 const accessToken = data.accessToken;
                 const successMsg = data.message;
                 toast.success(successMsg, {
-                    position: "bottom-center"
+                    position: "top-center"
                   })
                 await setCookies(accessToken);
 
@@ -50,11 +51,15 @@ export default function LoginForm() {
                 
             } else {
                 const errorData = await response.json();
-                setError(errorData.message);
+                toast.error(errorData.message, {
+                    position: "top-center"
+                  })
             }
         } catch (error) {
             console.error('Error during login:', error);
-            setError('An unexpected error occurred');
+            toast.error('An unexpected error occurred', {
+                position: "top-center"
+              })
         }
     }
 
@@ -69,11 +74,6 @@ export default function LoginForm() {
                     <h1 className="font-semibold text-xl md:text-2xl pb-0.5">Sign in to your account</h1>
                 </div>
                 <div className="w-full text-[12px]">
-                    {error && (
-                        <div className="mb-4 w-full flex justify-center items-center">
-                            <span className="bg-red-500 text-white px-2 py-0.5 rounded-md">{error}</span>
-                        </div>
-                    )}
                     <form className="w-full flex flex-col justify-center items-center" onSubmit={handleSumbit}>
                         <div className="flex flex-col w-full gap-2">
                             <label className="font-semibold">Email Address</label>

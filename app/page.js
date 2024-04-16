@@ -89,7 +89,7 @@ export default async function Home() {
 
 
   const posts = await getPosts();
-  const feed = posts.reverse();
+  const feed = posts;
 
   return (
     <main className="h-auto antialiased">

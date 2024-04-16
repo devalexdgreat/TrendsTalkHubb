@@ -27,10 +27,11 @@ export default function CommentBox({ token, postid, user, comments }) {
     const postComment = async (id, token) => {
         
         if (!content) {
-            setError("Can't post an empty comment!");
+            toast.error("Can't post an empty comment!", {
+                position: "top-center"
+              })
             return;
         }
-        setError("");
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}/comments`, {
@@ -46,16 +47,20 @@ export default function CommentBox({ token, postid, user, comments }) {
                 const data = await response.json();
                 const successMsg = data.message;
                 toast.success(successMsg, {
-                    position: "bottom-center"
+                    position: "top-center"
                   })
                 router.refresh();
             } else {
                 const errorData = await response.json();
-                setError(errorData.message);
+                toast.error(errorData.message, {
+                    position: "top-center"
+                  })
             }
         } catch (error) {
             console.error('Error during Comment:', error);
-            setError('An unexpected error occurred');
+            toast.error('An unexpected error occurred', {
+                position: "top-center"
+              })
         }
     }
 
@@ -70,19 +75,9 @@ export default function CommentBox({ token, postid, user, comments }) {
             <Toaster />
             <form className="w-full py-4" onSubmit={handleSubmit}>
                 <div className="flex gap-1 items-center mb-2">
-                    <span className="font-semibold">Comments</span>
+                    <span className="font-semibold">Comment (s)</span>
                 </div>
                 <div>
-                    {error && (
-                        <div className="mb-4 w-full">
-                            <span className="bg-red-500 text-white px-2 py-0.5 rounded-md">{error}</span>
-                        </div>
-                    )}
-                    {msg && (
-                        <div className="mb-4 w-full">
-                            <span className="bg-green-500 text-white px-2 py-0.5 rounded-md">{msg}</span>
-                        </div>
-                    )}
                     <div className="relative">
                         <textarea
                         className="bg-white outline-none border border-black h-full w-full rounded-md p-2 resize-none"
@@ -102,7 +97,7 @@ export default function CommentBox({ token, postid, user, comments }) {
                 <div className="flex items-center gap-1 text-base md:text-lg font-semibold mb-2">
                     <span>
                         <span>
-                        {comments.length}</span> Comments on &ldquo;{truncateString(comments[0].post, 30)}&rdquo;</span>
+                        {comments.length}</span> Comment (s) on &ldquo;{truncateString(comments[0].post, 30)}&rdquo;</span>
                 </div>
                 <div className="mt-1 w-full flex flex-col gap-3">
                     {comments.map((c) => (
