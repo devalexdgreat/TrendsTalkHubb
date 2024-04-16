@@ -22,7 +22,6 @@ export default async function Tags({ params }) {
 
     const { id } = params;
     const posts = await getPostsByTag(id);
-    console.log('hey', posts);
 
     return (
         <div className="w-full">

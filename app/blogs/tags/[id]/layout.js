@@ -7,6 +7,10 @@ export async function generateMetadata({params, searchParams }, parent) {
   // fetch data
   const posts = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?tags=${id}`);
   const ps = posts.data;
+
+  // Generate a random index
+  const randomIndex = Math.floor(Math.random() * ps.length);
+  // console.log(ps[randomIndex].images[0].url);
  
   return {
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
@@ -24,7 +28,7 @@ export async function generateMetadata({params, searchParams }, parent) {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
+      images: ps[randomIndex].images[0].url, // Must be an absolute URL
       },
     openGraph: {
       title: `${id} Tag - TrendsTalk Hubb`,
@@ -32,7 +36,7 @@ export async function generateMetadata({params, searchParams }, parent) {
       type: 'website',
       url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
       siteName: 'TrendsTalk Hubb',
-      images: '/favicon.png',
+      images: ps[randomIndex].images[0].url,
     },
     robots: {
         index: true,
@@ -52,7 +56,7 @@ export async function generateMetadata({params, searchParams }, parent) {
     keywords: `${id}, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
     author: "TrendsTalk Hubb",
     url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
-    image: "https://trendstalkhubb.vercel.app/favicon.png",
+    image: ps[randomIndex].images[0].url,
     siteName: "TrendsTalk Hubb",
     type: "website",
   }
