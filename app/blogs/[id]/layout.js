@@ -41,7 +41,7 @@ export async function generateMetadata({params, searchParams }, parent) {
   const posts = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`);
     const ps = posts.data;
     let realPost = ps.filter(p => p.id == id);
-  
+    // console.log(realPost[0].images[0].url);
  
   return {
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
@@ -59,7 +59,7 @@ export async function generateMetadata({params, searchParams }, parent) {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
+      images: realPost[0].images[0].url, // Must be an absolute URL
       },
     openGraph: {
       title: realPost[0].title,
@@ -67,7 +67,7 @@ export async function generateMetadata({params, searchParams }, parent) {
       type: 'article',
       publishedTime: timeSinceCreation(realPost[0].date),
       authors: 'TrendsTalk Hubb',
-      images: '/favicon.png',
+      images: realPost[0].images[0].url,
     },
     robots: {
       index: true,
@@ -87,7 +87,7 @@ export async function generateMetadata({params, searchParams }, parent) {
     keywords: convertArrayToStringWithCommas(realPost[0].tags),
     author: "TrendsTalk Hubb",
     url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
-    image: "https://trendstalkhubb.vercel.app/favicon.png",
+    image: realPost[0].images[0].url,
     siteName: "TrendsTalk Hubb",
     type: "website",
   }

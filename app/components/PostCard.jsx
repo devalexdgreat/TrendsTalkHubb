@@ -297,7 +297,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                                 <div className="h-80" key={r.id}>
                                     <Link href={`/blogs/${r.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
                                         <div className="h-3/6">
-                                            <Image src={r.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-contain object-center" />
+                                            <Image src={r.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
                                             <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                         </div>
                                         <div className="bg-black p-3 t-box h-3/6  relative">

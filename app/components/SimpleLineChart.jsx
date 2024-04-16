@@ -8,8 +8,7 @@ const SimpleLineChart = ({ data }) => {
         <XAxis dataKey="name" />
         <Tooltip />
         <CartesianGrid stroke="#f5f5f5" />
-        <Line type="monotone" dataKey="expenses" stroke="#ff7300" yAxisId={0} />
-        <Line type="monotone" dataKey="sales" stroke="#387908" yAxisId={1} />
+        <Line type="monotone" dataKey="views" stroke="#000" yAxisId={0} />
         </LineChart>
     );
 };

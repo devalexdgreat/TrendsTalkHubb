@@ -67,7 +67,7 @@ export default function PostSideBar({ posts }) {
                     {posts.map((p) => (
                         <Link key={p.id} href={`/blogs/${p.id}`} className="w-full flex gap-2 items-center justify-between text-[12px] group">
                             <div className="w-4/12 h-14 bg-white rounded-md">
-                               <Image src={p.images[0].url} width={1000} height={1000} className="object-cover object-center h-full rounded-md" alt="" /> 
+                               <Image src={p.images[0].url} width={1000} height={1000} className="object-cover object-top h-full rounded-md" alt="" /> 
                             </div>
                             
                             <div className="w-8/12">

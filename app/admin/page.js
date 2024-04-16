@@ -96,18 +96,12 @@ function getTimeOfDay() {
 }
 
 const data = [
-    { name: 'Jan', sales: 400, expenses: 240 },
-    { name: 'Feb', sales: 300, expenses: 139 },
-    { name: 'Mar', sales: 200, expenses: 280 },
-    { name: 'Apr', sales: 278, expenses: 390 },
-    { name: 'May', sales: 189, expenses: 480 },
-    { name: 'Jun', sales: 239, expenses: 430 },
-    { name: 'Jul', sales: 349, expenses: 310 },
-    { name: 'Aug', sales: 349, expenses: 210 },
-    { name: 'Sep', sales: 349, expenses: 210 },
-    { name: 'Oct', sales: 349, expenses: 210 },
-    { name: 'Nov', sales: 349, expenses: 210 },
-    { name: 'Dec', sales: 349, expenses: 210 },
+    { name: 'January', sales: 400, views: 240 },
+    { name: 'February', sales: 300, views: 139 },
+    { name: 'March', sales: 200, views: 280 },
+    { name: 'April', sales: 278, views: 390 },
+    { name: 'May', sales: 189, views: 480 },
+    { name: 'June', sales: 239, views: 430 },
 ];
 
 const fetchUser = async (token) => {
@@ -246,7 +240,7 @@ export default async function AdminPage() {
                             {posts.map((d) => (
                                 <div key={d.id} className="flex gap-2 items-center w-full">
                                     <div className="w-3/12 h-14 flex items-center justify-center">
-                                        <Image src={imgOne} className="rounded-md" alt="" />
+                                        <Image src={d.images[0].url} width={1000} height={1000} className="rounded-md object-cover object-top h-full w-full" alt="" />
                                     </div>
                                     <div className="w-9/12 flex flex-col justify-center h-full gap-1">
                                         <div>

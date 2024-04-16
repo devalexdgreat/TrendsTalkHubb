@@ -103,7 +103,7 @@ export default function TagPostsCard({ data, tag }) {
                         <div className="h-80" key={d.id}>
                             <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
                                 <div className="h-3/6">
-                                    <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-center" />
+                                    <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
                                     <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
                                 </div>
                                 <div className="bg-black p-3 t-box h-3/6 relative">
