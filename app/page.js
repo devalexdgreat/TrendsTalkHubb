@@ -3,13 +3,9 @@ import Content from "./components/Content";
 import Navbar from "./components/Navbar";
 import { getCookies } from "@/actions";
 
-const fetchFeed = async (accessToken) => {
+const fetchFeed = async () => {
   try {
-      // Fetch post data from the protected endpoint
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/feed`, {
-          headers: {
-              'Authorization': `Bearer ${accessToken}`
-          },
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${5}`, {
           cache: "no-store",
       });
 
@@ -17,8 +13,8 @@ const fetchFeed = async (accessToken) => {
           throw new Error("Failed to fetch feed");
       }
 
-      const postData = await response.json();
-      return postData;
+      return response.json();
+
   } catch (error) {
       console.error(error);
   }
@@ -73,23 +69,8 @@ const checkToken = (token) => {
 
 export default async function Home() {
 
-  // const token = await getCookies();
-  // checkToken(token);
-  // const aT = token.value;
-
-  // if (isTokenExpired(aT)) {
-  //   console.log('Access token has expired');
-  //   // redirect('/login');
-  //   return;
-  // } else {
-  //     console.log('Access token is still valid');
-  // }
-
-  // const feed = await fetchFeed(aT);
-
-
   const posts = await getPosts();
-  const feed = posts;
+  const feed = await fetchFeed();
 
   return (
     <main className="h-auto antialiased">

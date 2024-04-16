@@ -7,7 +7,6 @@ export async function generateMetadata({params, searchParams }, parent) {
   // fetch data
   const posts = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categories/${id}`);
   const ps = posts.data;
-  console.log(ps);
  
   return {
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
