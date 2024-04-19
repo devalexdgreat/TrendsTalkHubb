@@ -1,3 +1,4 @@
+'use server';
 import AdminNav from "../components/AdminNav";
 import { BiCommentDetail } from "react-icons/bi";
 import { MdOutlineThumbUp } from "react-icons/md";
