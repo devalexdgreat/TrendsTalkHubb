@@ -12,7 +12,7 @@ export const metadata = {
       },
     twitter: {
     card: 'summary_large_image',
-    title: 'About Us - TrendsTalk Hubb',
+    title: 'Admin - TrendsTalk Hubb',
     description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
     siteId: '@TrendsTalkHubb',
     creator: 'TrendsTalkHubb',
@@ -22,7 +22,7 @@ export const metadata = {
     openGraph: {
       title: 'Admin - TrendsTalk Hubb',
       description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
-      url: 'https://trendstalkhubb.vercel.app/about',
+      url: 'https://trendstalkhubb.vercel.app/admin',
       siteName: 'TrendsTalk Hubb',
       images: [
         {
@@ -57,7 +57,7 @@ export const metadata = {
     description: "Discover more about TrendsTalk Hubb – your dynamic hub where curiosity meets insight, and where trends are not just observed, but actively shaped.",
     keywords: "about us, about, TrendsTalk Hubb, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     author: "TrendsTalk Hubb",
-    url: "https://trendstalkhubb.vercel.app/about",
+    url: "https://trendstalkhubb.vercel.app/admin",
     image: "https://trendstalkhubb.vercel.app/favicon.png",
     siteName: "TrendsTalk Hubb",
     type: "website"

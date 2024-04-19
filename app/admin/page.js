@@ -1,4 +1,3 @@
-
 import AdminNav from "../components/AdminNav";
 import { BiCommentDetail } from "react-icons/bi";
 import { MdOutlineThumbUp } from "react-icons/md";
@@ -238,7 +237,7 @@ export default async function AdminPage() {
                             </Link>
                         </div>
                         <div className="w-full">
-                            <PostList data={posts} user={user} />
+                            {/* <PostList data={posts} user={user} /> */}
                         </div>
                     </div>
                 </div>
