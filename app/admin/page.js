@@ -160,11 +160,22 @@ export default async function AdminPage() {
     const tokenRaw = await getCookies();
     const token = tokenRaw.value;
     const user = await fetchUser(token);
+
     const usersPosts = await getUsersPosts(user.username);
-    console.log(usersPosts);
 
     const posts = await getPosts();
-    console.log('i am the', posts);
+
+    var sumFromArray = (propertyName, array) => {
+        let sum = 0;
+        array.forEach(item => {
+          sum += item[propertyName] ?? 0;
+        });
+        return sum;
+      };
+      
+      var totalLikes = sumFromArray('likeCount', usersPosts);
+      var totalViews = sumFromArray('viewCount', usersPosts);
+      var totalCom = sumFromArray('commentsCount', usersPosts);
 
     return (
         <div className="w-full">
@@ -184,8 +195,8 @@ export default async function AdminPage() {
                         </div>
                         <div className="flex gap-3 items-center">
                             <div className="flex gap-1 items-baseline">
-                                <span className="font-semibold text-lg">91th</span>
-                                <span className="text-[12px] font-normal">Rank</span>
+                                <span className="font-semibold text-lg">{totalViews}</span>
+                                <span className="text-[12px] font-normal">Total Views</span>
                             </div>
                             <div className="flex gap-1 items-baseline">
                                 <span className="font-semibold text-lg">{usersPosts.length}</span>
@@ -201,7 +212,7 @@ export default async function AdminPage() {
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap">
                                     <span className="font-medium text-[12px]">Comments</span>
-                                    <span className="text-lg font-semibold">12K</span>
+                                    <span className="text-lg font-semibold">{totalCom}</span>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +223,7 @@ export default async function AdminPage() {
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap">
                                     <span className="font-medium text-[12px]">Total Likes</span>
-                                    <span className="text-lg font-semibold">15M</span>
+                                    <span className="text-lg font-semibold">{totalLikes}</span>
                                 </div>
                             </div>
                         </div> 
