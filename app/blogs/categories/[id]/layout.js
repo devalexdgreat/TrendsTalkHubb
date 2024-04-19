@@ -1,72 +1,93 @@
 import axios from "axios";
 
-export async function generateMetadata({params, searchParams }, parent) {
-  
+export async function generateMetadata({ params }, parent) {
   const id = params.id;
- 
-  // fetch data
-  const posts = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categories/${id}`);
-  const ps = posts.data;
 
-  // Generate a random index
-  const randomIndex = Math.floor(Math.random() * ps.posts.length);
-  // console.log(ps.posts[randomIndex].images[0].url);
- 
-  return {
+  // Fetch category data
+  const categoryResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/categories/${id}`);
+  const categoryData = categoryResponse.data;
+
+  // Generate metadata
+  let metadata = {
     metadataBase: new URL('https://trendstalkhubb.vercel.app'),
     alternates: {
-      canonical: `/blogs/categories/${ps.title}`,
+      canonical: `/blogs/categories/${categoryData.title}`,
       languages: {
-        'en-US': `/en-US/blogs/categories/${ps.title}`,
-        'de-DE': `/de-DE/blogs/categories/${ps.title}`,
+        'en-US': `/en-US/blogs/categories/${categoryData.title}`,
+        'de-DE': `/de-DE/blogs/categories/${categoryData.title}`,
       },
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${ps.title} Collection - TrendsTalk Hubb`,
-      description: `Explore the latest ${ps.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
+      title: `${categoryData.title} Collection - TrendsTalk Hubb`,
+      description: `Explore the latest ${categoryData.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: ps.posts[randomIndex].images[0].url, // Must be an absolute URL
-      },
+    },
     openGraph: {
-      title: `${ps.title} Collection - TrendsTalk Hubb`,
-      description: `Explore the latest ${ps.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
+      title: `${categoryData.title} Collection - TrendsTalk Hubb`,
+      description: `Explore the latest ${categoryData.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
       type: 'website',
-      url: `https://trendstalkhubb.vercel.app/blogs/categories/${ps.title}`,
+      url: `https://trendstalkhubb.vercel.app/blogs/categories/${categoryData.title}`,
       siteName: 'TrendsTalk Hubb',
-      images: ps.posts[randomIndex].images[0].url,
     },
     robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
         index: true,
         follow: true,
-        nocache: false,
-        googleBot: {
-          index: true,
-          follow: true,
-          noimageindex: false,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
-    title: `${ps.title} Collection - TrendsTalk Hubb`,
-    description: `Explore the latest ${ps.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
-    keywords: `${ps.title}, categories, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
+    },
+    title: `${categoryData.title} Collection - TrendsTalk Hubb`,
+    description: `Explore the latest ${categoryData.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
+    keywords: `${categoryData.title}, categories, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
     author: "TrendsTalk Hubb",
-    url: `https://trendstalkhubb.vercel.app/blogs/categories/${ps.title}`,
-    image: ps.posts[randomIndex].images[0].url,
+    url: `https://trendstalkhubb.vercel.app/blogs/categories/${categoryData.title}`,
     siteName: "TrendsTalk Hubb",
     type: "website",
+  };
+
+  // Add images if posts exist
+  if (categoryData.posts && categoryData.posts.length > 0) {
+    const randomIndex = Math.floor(Math.random() * categoryData.posts.length);
+    metadata = {
+      ...metadata,
+      twitter: {
+        ...metadata.twitter,
+        images: categoryData.posts[randomIndex].images[0].url, // Must be an absolute URL
+      },
+      openGraph: {
+        ...metadata.openGraph,
+        images: categoryData.posts[randomIndex].images[0].url,
+      },
+      image: categoryData.posts[randomIndex].images[0].url,
+    };
+  } else {
+    // Assign default favicon URL
+    metadata = {
+      ...metadata,
+      twitter: {
+        ...metadata.twitter,
+        images: '/favicon.png', // Default favicon URL
+      },
+      openGraph: {
+        ...metadata.openGraph,
+        images: '/favicon.png',
+      },
+      image: '/favicon.png',
+    };
   }
 
+  return metadata;
 }
 
 export default function Layout({ children }) {
-    return (
-        <div>
-            {children}
-        </div>
-    );
+  return <div>{children}</div>;
 }

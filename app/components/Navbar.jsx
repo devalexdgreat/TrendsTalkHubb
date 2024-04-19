@@ -407,7 +407,7 @@ export default function Navbar() {
                                                 <div key={f.id} className="z-10">
                                                     <Link href={`/blogs/${f.id}`} onClick={toggleSearch} className="z-20 group bg-black/30 backdrop-blur-sm rounded-md p-2 flex h-24 gap-2">
                                                         <div className="w-3/12 h-full">
-                                                            <Image src={imgOne} className="rounded-md object-cover h-full" alt="" />
+                                                            <Image src={f.images[0].url} width={1000} height={1000} className="rounded-md object-cover h-full" alt="" />
                                                         </div>
                                                         <div className="w-9/12 h-full flex items-center">
                                                             <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-semibold">{f.title}</h1>

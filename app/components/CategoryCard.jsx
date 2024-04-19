@@ -77,53 +77,58 @@ export default function CategoryCard({ data, tag, title }) {
                 </span>
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
-                
-                {data.map((d) => (
-                    <div className="h-80" key={d.id}>
-                        <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
-                            <div className="h-3/6">
-                                <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
-                                <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                            </div>
-                            <div className="bg-black p-3 t-box h-3/6 relative">
-                                <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
-                                    <span><FaUser /></span>
-                                    <div className="flex gap-0.5 items-center">
-                                        <h1>{d.author}</h1>
-                                        <span><BsDot /></span>
-                                        <span>{timeSinceCreation(d.date)}</span> 
+            {data.length > 0 ? (
+                <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {data.map((d) => (
+                        <div className="h-80" key={d.id}>
+                            <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                <div className="h-3/6">
+                                    <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
+                                    <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
+                                </div>
+                                <div className="bg-black p-3 t-box h-3/6 relative">
+                                    <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
+                                        <span><FaUser /></span>
+                                        <div className="flex gap-0.5 items-center">
+                                            <h1>{d.author}</h1>
+                                            <span><BsDot /></span>
+                                            <span>{timeSinceCreation(d.date)}</span> 
+                                        </div>
+                                    </div>
+                                    <div className="my-2">
+                                        <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
+                                    </div>
+                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                        <div className="flex gap-3">
+                                            <button className="flex gap-1.5 items-center">
+                                                <BsHandThumbsUp />
+                                                <span>{formatNumber(d.likesCount)}</span>
+                                            </button>
+                                            <button className="flex gap-1.5 items-center">
+                                                <FiEye />
+                                                <span>{formatNumber(d.viewsCount)}</span>
+                                            </button>
+                                        </div>
+                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
+                                            {d.tags.map((tag) => (
+                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                    <AiOutlineRise />
+                                                    <span>{tag}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="my-2">
-                                    <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
-                                </div>
-                                <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                    <div className="flex gap-3">
-                                        <button className="flex gap-1.5 items-center">
-                                            <BsHandThumbsUp />
-                                            <span>{formatNumber(d.likesCount)}</span>
-                                        </button>
-                                        <button className="flex gap-1.5 items-center">
-                                            <FiEye />
-                                            <span>{formatNumber(d.viewsCount)}</span>
-                                        </button>
-                                    </div>
-                                    <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                        {d.tags.map((tag) => (
-                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                <AiOutlineRise />
-                                                <span>{tag}</span>
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                            <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                        </Link>
-                    </div>
-                ))}
-            </div>
+                                <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+            ):(
+                <div className="text-black">
+                    <span>No post (s) yet 😓</span>
+                </div>
+            )}
         </div>
     );
 }
