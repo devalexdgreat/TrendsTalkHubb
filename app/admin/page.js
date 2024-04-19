@@ -4,7 +4,6 @@ import { BiCommentDetail } from "react-icons/bi";
 import { MdOutlineThumbUp } from "react-icons/md";
 import Link from "next/link";
 import { FiPlus } from "react-icons/fi";
-import SimpleLineChart from "../components/SimpleLineChart";
 import { getCookies } from "@/actions";
 import PostList from "../components/PostLists";
 
@@ -137,22 +136,22 @@ const getPosts = async () => {
     }
 }
 
-const getUsersPosts = async (author) => {
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?author=${author}`, {
-            cache: "no-store",
-        });
+// const getUsersPosts = async (author) => {
+//     try {
+//         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?author=${author}`, {
+//             cache: "no-store",
+//         });
   
-        if (!res.ok) {
-            throw new Error("Failed to fetch Projects");
-        }
+//         if (!res.ok) {
+//             throw new Error("Failed to fetch Projects");
+//         }
   
-        return res.json();
+//         return res.json();
         
-    } catch (error) {
-        console.log(error);
-    }
-}
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
   
 export default async function AdminPage() {
 
@@ -161,7 +160,7 @@ export default async function AdminPage() {
     const token = tokenRaw.value;
     const user = await fetchUser(token);
 
-    const usersPosts = await getUsersPosts(user.username);
+    // const usersPosts = await getUsersPosts(user.username);
 
     const posts = await getPosts();
 
@@ -173,9 +172,9 @@ export default async function AdminPage() {
         return sum;
       };
       
-      var totalLikes = sumFromArray('likeCount', usersPosts);
-      var totalViews = sumFromArray('viewCount', usersPosts);
-      var totalCom = sumFromArray('commentsCount', usersPosts);
+      var totalLikes = sumFromArray('likeCount', posts);
+      var totalViews = sumFromArray('viewCount', posts);
+      var totalCom = sumFromArray('commentsCount', posts);
 
     return (
         <div className="w-full">
