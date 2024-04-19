@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FiPlus } from "react-icons/fi";
 import { getCookies } from "@/actions";
 import PostList from "../components/PostLists";
+import { redirect } from "next/navigation";
 
 
 function timeSinceCreation(createdDate) {
@@ -136,45 +137,85 @@ const getPosts = async () => {
     }
 }
 
-// const getUsersPosts = async (author) => {
-//     try {
-//         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?author=${author}`, {
-//             cache: "no-store",
-//         });
+const getUsersPosts = async (author) => {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?author=${author}`, {
+            cache: "no-store",
+        });
   
-//         if (!res.ok) {
-//             throw new Error("Failed to fetch Projects");
-//         }
+        if (!res.ok) {
+            throw new Error("Failed to fetch Projects");
+        }
   
-//         return res.json();
+        return res.json();
         
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const checkToken = (token) => {
+    if(token) {
+        console.log('Token present.')
+        return;
+    } else {
+        redirect('/login');
+    }
+};
+
+function isTokenExpired(token) {
+    if (!token) {
+        // If token is not provided, consider it as expired
+        return true;
+    }
+
+    try {
+        // Decode the token
+        const payload = JSON.parse(atob(token.split('.')[1]));
+
+        // Get the expiration time (exp) from the payload
+        const expirationTime = payload.exp * 1000; // Convert to milliseconds
+
+        // Check if the current time is after the expiration time
+        return Date.now() >= expirationTime;
+    } catch (error) {
+        // If decoding fails, consider the token as expired
+        return true;
+    }
+}
   
 export default async function AdminPage() {
 
-    var greetingm = getTimeOfDay();
+    var greeting = getTimeOfDay();
     const tokenRaw = await getCookies();
+    checkToken(tokenRaw);
     const token = tokenRaw.value;
+
+    if (isTokenExpired(token)) {
+        console.log('Access token has expired');
+        redirect('/login');
+        return;
+    } else {
+        console.log('Access token is still valid');
+    }
+
     const user = await fetchUser(token);
 
-    // const usersPosts = await getUsersPosts(user.username);
+    const usersPosts = await getUsersPosts(user.username);
 
     const posts = await getPosts();
 
-    // var sumFromArray = (propertyName, array) => {
-    //     let sum = 0;
-    //     array.forEach(item => {
-    //       sum += item[propertyName] ?? 0;
-    //     });
-    //     return sum;
-    //   };
+    var sumFromArray = (propertyName, array) => {
+        let sum = 0;
+        array.forEach(item => {
+          sum += item[propertyName] ?? 0;
+        });
+        return sum;
+      };
       
-    //   var totalLikes = sumFromArray('likeCount', posts);
-    //   var totalViews = sumFromArray('viewCount', posts);
-    //   var totalCom = sumFromArray('commentsCount', posts);
+      var totalLikes = sumFromArray('likeCount', posts);
+      var totalViews = sumFromArray('viewCount', posts);
+      var totalCom = sumFromArray('commentsCount', posts);
 
     return (
         <div className="w-full">
@@ -183,7 +224,7 @@ export default async function AdminPage() {
                 <div className="w-full">
                     <span className="text-base md:text-lg flex flex-col">
                         <span className="font-semibold">Welcome Back!👋</span>
-                        <span className="text-[12px]">Good {capString(greetingm)}</span>
+                        <span className="text-[12px]">Good {capString(greeting)}</span>
                     </span>
                 </div>
                 <div className="flex flex-col md:flex-row mt-4 w-full gap-4">
@@ -194,7 +235,7 @@ export default async function AdminPage() {
                         </div>
                         <div className="flex gap-3 items-center">
                             <div className="flex gap-1 items-baseline">
-                                <span className="font-semibold text-lg">20K</span>
+                                <span className="font-semibold text-lg">{totalViews}</span>
                                 <span className="text-[12px] font-normal">Total Views</span>
                             </div>
                             <div className="flex gap-1 items-baseline">
@@ -211,7 +252,7 @@ export default async function AdminPage() {
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap">
                                     <span className="font-medium text-[12px]">Comments</span>
-                                    <span className="text-lg font-semibold">3K</span>
+                                    <span className="text-lg font-semibold">{totalCom}</span>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +263,7 @@ export default async function AdminPage() {
                             <div className="flex flex-col">
                                 <div className="flex flex-col gap">
                                     <span className="font-medium text-[12px]">Total Likes</span>
-                                    <span className="text-lg font-semibold">14.8K</span>
+                                    <span className="text-lg font-semibold">{totalLikes}</span>
                                 </div>
                             </div>
                         </div> 
@@ -238,7 +279,7 @@ export default async function AdminPage() {
                             </Link>
                         </div>
                         <div className="w-full">
-                            {/* <PostList data={posts} user={user} /> */}
+                            <PostList data={posts} user={user} />
                         </div>
                     </div>
                 </div>
