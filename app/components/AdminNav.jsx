@@ -114,27 +114,6 @@ export default function AdminNav() {
         fetchUser(); // Call fetchUser() when the component mounts
     }, []);
 
-    useEffect(() => {
-        const getCategories = async () => {
-            try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/categories`, {
-                    cache: "no-store",
-                });
-                
-                if (!res.ok) {
-                    throw new Error("Failed to fetch categories");
-                }
-        
-                const data = await res.json();
-                console.log(data);
-                setCategories(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getCategories();
-    }, [])
-
     const toggleProfile = () => {
         setProfileOpen(prevProfileOpen => !prevProfileOpen);
     };
@@ -194,12 +173,6 @@ export default function AdminNav() {
         toggleMenu();
     }
 
-    const handleSelect = (e) => {
-        const link = e.target.value;
-        console.log(link);
-        router.push(link);
-    }
-
     return (
         <div className="w-full fixed top-0 z-30 bg-white shadow-md" ref={ref}>
             <div className="w-11/12 mx-auto flex items-center text-black justify-between py-3">
@@ -208,56 +181,7 @@ export default function AdminNav() {
                 </Link>
                 <div className="hidden md:flex items-center gap-6">
                     <Link href={'/admin'} className="hover:text-black/60 duration-500">Dashboard</Link>
-                    
-                    {/* <Menu as="div" className="relative inline-block text-left">
-                        <div>
-                            <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-gray-900">
-                            Categories
-                            <ChevronDownIcon className="-mr-1 h-5 w-5 text-black" aria-hidden="true" />
-                            </Menu.Button>
-                        </div>
-
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {categories ? (
-                            <div className="py-1">
-                            {categories.map((cat, index) => (
-                                <Menu.Item key={index}>
-                                {({ active }) => (
-                                    <a
-                                    href={`/blogs/categories/${cat.title}`}
-                                    className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                        'block px-4 py-2 text-sm'
-                                    )}
-                                    >
-                                    {cat.title}
-                                    </a>
-                                )}
-                                </Menu.Item>
-                                ))}
-                            </div>
-                            ):(
-                            <span>No Category</span>
-                            )}
-                            <a
-                                href={`/blogs/categories/create-category`}
-                                className='text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900'
-                                >
-                                New Category
-                            </a>
-                            </Menu.Items>
-                        </Transition>
-                    </Menu> */}
-                    <Link href={'/admin/all-posts'} className="hover:text-black/60 duration-500">Posts</Link>
+                    <Link href={'/admin/create-post'} className="hover:text-black/60 duration-500">New Post</Link>
                     {isloggedIn ? (
                         <button onClick={toggleProfile} className="flex rounded-full h-9 justify-center items-center bg-black text-white p-0.5">
                             <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
@@ -299,56 +223,8 @@ export default function AdminNav() {
                     </div>
                     <div className="w-11/12 mx-auto flex flex-col">
                         <Link href={'/admin'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Dashboard</Link>
-                        {/* <Menu as="div" className="relative inline-block text-left">
-                            <div className="hover:text-gray-400 duration-500">
-                                <Menu.Button className="inline-flex w-full justify-start items-center gap-x-1.5 py-3 border-b border-gray-700 ">
-                                Categories
-                                <ChevronDownIcon className="-mr-1 h-5 w-5 text-white hover:text-gray-400 duration-500" aria-hidden="true" />
-                                </Menu.Button>
-                            </div>
-
-                            <Transition
-                                as={Fragment}
-                                enter="transition ease-out duration-100"
-                                enterFrom="transform opacity-0 scale-95"
-                                enterTo="transform opacity-100 scale-100"
-                                leave="transition ease-in duration-75"
-                                leaveFrom="transform opacity-100 scale-100"
-                                leaveTo="transform opacity-0 scale-95"
-                            >
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                {categories ? (
-                                <div className="py-1">
-                                <a href={`/blogs/categories/create-category`} className={classNames(
-                                        active ? 'bg-black text-gray-900' : 'text-gray-700',
-                                        'block px-4 py-2 text-sm'
-                                    )}
-                                    >
-                                    Add Category</a>
-                                {categories.map((cat, index) => (
-                                    <Menu.Item key={index}>
-                                    {({ active }) => (
-                                        <a
-                                        href={`/blogs/categories/${cat.title}`}
-                                        className={classNames(
-                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                            'block px-4 py-2 text-sm'
-                                        )}
-                                        >
-                                        {cat.title}
-                                        </a>
-                                    )}
-                                    </Menu.Item>
-                                    ))}
-                                </div>
-                                ):(
-                                <span>No Category</span>
-                                )}
-                                </Menu.Items>
-                            </Transition>
-                        </Menu> */}
                         
-                        <Link href={'/all-posts'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Posts</Link>
+                        <Link href={'/admin/create-post'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">New Post</Link>
                         {isloggedIn ? (
                             <div className="flex justify-between items-center py-2">
                                 <div className="flex rounded-full h-9 justify-center items-center text-[12px] bg-black text-white p-0.5 md:hidden">

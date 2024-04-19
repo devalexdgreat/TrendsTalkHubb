@@ -8,13 +8,13 @@ import { getCookies } from "@/actions";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-export default function CreatePostForm({ data }) {
-
+export default function EditPostForm({ data, pData, cData, id }) {
+    const [pselectedImage, setPselectedImage] = useState(pData.images);
     const [selectedImage, setSelectedImage] = useState();
-    const [title, setTitle] = useState('');
-    const [tags, setTags] = useState([]);
-    const [content, setContent] = useState('');
-    const [category, setCategory] = useState('');
+    const [title, setTitle] = useState(pData.title);
+    const [tags, setTags] = useState(pData.tags);
+    const [content, setContent] = useState(pData.content);
+    const [category, setCategory] = useState(cData.id);
     const [images, setImages] = useState();
 
     const router = useRouter();
@@ -40,28 +40,29 @@ export default function CreatePostForm({ data }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!title || !content || !tags || !category || !selectedImage) {
-            toast.error("All fields are necessary.", {
-                position: "top-center"
-              })
-            return;
-        }
+        // if (!title || !content || !tags || !category || !selectedImage) {
+        //     toast.error("All fields are necessary.", {
+        //         position: "top-center"
+        //       })
+        //     return;
+        // }
         const formData = new FormData();
         formData.append('title',title)
         formData.append('content',content)
         formData.append('tags',tags)
         formData.append('category',category)
-        images.forEach((image) => {
-            formData.append('images', image);
-        });
-
+        if(images) {
+            images.forEach((image) => {
+                formData.append('images', image);
+            });
+        }
         
         const at = await getCookies();
         const accessToken = at.value;
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
-                method: "POST",
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}`, {
+                method: "PUT",
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 },
@@ -75,7 +76,7 @@ export default function CreatePostForm({ data }) {
                     position: "top-center"
                   })
                 router.refresh();
-                router.push("/admin/all-posts");
+                router.push("/admin");
                 
             } else {
                 const errorData = await res.json();
@@ -96,7 +97,7 @@ export default function CreatePostForm({ data }) {
             <Toaster/>
             <div className="flex flex-col w-full gap-2">
                 <label className="font-medium">Title</label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Blord causes a buzz..." className="text-sm py-2 rounded-md ps-3 border border-black" />
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Blord causes a buzz..." className="text-sm py-2 rounded-md ps-3 border border-black" />
             </div>
             <div className="flex flex-col w-full gap-2">
                 <label>Description</label>
@@ -106,20 +107,21 @@ export default function CreatePostForm({ data }) {
                     placeholder={`Content description`}
                     name="description"
                     id="description"
+                    value={content}
                     onChange={(e) => setContent(e.target.value)}
                     >
                 </textarea>
             </div>
             <div className="flex flex-col w-full gap-2">
                 <label className="font-medium">Tags</label>
-                <input type="text" onChange={getTags} placeholder="trending, viral, gist, media, tiktok" className="text-sm py-2 rounded-md ps-3 border border-black" />
+                <input type="text" value={tags} onChange={getTags} placeholder="trending, viral, gist, media, tiktok" className="text-sm py-2 rounded-md ps-3 border border-black" />
             </div>
             <div className="flex items-center justify-between w-full gap-2">
                 <div className="flex flex-col gap-2 w-full">
                     <label className="font-medium">Category</label>
                     <div className="flex gap-3 items-center">
                         <select onChange={(e) => setCategory(e.target.value)} className="py-2 border border-black rounded-md px-1">
-                            <option>Select a category</option>
+                            <option value={cData.id}>{pData.category}</option>
                             {data.map(o => (
                             <option key={o.id} value={o.id}>{o.title}</option>
                             ))}
@@ -142,8 +144,8 @@ export default function CreatePostForm({ data }) {
                 multiple
                 onChange={onSelectFile}
                 />
-
-                {selectedImage && (
+                
+                {selectedImage ? (
                 <>
                     <h1>Preview</h1>
                     <div className="grid grid-cols-4 md:grid-cols-4 gap-1">
@@ -157,9 +159,25 @@ export default function CreatePostForm({ data }) {
                                     width={1000}
                                     alt="Thumb"
                                     />
-                                    <button onClick={() => setSelectedImage(selectedImage.filter((e) => e !== image ))} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-0.5">
-                                        <IoClose />
-                                    </button>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>
+                ):(
+                    <>
+                    <h1>Preview</h1>
+                    <div className="grid grid-cols-4 md:grid-cols-4 gap-1">
+                        {pselectedImage.map((image, index) => {
+                            return (
+                                <div key={index} className="relative">
+                                    <Image
+                                    src={image.url}
+                                    className=""
+                                    height={1000}
+                                    width={1000}
+                                    alt="Thumb"
+                                    />
                                 </div>
                             )
                         })}

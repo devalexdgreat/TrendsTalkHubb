@@ -24,7 +24,6 @@ const getCategories = async () => {
 export default async function CreatePost() {
 
     const categories = await getCategories();
-    console.log(categories);
 
     return (
         <div className="w-full">
