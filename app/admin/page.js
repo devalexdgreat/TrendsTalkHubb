@@ -213,8 +213,8 @@ export default async function AdminPage() {
         return sum;
       };
       
-      var totalLikes = sumFromArray('likeCount', posts);
-      var totalViews = sumFromArray('viewCount', posts);
+      var totalLikes = sumFromArray('likesCount', posts);
+      var totalViews = sumFromArray('viewsCount', posts);
       var totalCom = sumFromArray('commentsCount', posts);
 
     return (

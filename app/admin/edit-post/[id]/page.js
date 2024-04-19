@@ -1,7 +1,7 @@
 import { getCookies } from "@/actions";
 import AdminNav from "@/app/components/AdminNav";
 import EditPostForm from "@/app/components/EditPostForm";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 const getCategories = async () => {
     try {
