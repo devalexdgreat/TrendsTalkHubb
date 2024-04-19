@@ -21,10 +21,6 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-
 export default function AdminNav() {
 
     const [open, setOpen] = useState(false);
@@ -36,7 +32,6 @@ export default function AdminNav() {
     const [isEmpty, setIsEmpty] = useState(false);
     const [isloggedIn, setIsLoggedIn] = useState(true);
     const [user, setUser] = useState(null);
-    const [categories, setCategories] = useState(null);
     const router = useRouter();
     const ref = useRef();
 
