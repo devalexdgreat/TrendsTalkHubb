@@ -7,11 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logoLight from '@/public/logo-light.png'
 import logoDark from '@/public/logo-dark.png'
-import imgOne from '@/public/1.jpg'
-import imgTwo from '@/public/2.jpg'
-import imgThr from '@/public/3.jpg'
-import imgFor from '@/public/4.jpg'
-import SearchComponent from "./SearchComponent";
 import LogoutBtn from "./LogoutBtn";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";

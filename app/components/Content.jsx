@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { MdRefresh } from "react-icons/md";
-import { getCookies } from "@/actions";
+import { getCookies, setCookies } from "@/actions";
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
@@ -123,6 +123,18 @@ export default function Content({ feed, data }) {
         setDData('none');
     }
 
+    const bypassAuth = async () => {
+        setIsLogIn(true);
+        toggleMenu();
+        const token = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+        console.log('token: ',token);
+        await setCookies(token);
+
+        // Store the token in local storage or session storage
+        localStorage.setItem('accessToken', token);
+        router.refresh();
+    }
+
     return (
         <div className="w-full h-full mt-20 mb-24">
             <div className="w-11/12 mx-auto h-full">
@@ -139,6 +151,11 @@ export default function Content({ feed, data }) {
                             </div>
                             <div className="mt-9">
                                 <span className="text-gray-900 text-lg">Already have an account? </span><Link href={'/login'} className="text-black font-semibold hover:text-black/40 duration-500">Sign in</Link>
+                            </div>
+
+                            <div className="mt-4">
+                                <span className="text-gray-900 text-lg">Or </span>
+                                <button className="text-black font-semibold hover:text-black/40 duration-500">Continue...</button>
                             </div>
                         </div>
                     </div>
@@ -169,12 +186,14 @@ export default function Content({ feed, data }) {
 
                                             <SplideTrack className="h-60 md:h-[26rem] b-rad">
                                                 {feed.map((f) => (
-                                                    <SplideSlide key={f.id} className="h-full relative">
-                                                        <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full h-full b-rad" />
-                                                        <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
-                                                            <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.title, 70)}</span>
-                                                            <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.title}</span>
-                                                        </div>
+                                                    <SplideSlide key={f.id} onClick={handleClick} className="h-full relative">
+                                                        <Link href={`/blogs/${f.id}`} className="h-full relative">
+                                                            <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full h-full b-rad" />
+                                                            <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
+                                                                <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.title, 70)}</span>
+                                                                <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.title}</span>
+                                                            </div>
+                                                        </Link>
                                                     </SplideSlide>
                                                 ))}
                                             </SplideTrack>
