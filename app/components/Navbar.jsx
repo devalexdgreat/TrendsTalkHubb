@@ -15,6 +15,7 @@ import { delCookies, getCookies } from "@/actions";
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { RiAdminLine } from "react-icons/ri";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -347,28 +348,60 @@ export default function Navbar() {
                             <GoMegaphone />
                         </Link>
                         {isloggedIn ? (
-                            <div className="flex justify-between items-center py-2">
-                                <div className="flex rounded-full h-9 justify-center items-center text-[12px] bg-black text-white p-0.5 md:hidden">
-                                    <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
-                                        <FaCircleUser className="text-2xl" />
-                                    </span>
-                                    <div className="h-full ps-2 pe-3 flex justify-center items-center">
-                                        {user ? (
-                                            <div className="text-[13px] md:text-base flex flex-col">
-                                                <span>@{user.username}</span>
-                                                <span>{user.email}</span>
+                            <>
+                            {user ? (
+                                <div className="w-full">
+                                    {user.role === 'admin' ? (
+                                        <div className="flex flex-col py-2">
+                                            <div className="flex rounded-full h-9 items-start text-[12px] bg-black text-white p-0.5 md:hidden">
+                                                <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
+                                                    <FaCircleUser className="text-2xl" />
+                                                </span>
+                                                <div className="h-full ps-2 pe-3 flex justify-center items-center">
+                                                    <div className="text-[13px] md:text-base flex flex-col">
+                                                        <span>@{user.username}</span>
+                                                        <span>{user.email}</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        ):(
-                                            <span className="pt-2 px-2">Error!...</span>
-                                        )}
-                                    </div>
+                                            <div className="flex justify-between gap-0.5">
+                                                {user.role === 'admin' && (
+                                                    <Link href={'/admin'} onClick={toggleMenu} className="w-6/12 text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
+                                                        <span>Go to Admin</span>
+                                                        <RiAdminLine />
+                                                    </Link>
+                                                )}
+                                                <button onClick={Logout} className="w-6/12 text-black bg-white rounded-md hover:bg-gray-400 duration-500 px-3 py-2 text-center mt-2 flex justify-center gap-3 items-center">
+                                                    <span>Logout</span>
+                                                    <FiLogOut />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ):(
+                                        <div className="flex justify-between items-center py-2">
+                                            <div className="flex rounded-full h-9 items-start text-[12px] bg-black text-white p-0.5 md:hidden">
+                                                <span className="h-8 w-8 rounded-full shadow-sm flex justify-center items-center">
+                                                    <FaCircleUser className="text-2xl" />
+                                                </span>
+                                                <div className="h-full ps-2 pe-3 flex justify-center items-center">
+                                                    <div className="text-[13px] md:text-base flex flex-col">
+                                                        <span>@{user.username}</span>
+                                                        <span>{user.email}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button onClick={Logout} className=" text-black bg-white rounded-md hover:bg-gray-400 duration-500 px-3 py-2 text-center mt-2 flex justify-center gap-3 items-center">
+                                                <span>Logout</span>
+                                                <FiLogOut />
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
-                                <button onClick={Logout} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 px-3 py-2 text-center mt-2 flex justify-center gap-3 items-center">
-                                    <span>Logout</span>
-                                    <FiLogOut />
-                                </button>
-                            </div>
-                            
+                                
+                            ):(
+                                <div>Error!</div>
+                            )}
+                            </>
                         ):(
                             <Link href={'/login'} onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
                                 <span>Login</span>
@@ -442,7 +475,16 @@ export default function Navbar() {
                                     <p className="font-semibold">Username: <span className="font-normal">@{user.username}</span></p>
                                     <p className="font-semibold">Email: <span className="font-normal">{user.email}</span></p>
                                     <p className="font-semibold mb-2">Role: <span className="font-normal">{user.role}</span></p>
-                                    <LogoutBtn />
+                                    <div className="flex gap-1 items-center">
+                                        {user.role === 'admin' && (
+                                            <Link href={'/admin'} className="py-1 px-3 bg-black text-white hover:bg-black/80 duration-500 rounded-md flex items-center gap-1">
+                                                <span>Go to Admin</span>
+                                                <RiAdminLine />
+                                            </Link>
+                                        )}
+                                        <LogoutBtn /> 
+                                    </div>
+                                    
                                 </div>
                             ):(
                                 <span className="pt-2 px-2">Loading...</span>
