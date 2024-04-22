@@ -8,7 +8,21 @@ import { getCookies } from "@/actions";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+function convertStringToArray(inputString) {
+    // Split the input string based on commas
+    const wordsArray = inputString.split(',');
+    
+    // Trim whitespace from each word and remove empty strings
+    const trimmedArray = wordsArray.map(word => word.trim()).filter(Boolean);
+    
+    return trimmedArray;
+}
+
+
+
 export default function EditPostForm({ data, pData, cData, id }) {
+    // console.log(pData.tags);
+    // const string = pData.tags.join(', ');
     const [pselectedImage, setPselectedImage] = useState(pData.images);
     const [selectedImage, setSelectedImage] = useState();
     const [title, setTitle] = useState(pData.title);
@@ -29,14 +43,14 @@ export default function EditPostForm({ data, pData, cData, id }) {
 
         setSelectedImage(imagesArray)
     }
-
+    
     const getTags = (e) => {
         e.preventDefault();
-        const varTag = e.target.value.split(/,\s|,/);
-        setTags(varTag);
+        var words = e.target.value;
+        setTags(words.split(/,\s|,/));
         console.log(tags);
     }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -49,7 +63,9 @@ export default function EditPostForm({ data, pData, cData, id }) {
         const formData = new FormData();
         formData.append('title',title)
         formData.append('content',content)
-        formData.append('tags',tags)
+        tags.forEach((tag) => {
+            formData.append('tags', tag);
+        })
         formData.append('category',category)
         if(images) {
             images.forEach((image) => {
@@ -97,7 +113,7 @@ export default function EditPostForm({ data, pData, cData, id }) {
             <Toaster/>
             <div className="flex flex-col w-full gap-2">
                 <label className="font-medium">Title</label>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Blord causes a buzz..." className="text-sm py-2 rounded-md ps-3 border border-black" />
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Blord causes a buzz..." className="text-sm py-2 rounded-md ps-3 border border-black pe-2" />
             </div>
             <div className="flex flex-col w-full gap-2">
                 <label>Description</label>
@@ -114,7 +130,7 @@ export default function EditPostForm({ data, pData, cData, id }) {
             </div>
             <div className="flex flex-col w-full gap-2">
                 <label className="font-medium">Tags</label>
-                <input type="text" value={tags} onChange={getTags} placeholder="trending, viral, gist, media, tiktok" className="text-sm py-2 rounded-md ps-3 border border-black" />
+                <input type="text" value={tags} onChange={getTags} placeholder="trending, viral, gist, media, tiktok" className="text-sm py-2 rounded-md ps-3 border border-black pe-2" />
             </div>
             <div className="flex items-center justify-between w-full gap-2">
                 <div className="flex flex-col gap-2 w-full">

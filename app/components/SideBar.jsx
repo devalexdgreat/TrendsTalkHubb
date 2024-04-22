@@ -134,7 +134,7 @@ export default function SideBar() {
                 </div>
                 <div className="flex flex-col w-full my-3">
                     {isAdAvail ? (
-                        <Link href={'/https://devalexdgreat.vercel.app/Projects/65f67dfee188b57768deda2a'} className="flex w-full justify-center items-center">
+                        <Link href={'https://devalexdgreat.vercel.app/Projects/65f67dfee188b57768deda2a'} className="flex w-full justify-center items-center">
                             <div className="h-full">
                                 <Image src={adOne} alt="" className="rounded-md h-full object-cover" />
                             </div>

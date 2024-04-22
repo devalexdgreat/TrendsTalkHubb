@@ -150,7 +150,7 @@ export default function PostList({ data, user }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-black/10 md:invisible group-hover:visible border backdrop-blur-sm py-2 px-3 absolute top-1 right-1 rounded-md text-[16px] md:text-[12px] z-20 flex items-center gap-3">
+                            <div className="bg-black/10 md:invisible group-hover:visible border backdrop-blur-sm py-2 px-3 absolute top-1 right-1 rounded-md text-[15px] md:text-[12px] z-20 flex items-center gap-3">
                                 <Link href={`/admin/edit-post/${d.id}`} className="flex gap-1 items-center">
                                     <FiEdit /><span>Edit</span>
                                 </Link>

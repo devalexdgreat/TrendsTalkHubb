@@ -30,10 +30,17 @@ export default function CreatePostForm({ data }) {
         setSelectedImage(imagesArray)
     }
 
+    // const getTags = (e) => {
+    //     e.preventDefault();
+    //     const varTag = e.target.value.split(/,\s|,/);
+    //     setTags(varTag);
+    //     console.log(tags);
+    // }
+
     const getTags = (e) => {
         e.preventDefault();
-        const varTag = e.target.value.split(/,\s|,/);
-        setTags(varTag);
+        var words = e.target.value;
+        setTags(words.split(/,\s*|,/));
         console.log(tags);
     }
 
@@ -49,7 +56,9 @@ export default function CreatePostForm({ data }) {
         const formData = new FormData();
         formData.append('title',title)
         formData.append('content',content)
-        formData.append('tags',tags)
+        tags.forEach((tag) => {
+            formData.append('tags', tag);
+        })
         formData.append('category',category)
         images.forEach((image) => {
             formData.append('images', image);
@@ -96,7 +105,7 @@ export default function CreatePostForm({ data }) {
             <Toaster/>
             <div className="flex flex-col w-full gap-2">
                 <label className="font-medium">Title</label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Blord causes a buzz..." className="text-sm py-2 rounded-md ps-3 border border-black" />
+                <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Blord causes a buzz..." className="text-sm py-2 rounded-md ps-3 border border-black pe-2" />
             </div>
             <div className="flex flex-col w-full gap-2">
                 <label>Description</label>
@@ -112,7 +121,7 @@ export default function CreatePostForm({ data }) {
             </div>
             <div className="flex flex-col w-full gap-2">
                 <label className="font-medium">Tags</label>
-                <input type="text" onChange={getTags} placeholder="trending, viral, gist, media, tiktok" className="text-sm py-2 rounded-md ps-3 border border-black" />
+                <input type="text" onChange={getTags} placeholder="trending, viral, gist, media, tiktok" className="text-sm py-2 rounded-md ps-3 border border-black pe-2" />
             </div>
             <div className="flex items-center justify-between w-full gap-2">
                 <div className="flex flex-col gap-2 w-full">
