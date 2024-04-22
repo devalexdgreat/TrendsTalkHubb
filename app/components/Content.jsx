@@ -175,7 +175,7 @@ export default function Content({ feed, data }) {
                             {feed ? (
                             <div className="w-full">
                                 <div className="mb-5 heading mt-5">
-                                    <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Posts</span>
+                                    <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest posts</span>
                                     <hr className="border-2 border-black w-12 rounded-3xl"/>
                                 </div>
                                 <div className="w-full md:w-full mb-12 bg-black b-rad">

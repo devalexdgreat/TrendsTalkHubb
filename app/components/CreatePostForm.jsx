@@ -75,7 +75,7 @@ export default function CreatePostForm({ data }) {
                     position: "top-center"
                   })
                 router.refresh();
-                router.push("/admin/all-posts");
+                router.push("/admin");
                 
             } else {
                 const errorData = await res.json();

@@ -71,10 +71,10 @@ function capString(str) {
 function getTimeOfDay() {
     // Get the current date
     var currentDate = new Date();
-
+    
     // Get the current hour
     var currentHour = currentDate.getHours();
-
+    
     // Define the time ranges
     var morningStart = 5; // 5:00 AM
     var afternoonStart = 12; // 12:00 PM (noon)
@@ -200,6 +200,9 @@ export default async function AdminPage() {
     }
 
     const user = await fetchUser(token);
+    if(user.role !== 'admin') {
+        redirect('/');
+    }
 
     const usersPosts = await getUsersPosts(user.username);
 

@@ -2,7 +2,7 @@ import Image from "next/image"
 import Navbar from "../components/Navbar"
 
 const links = [
-    { name: 'Open roles', href: '#' },
+    { name: 'Upcoming Updates', href: '#' },
     { name: 'Ads Policy', href: '#' },
     { name: 'Our values', href: '#' },
   ]

@@ -75,7 +75,7 @@ export default function CommentBox({ token, postid, user, comments }) {
             <Toaster />
             <form className="w-full py-4" onSubmit={handleSubmit}>
                 <div className="flex gap-1 items-center mb-2">
-                    <span className="font-semibold">Comment (s)</span>
+                    <span className="font-semibold">Comment</span>
                 </div>
                 <div>
                     <div className="relative">

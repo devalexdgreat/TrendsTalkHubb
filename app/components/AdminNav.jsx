@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { GoMegaphone } from "react-icons/go";
 import { FiLogIn, FiLogOut, FiSearch } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
+import { IoChevronDown, IoClose } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logoLight from '@/public/logo-light.png'
@@ -175,6 +175,7 @@ export default function AdminNav() {
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>
                 <div className="hidden md:flex items-center gap-6">
+                    <Link href={'/'} className="hover:text-black/60 duration-500">Home</Link>
                     <Link href={'/admin'} className="hover:text-black/60 duration-500">Dashboard</Link>
                     <Link href={'/admin/create-post'} className="hover:text-black/60 duration-500">New Post</Link>
                     {isloggedIn ? (
@@ -184,7 +185,7 @@ export default function AdminNav() {
                             </span>
                             <div className="h-full ps-2 pe-3 flex justify-center items-center">
                                 {user ? (
-                                    <span className="font-semibold">@{user.username}</span>
+                                    <span className="font-semibold flex gap-1 items-center">@{user.username}<IoChevronDown /></span>
                                 ):(
                                     <span>Error!</span>
                                 )}
@@ -217,6 +218,8 @@ export default function AdminNav() {
                         </div>
                     </div>
                     <div className="w-11/12 mx-auto flex flex-col">
+                        <Link href={'/'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Home</Link>
+
                         <Link href={'/admin'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">Dashboard</Link>
                         
                         <Link href={'/admin/create-post'} onClick={toggleMenu} className="hover:text-gray-400 duration-500 py-3 border-b border-gray-700">New Post</Link>

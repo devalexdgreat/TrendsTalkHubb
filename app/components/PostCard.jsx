@@ -14,6 +14,8 @@ import CommentBox from "./CommentBox";
 import toast, { Toaster } from "react-hot-toast";
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { MdContentCopy } from "react-icons/md";
+import copyToClipboard from "@/utils/copyToClipboard";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -69,6 +71,8 @@ function truncateString(str, num) {
         return str;
     }
 }
+
+
 
 export default function PostCard({ post, token, postid, relatedData, comments }) {
     const data = post;
@@ -167,6 +171,16 @@ export default function PostCard({ post, token, postid, relatedData, comments })
 
     const handleLike = async (postid, token) => {
         try {
+            const updatedIsLiked = !isLiked;
+            
+            const likeCountElement = document.getElementById(`like-count-${postid}`);
+            if (likeCountElement) {
+                const currentLikeCount = parseInt(likeCountElement.innerText);
+                const updatedLikeCount = updatedIsLiked ? currentLikeCount + 1 : currentLikeCount - 1;
+                likeCountElement.innerText = updatedLikeCount;
+                setIsLiked(updatedIsLiked);
+            }
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${postid}/like`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -175,18 +189,32 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                 cache: "no-store",
             });
 
-            if(response.ok) {
-                const message = await response.json();
-                // alert(message.message);
+            if (response.ok) {
+                const data = await response.json();
+
+
+                const message = data.message
+                toast.success(message, {
+                    position: "top-center"
+                  })
                 router.refresh();
                 checkLiked(postid, token);
+            } else {
+                // Revert UI changes if request fails
+                setIsLiked(!updatedIsLiked);
+                toast.error('Failed to like the post', {
+                    position: "top-center"
+                  });
             }
         } catch (error) {
             console.log(error);
         }
     }
 
-    const notify = () => toast('Here is your toast.');
+    const copyButtonHandler = () => {
+        const textToCopy = `https://trendstalkhubb.vercel.app/blogs/${postid}`;
+        copyToClipboard(textToCopy);
+    };
 
     return (
         <div className="w-full md:w-9/12 text-black">
@@ -226,7 +254,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                                 ):(
                                     <BsHandThumbsUp />
                                 )}
-                                <span>{formatNumber(data.likeCount)}</span>
+                                <span id={`like-count-${postid}`}>{formatNumber(data.likeCount)}</span>
                             </button>|
                             <button className="flex gap-1.5 items-center">
                                 <FiEye />
@@ -272,15 +300,9 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                             <span>Share <span className="hidden md:inline-block">this Article</span></span>
                         </div>
                         <div className="flex gap-3 items-center">
-                            <button className="flex items-center gap-1 bg-blue-600 text-white py-1 px-2 rounded-md">
-                                <FaFacebook /><span>Facebook</span>
+                            <button onClick={copyButtonHandler} className="flex items-center gap-1 bg-black text-white py-1 px-2 rounded-md hover:bg-black/80 duration-500">
+                                <MdContentCopy /><span>Copy Link</span>
                             </button>
-                            <Link href={'/share#'} className="flex items-center gap-1 bg-blue-500 text-white py-1 px-2 rounded-md">
-                                <FaTwitter /><span>Twitter</span>
-                            </Link>
-                            <Link href={'/share#'} className="flex items-center gap-1 bg-green-500 text-white p-2 rounded-md">
-                                <FaWhatsapp />
-                            </Link>
                         </div>
                     </div>
                     <CommentBox token={token} postid={postid} user={user} comments={comments} />

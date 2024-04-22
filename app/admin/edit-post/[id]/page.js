@@ -44,6 +44,27 @@ const fetchPostById = async (id, accessToken) => {
     }
 };
 
+const fetchUser = async (token) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            cache: "no-store"
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            return userData.user;
+        } else {
+            console.error('Failed to fetch user data');
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+    }
+};
+
 function isTokenExpired(token) {
     if (!token) {
         // If token is not provided, consider it as expired
@@ -95,6 +116,11 @@ export default async function EditPost({ params }) {
         console.log('Access token has expired');
         redirect('/login');
         return;
+    }
+
+    const user = await fetchUser(aT);
+    if(user.role !== 'admin') {
+        redirect('/');
     }
 
     const post = await fetchPostById(id, aT);

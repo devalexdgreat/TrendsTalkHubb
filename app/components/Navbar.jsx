@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { GoMegaphone } from "react-icons/go";
 import { FiLogIn, FiLogOut, FiSearch } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
+import { IoChevronDown, IoClose } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logoLight from '@/public/logo-light.png'
@@ -16,6 +16,7 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RiAdminLine } from "react-icons/ri";
+import errorImg from '@/public/error.png';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -259,7 +260,7 @@ export default function Navbar() {
                             </span>
                             <div className="h-full ps-2 pe-3 flex justify-center items-center">
                                 {user ? (
-                                    <span className="font-semibold">@{user.username}</span>
+                                    <span className="font-semibold flex gap-1 items-center">@{user.username}<IoChevronDown /></span>
                                 ):(
                                     <span>Error!</span>
                                 )}
@@ -430,7 +431,7 @@ export default function Navbar() {
                                         <div className="w-full md:w-6/12 mt-3">
                                             <span>Results for Search</span>
                                         </div>
-                                        <div className="w-full md:w-6/12 flex flex-col only:md:flex-row mt-3 gap-2">
+                                        <div className="w-full md:w-6/12 flex flex-col only:md:flex-row mt-3 gap-2 overflow-y-scroll mb-8 pb-8 h-[70vh] scrollbar-hide md:scrollbar-default">
                                             {foundQuery.map((f) => (
                                                 <div key={f.id} className="z-10">
                                                     <Link href={`/blogs/${f.id}`} onClick={toggleSearch} className="z-20 group bg-black/30 backdrop-blur-sm rounded-md p-2 flex h-24 gap-2">
@@ -451,8 +452,9 @@ export default function Navbar() {
                                 )}
                             </>
                             ) : (
-                                <div className="w-full md:w-6/12 mt-3 bg-red-500 text-white ps-2 rounded-md">
-                                    <h1>Not Found</h1>
+                                <div className="w-full md:w-6/12 mt-3 bg-red-500 text-white p-2 rounded-md flex justify-center items-center flex-col">
+                                    <h1 className="text-base md:text-lg font-semibold mt-3">Not Found</h1>
+                                    <Image src={errorImg} alt="" className="" />
                                 </div>
                             )} 
                         </>
