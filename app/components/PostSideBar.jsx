@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import { GoMegaphone } from "react-icons/go";
 import { MdOutlineStore } from "react-icons/md";
@@ -10,13 +11,12 @@ import { BsDot, BsHandThumbsDown } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
-import imgOne from '@/public/1.jpg'
-import imgTwo from '@/public/2.jpg'
-import imgThr from '@/public/3.jpg'
-import imgFor from '@/public/4.jpg'
-import imgFive from '@/public/5.jpg'
+import shopImg from '@/public/shop.gif'
+import tunedImg from '@/public/tuned.gif'
+import adOne from '@/public/try.jpg'
 import Link from "next/link";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
+import { useState } from "react";
 
 function truncateString(str, num) {
     if (str.length > num) {
@@ -27,6 +27,9 @@ function truncateString(str, num) {
 }
 
 export default function PostSideBar({ posts }) {
+
+    const [isAdAvail, setIsAdAvail] = useState(true);
+
     return (
         <aside className="sticky top-0 w-full md:w-3/12 flex gap-3 flex-col">
             <div className="p-4 bg-black rounded-lg hover:shadow-2xl duration-500">
@@ -160,16 +163,24 @@ export default function PostSideBar({ posts }) {
                     </button>
                 </div>
                 <div className="flex flex-col w-full my-3">
-                    <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full h-64 justify-center items-center">
-                        <span>Adverts</span>
-                    </div>
+                    {isAdAvail ? (
+                        <Link href={'/https://devalexdgreat.vercel.app/Projects/65f67dfee188b57768deda2a'} className="flex w-full justify-center items-center">
+                            <div className="h-full">
+                                <Image src={adOne} alt="" className="rounded-md h-full object-cover" />
+                            </div>
+                        </Link>
+                    ):(
+                        <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full justify-center items-center h-64">
+                            <span>Place Ads</span>
+                        </div>
+                    )}
                 </div>
                 <div className="flex justify-center">
-                    <button className="text-[12px] bg-white/10 backdrop-blur-sm py-0.5 px-2 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Place Ads</button>
+                    <button className="text-[12px] bg-white/10 backdrop-blur-sm py-1.5 px-3 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Place Ads</button>
                 </div>
             </div>
 
-            {/* <div className="p-4 bg-black shadow-2xl rounded-lg hover:shadow-2xl duration-500">
+            <div className="p-4 bg-black shadow-2xl rounded-lg hover:shadow-2xl duration-500">
                 <div className="flex justify-between">
                     <div className="flex gap-1 items-center">
                         <MdOutlineStore />
@@ -180,73 +191,19 @@ export default function PostSideBar({ posts }) {
                     </button>
                 </div>
                 <div className="flex flex-col w-full my-3">
-                    <div className="grid duration-500 rounded-md backdrop-blur-md w-full grid-cols-2 gap-1">
-                        <div className="relative rounded-md h-full bg-black/10">
-                            <div className="">
-                                <Image src={imgOne} alt="" className="rounded-md" />
-                            </div>
-                            <div className="h-full w-full absolute top-0 bg-black/40 rounded-md">
-
-                            </div>
-                            <div className="absolute z-20 bottom-1 left-1 w-11/12 rounded-md group">
-                                <h1 className="text-[15px]">Frying pans</h1>
-                                <div className="flex justify-between mt-0.5">
-                                    <span className="text-[12px] font-semibold p-0.5 px-1 rounded-full">
-                                        $25.00
-                                    </span>
-                                    <Link href={'/'} className="p-0.5 group-hover:scale-110 rounded-full duration-500"><GoLinkExternal /></Link>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
+                    <div className="h-64 bg-white rounded-md flex flex-col relative">
+                        <div className="h-full">
+                            <Image src={shopImg} alt="" className="h-full object-cover" />
                         </div>
-                        <div className="relative rounded-md h-full bg-black/10">
-                            <div className="">
-                                <Image src={imgTwo} alt="" className="rounded-md" />
-                            </div>
-                            <div className="h-full w-full absolute top-0 bg-black/40 rounded-md">
-
-                            </div>
-                            <div className="absolute z-20 bottom-1 left-1 w-11/12 rounded-md group">
-                                <h1 className="text-[15px]">Frying pans</h1>
-                                <div className="flex justify-between mt-0.5">
-                                    <span className="text-[12px] font-semibold p-0.5 px-1 rounded-full">
-                                        $25.00
-                                    </span>
-                                    <Link href={'/'} className="p-0.5 group-hover:scale-110 rounded-full duration-500"><GoLinkExternal /></Link>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div className="relative rounded-md h-full bg-black/10">
-                            <div className="">
-                                <Image src={imgFive} alt="" className="rounded-md" />
-                            </div>
-                            <div className="h-full w-full absolute top-0 bg-black/40 rounded-md">
-
-                            </div>
-                            <div className="absolute z-20 bottom-1 left-1 w-11/12 rounded-md group">
-                                <h1 className="text-[15px]">Frying pans</h1>
-                                <div className="flex justify-between mt-0.5">
-                                    <span className="text-[12px] font-semibold p-0.5 px-1 rounded-full">
-                                        $25.00
-                                    </span>
-                                    <Link href={'/'} className="p-0.5 group-hover:scale-110 rounded-full duration-500"><GoLinkExternal /></Link>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
+                        <div className="absolute bottom-0">
+                            <Image src={tunedImg} alt="" className="" />
                         </div>
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <button className="text-[12px] bg-white/10 backdrop-blur-sm py-0.5 px-2 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Go to Shop</button>
+                    <button className="text-[12px] bg-white/10 backdrop-blur-sm py-1.5 px-3 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Go to Shop</button>
                 </div>
-            </div> */}
+            </div>
         </aside>
     );
 }
