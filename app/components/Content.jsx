@@ -120,6 +120,17 @@ export default function Content({ feed, data }) {
         }
     }
 
+    const pushLink = (id) => {
+        if(isLogIn === false) {
+            router.push('/');
+            setDData('flex');
+            return;
+        } else {
+            setIsLogIn(true);
+            router.push(`/blogs/${id}`);
+        }
+    }
+
     const toggleMenu = () => {
         setDData('none');
     }
