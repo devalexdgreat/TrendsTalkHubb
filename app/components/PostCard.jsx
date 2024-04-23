@@ -4,7 +4,7 @@ import { BsDot, BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
 import { FaFacebook, FaFolderOpen, FaTwitter, FaUser, FaWhatsapp } from "react-icons/fa6";
 import imgOne from '@/public/5.jpg'
 import imgFiv from '@/public/1.jpg'
-import { IoShareSocialOutline } from "react-icons/io5";
+import { IoClose, IoShareSocialOutline } from "react-icons/io5";
 import Link from "next/link";
 import { AiOutlineRise } from "react-icons/ai";
 import { FiEye, FiInfo } from "react-icons/fi";
@@ -16,6 +16,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { MdContentCopy } from "react-icons/md";
 import copyToClipboard from "@/utils/copyToClipboard";
+import { getCookies } from "@/actions";
 
 function timeSinceCreation(createdDate) {
     // Get the current date
@@ -76,9 +77,37 @@ function truncateString(str, num) {
 
 export default function PostCard({ post, token, postid, relatedData, comments }) {
     const data = post;
+    const [dData, setDData] = useState('none');
     const [isLiked, setIsLiked] = useState(false);
+    const [isLogIn, setIsLogIn] = useState(false);
     const [user, setUser] = useState(null);
     const router = useRouter();
+
+    useEffect(() => {
+        const fetchAt = async () => {
+            let aT = await getCookies();
+            return aT;
+        }
+        const checkLogin = async () => {
+            let accessToken = localStorage.getItem('accessToken');
+            let aToken = await fetchAt();
+            if(accessToken != null || aToken != null) {
+                setIsLogIn(true);
+                return;
+            } else {
+                setIsLogIn(false);
+            }
+        }
+        checkLogin();
+    }, [])
+
+    const toggleMenu = () => {
+        setDData('none');
+    }
+
+    const goNoAuth = async () => {
+        toggleMenu();
+    }
 
     useEffect(() => {
         const fetchUser = async (token) => {
@@ -170,6 +199,11 @@ export default function PostCard({ post, token, postid, relatedData, comments })
     }
 
     const handleLike = async (postid, token) => {
+        if(isLogIn === false) {
+            setDData('flex');
+            return;
+        }
+        setIsLogIn(true);
         try {
             const updatedIsLiked = !isLiked;
             
@@ -218,6 +252,27 @@ export default function PostCard({ post, token, postid, relatedData, comments })
 
     return (
         <div className="w-full md:w-9/12 text-black">
+
+            <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
+                <div className="text-center rounded-lg w-11/12 md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
+                    <button className="absolute right-1 top-1 bg-red-500 text-white hover:bg-red-400 duration-500 p-1 rounded-md font-semibold text-lg" onClick={toggleMenu}><IoClose /></button>
+                    <div className="w-full py-9">
+                        <span className="font-semibold text-2xl md:text-2xl pb-0.5">Create an account for more interactivity.</span>
+                    </div>
+                    <div>
+                        <Link href={'/signup'} className="py-2 px-7 bg-black text-white rounded-md hover:bg-black/80 duration-500">Sign up</Link>
+                    </div>
+                    <div className="mt-9">
+                        <span className="text-gray-900 text-lg">Already have an account? </span><Link href={'/login'} className="text-black font-semibold hover:text-black/40 duration-500">Sign in</Link>
+                    </div>
+
+                    <div className="mt-4">
+                        <span className="text-gray-900 text-lg">Or </span>
+                        <button onClick={goNoAuth} className="text-black font-semibold hover:text-black/40 duration-500">Continue...</button>
+                    </div>
+                </div>
+            </div>
+
             <div className="w-full">       
                 <div>
                     <Toaster />
@@ -232,7 +287,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                         <div className="font-semibold">
                             #Tags
                         </div>
-                        {post.tags.map((tag) => (
+                        {data.tags.map((tag) => (
                             <Link key={tag} href={`/blogs/tags/${tag}`} className="py-1 px-2 rounded-md duration-500 text-[10px] flex items-center gap-2 hover:bg-black/80 backdrop-blur-sm bg-black text-white whitespace-nowrap">
                                 <AiOutlineRise />
                                 <p className="font-normal">{tag}</p>

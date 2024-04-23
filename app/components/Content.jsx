@@ -93,7 +93,8 @@ export default function Content({ feed, data }) {
 
     useEffect(() => {
         const fetchAt = async () => {
-            let aT = await getCookies();
+            let rawAt = await getCookies();
+            const aT = rawAt?.value;
             return aT;
         }
         const checkLogin = async () => {
@@ -123,28 +124,10 @@ export default function Content({ feed, data }) {
         setDData('none');
     }
 
-    const pushLink = (id) => {
-        if(isLogIn === false) {
-            router.push('/');
-            setDData('flex');
-            return;
-        } else {
-            setIsLogIn(true);
-            router.push(`/blogs/${id}`);
-        }
+    const bypassAuth = async () => {
+        setIsLogIn(true);
+        toggleMenu();
     }
-
-    // const bypassAuth = async () => {
-    //     setIsLogIn(true);
-    //     toggleMenu();
-    //     const token = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
-    //     console.log('token: ',token);
-    //     await setCookies(token);
-
-    //     // Store the token in local storage or session storage
-    //     localStorage.setItem('accessToken', token);
-    //     router.refresh();
-    // }
 
     return (
         <div className="w-full h-full mt-20 mb-24">
@@ -166,7 +149,7 @@ export default function Content({ feed, data }) {
 
                             <div className="mt-4">
                                 <span className="text-gray-900 text-lg">Or </span>
-                                <button className="text-black font-semibold hover:text-black/40 duration-500">Continue...</button>
+                                <button onClick={bypassAuth} className="text-black font-semibold hover:text-black/40 duration-500">Continue...</button>
                             </div>
                         </div>
                     </div>

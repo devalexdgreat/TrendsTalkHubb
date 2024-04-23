@@ -37,6 +37,7 @@ export default function Navbar() {
     const router = useRouter();
     const ref = useRef();
 
+
     function isTokenExpired(token) {
         if (!token) {
             // If token is not provided, consider it as expired
@@ -61,7 +62,7 @@ export default function Navbar() {
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (isTokenExpired(accessToken)) {
-            console.log('Access token has expired now');
+            // console.log('Access token has expired now');
             // Clear the access token from local storage
             localStorage.removeItem('accessToken');
             delCookies();
@@ -71,7 +72,8 @@ export default function Navbar() {
 
     useEffect(() => {
         const fetchAt = async () => {
-            let aT = await getCookies();
+            let rawAt = await getCookies();
+            const aT = rawAt?.value;
             return aT;
         }
         const checkLogin = async () => {
@@ -88,12 +90,16 @@ export default function Navbar() {
     })
 
     useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+        const finalToken = accessToken ? accessToken : fallbackToken;
+        
         const fetchUser = async () => {
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        'Authorization': `Bearer ${finalToken}`
                     },
                     cache: "no-store"
                 });
@@ -400,7 +406,7 @@ export default function Navbar() {
                                 </div>
                                 
                             ):(
-                                <div>Error!</div>
+                                <div>Unverified...</div>
                             )}
                             </>
                         ):(

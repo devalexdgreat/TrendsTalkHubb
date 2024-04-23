@@ -26,13 +26,10 @@ const fetchPostById = async (id, accessToken) => {
     }
 };
 
-const fetchComments = async (id, accessToken) => {
+const fetchComments = async (id) => {
     try {
         // Fetch post data from the protected endpoint
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/${id}/comments`, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            },
             cache: "no-store",
         });
 
@@ -47,10 +44,38 @@ const fetchComments = async (id, accessToken) => {
     }
 };
 
+// const fetchRelated = async (data) => {
+//     try {
+//         // Fetch post data from the protected endpoint
+//         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?tags[0]=${data.tags[0]}&tags[1]=${data.tags[1]}`, {
+//             cache: "no-store",
+//         });
+
+//         if (!response.ok) {
+//             throw new Error("Failed to fetch related post");
+//         }
+
+//         const relatedPosts = await response.json();
+//         return relatedPosts;
+        
+//     } catch (error) {
+//         console.error('Error fetching user data:', error);
+//     }
+// }
+
 const fetchRelated = async (data) => {
     try {
+        let url = `${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=12`;
+
+        // Check if there are tags
+        if (data.tags && data.tags.length > 0) {
+            // Construct the query parameters for each tag
+            const queryParams = data.tags.map((tag, index) => `tags[${index}]=${tag}`).join('&');
+            url += `&${queryParams}`;
+        }
+
         // Fetch post data from the protected endpoint
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?tags[0]=${data.tags[0]}&tags[1]=${data.tags[1]}&limit=2`, {
+        const response = await fetch(url, {
             cache: "no-store",
         });
 
@@ -66,6 +91,7 @@ const fetchRelated = async (data) => {
     }
 }
 
+
 const getPosts = async () => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${4}`, {
@@ -73,7 +99,7 @@ const getPosts = async () => {
         });
   
         if (!res.ok) {
-            throw new Error("Failed to fetch Projects");
+            throw new Error("Failed to fetch related posts");
         }
   
         return res.json();
@@ -83,55 +109,41 @@ const getPosts = async () => {
     }
 }
 
-function isTokenExpired(token) {
-    if (!token) {
-        // If token is not provided, consider it as expired
-        return true;
-    }
-
-    try {
-        // Decode the token
-        const payload = JSON.parse(atob(token.split('.')[1]));
-
-        // Get the expiration time (exp) from the payload
-        const expirationTime = payload.exp * 1000; // Convert to milliseconds
-
-        // Check if the current time is after the expiration time
-        return Date.now() >= expirationTime;
-    } catch (error) {
-        // If decoding fails, consider the token as expired
-        return true;
-    }
-}
-
-const checkToken = (token) => {
-    if(token) {
-        console.log('Token present.')
-        return;
-    } else {
-        redirect('/login')
-    }
-};
+// const assignAccessToken = (token) => {
+//     let aT;
+//     if(token) {
+//         console.log('Token present.');
+//         aT = token.value;
+//         return;
+//     } else {
+//         console.log('Token not present. Using fake token.');
+//         aT = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+//     }
+//     return aT;
+// };
 
 export default async function Blog({ params }) {
     const { id } = params;
-    const token = await getCookies();
-    checkToken(token);
-    const aT = token.value;
     
-    if (isTokenExpired(aT)) {
-        console.log('Access token has expired');
-        redirect('/login');
-        return;
-    } else {
-        console.log('Access token is still valid');
-    }
+    const rawToken = await getCookies();
+    const accessToken = rawToken?.value;
+    const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+    const aT = accessToken ? accessToken : fallbackToken;
 
     const post = await fetchPostById(id, aT);
     const sameTag = await fetchRelated(post);
-    const related = sameTag.filter(indPost => indPost.id !== id);
+
+    function checkRelated() {
+        if(sameTag) {
+            const related = sameTag.filter(indPost => indPost.id !== id);
+            return related;
+        }
+    }
+        
+    const related = checkRelated();
+    
     const posts = await getPosts();
-    const com = await fetchComments(id, aT);
+    const com = await fetchComments(id);
     const comments = com.reverse();
 
     return (
