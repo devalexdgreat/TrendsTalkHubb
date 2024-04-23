@@ -59,14 +59,18 @@ export async function generateMetadata({params, searchParams }, parent) {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: realPost[0].images[0].url, // Must be an absolute URL
+      images: realPost[0].images[0].url,
+      url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
       },
     openGraph: {
       title: realPost[0].title,
       description: realPost[0].content,
+      keywords: convertArrayToStringWithCommas(realPost[0].tags),
       type: 'article',
       publishedTime: timeSinceCreation(realPost[0].date),
       authors: 'TrendsTalk Hubb',
+      url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
+      siteName: "TrendsTalk Hubb",
       images: realPost[0].images[0].url,
     },
     robots: {

@@ -2,15 +2,7 @@
 import Image from "next/image";
 import { GoMegaphone } from "react-icons/go";
 import { MdOutlineStore } from "react-icons/md";
-import { GoLinkExternal } from "react-icons/go";
 import { LuMoreHorizontal } from "react-icons/lu";
-import { FaCloudSun } from "react-icons/fa6";
-import { AiOutlineRise } from "react-icons/ai";
-import { FcBearish, FcBullish } from "react-icons/fc";
-import { BsDot, BsHandThumbsDown } from "react-icons/bs";
-import { FaUser } from "react-icons/fa6";
-import { BsHandThumbsUp } from "react-icons/bs";
-import { FiEye } from "react-icons/fi";
 import shopImg from '@/public/shop.gif'
 import tunedImg from '@/public/tuned.gif'
 import adOne from '@/public/try.jpg'
@@ -31,7 +23,7 @@ export default function PostSideBar({ posts }) {
     const [isAdAvail, setIsAdAvail] = useState(true);
 
     return (
-        <aside className="sticky top-0 w-full md:w-3/12 flex gap-3 flex-col">
+        <aside className="sticky top-0 w-full md:w-4/12 lg:w-3/12 flex gap-3 flex-col">
             <div className="p-4 bg-black rounded-lg hover:shadow-2xl duration-500">
                 
                 <div className="flex justify-between">

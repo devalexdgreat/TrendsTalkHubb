@@ -41,10 +41,12 @@ export const metadata = {
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
       images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
-      },
+      url: "https://trendstalkhubb.vercel.app/",
+    },
   openGraph: {
     title: 'TrendsTalk Hubb: Explore the Latest Trends and Insights',
     description: 'Discover insightful articles and discussions on the latest trends across various industries at TrendsTalk Hubb.',
+    keywords: "trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     url: 'https://trendstalkhubb.vercel.app/',
     siteName: 'TrendsTalk Hubb',
     images: [

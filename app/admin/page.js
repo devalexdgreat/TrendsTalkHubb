@@ -231,7 +231,7 @@ export default async function AdminPage() {
                     </span>
                 </div>
                 <div className="flex flex-col md:flex-row mt-4 w-full gap-4">
-                    <div className="bg-slate-100 p-3 rounded-md shadow w-full md:w-3/12 flex flex-col justify-between gap-4">
+                    <div className="bg-slate-100 p-3 rounded-md shadow w-full md:w-4/12 lg:w-3/12 flex flex-col justify-between gap-4">
                         <div className="flex flex-col">
                             <span className="font-semibold">@{capString(user.username)}</span>
                             <span className="text-[12px]">{capString(user.role)}</span>
@@ -247,8 +247,8 @@ export default async function AdminPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex gap-4 w-full md:w-9/12">
-                        <div className="bg-slate-100 p-3 rounded-md shadow w-6/12 md:w-2/12 flex flex-col justify-between">
+                    <div className="flex gap-4 w-full md:w-7/12 lg:w-9/12">
+                        <div className="bg-slate-100 p-3 rounded-md shadow w-6/12 md:w-3/12 lg:w-2/12 flex flex-col justify-between">
                             <div className="flex flex-col mb-4">
                                 <BiCommentDetail className="text-3xl"/>
                             </div>
@@ -259,7 +259,7 @@ export default async function AdminPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-slate-100 p-3 rounded-md shadow w-6/12 md:w-2/12 flex flex-col justify-between">
+                        <div className="bg-slate-100 p-3 rounded-md shadow w-6/12 md:w-3/12 lg:w-2/12 flex flex-col justify-between">
                             <div className="flex flex-col mb-4">
                                 <MdOutlineThumbUp className="text-3xl" />
                             </div>

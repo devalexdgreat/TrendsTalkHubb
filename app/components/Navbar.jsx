@@ -209,7 +209,7 @@ export default function Navbar() {
                 <Link href={'/'} className="font-semibold">
                     <Image src={logoDark} className="h-10 w-32" alt="" />
                 </Link>
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden lg:flex items-center gap-6">
                     <Link href={'/'} className="hover:text-black/60 duration-500">Discover</Link>
                     
                     <Menu as="div" className="relative inline-block text-left">
@@ -281,7 +281,7 @@ export default function Navbar() {
                     <button onClick={toggleSearch} className="hover:bg-black/10 hover:text-black/60 backdrop-blur-sm rounded-sm duration-500 p-2"><FiSearch /></button>
                 </div>
 
-                <div className="flex gap-2 items-center md:hidden">
+                <div className="flex gap-2 items-center lg:hidden">
                     <button onClick={toggleSearch} className="hover:bg-black/10 backdrop-blur-sm rounded-sm duration-500 p-2">
                         <FiSearch className="text-xl" />
                     </button>
@@ -291,12 +291,12 @@ export default function Navbar() {
                 </div>
             </div>
             {menuOpen && (
-                <div className="h-screen text-white w-full fixed top-0 bg-black backdrop-blur-sm z-30 md:hidden">
+                <div className="h-screen text-white w-full fixed top-0 bg-black backdrop-blur-sm z-30 lg:hidden">
                     <div className="w-11/12 mx-auto flex items-center justify-between py-3 border-b border-gray-700">
                         <Link href={'/'} className="font-semibold">
                             <Image src={logoLight} className="h-10 w-32" alt="" />
                         </Link>
-                        <div className="flex items-center md:hidden">
+                        <div className="flex items-center lg:hidden">
                             <button onClick={toggleMenu} className="text-xl hover:bg-white/10 backdrop-blur-sm rounded-sm duration-500 p-2">
                                 <IoClose className="text-xl" />
                             </button>

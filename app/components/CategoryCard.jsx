@@ -4,11 +4,6 @@ import { FaFolderOpen, FaHashtag, FaRegFolderOpen, FaUser } from "react-icons/fa
 import { BsHandThumbsUp } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import Image from "next/image";
-import imgOne from '@/public/1.jpg'
-import imgTwo from '@/public/2.jpg'
-import imgThr from '@/public/3.jpg'
-import imgFor from '@/public/4.jpg'
-import imgFiv from '@/public/5.jpg'
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
 
@@ -62,7 +57,7 @@ function formatNumber(number) {
 export default function CategoryCard({ data, tag, title }) {
 
     return (
-        <div className="w-full md:w-9/12 text-white">
+        <div className="w-full md:w-8/12 lg:w-9/12 text-white">
             <div className="text-[13px] flex gap-1 items-center mt-4 mb-4 text-black">
                 <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
                 </Link>/
@@ -78,7 +73,7 @@ export default function CategoryCard({ data, tag, title }) {
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>
             {data.length > 0 ? (
-                <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {data.map((d) => (
                         <div className="h-80" key={d.id}>
                             <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">

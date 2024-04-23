@@ -28,11 +28,13 @@ export async function generateMetadata({params, searchParams }, parent) {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: ps[randomIndex].images[0].url, // Must be an absolute URL
+      images: ps[randomIndex].images[0].url,
+      url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
       },
     openGraph: {
       title: `${id} Tag - TrendsTalk Hubb`,
       description: `Explore posts tagged with "${id}" and stay updated on the latest trends and insights across various industries at TrendsTalk Hubb.`,
+      keywords: `${id}, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
       type: 'website',
       url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
       siteName: 'TrendsTalk Hubb',

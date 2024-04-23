@@ -24,10 +24,12 @@ export async function generateMetadata({ params }, parent) {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
+      url: `https://trendstalkhubb.vercel.app/blogs/categories/${categoryData.title}`,
     },
     openGraph: {
       title: `${categoryData.title} Collection - TrendsTalk Hubb`,
       description: `Explore the latest ${categoryData.title} and summaries of trends and insights across various industries at TrendsTalk Hubb.`,
+      keywords: `${categoryData.title}, categories, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
       type: 'website',
       url: `https://trendstalkhubb.vercel.app/blogs/categories/${categoryData.title}`,
       siteName: 'TrendsTalk Hubb',

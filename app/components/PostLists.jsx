@@ -1,6 +1,6 @@
 'use client';
 import { FaUser } from "react-icons/fa6";
-import { AiOutlineDelete, AiOutlineRise } from "react-icons/ai";
+import { AiOutlineRise } from "react-icons/ai";
 import Image from "next/image";
 import { BsDot, BsHandThumbsUp } from "react-icons/bs";
 import { FiEdit, FiEye } from "react-icons/fi";
@@ -106,7 +106,7 @@ export default function PostList({ data, user }) {
     return (
         <div className="flex flex-col mt-4 w-full gap-4 text-white">
             <Toaster/>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {data.map((d) => (
                     <div className="h-80" key={d.id}>
                         <div className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">

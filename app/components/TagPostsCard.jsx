@@ -5,11 +5,6 @@ import { FaHashtag, FaUser } from "react-icons/fa6";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { FiEye } from "react-icons/fi";
 import Image from "next/image";
-import imgOne from '@/public/1.jpg'
-import imgTwo from '@/public/2.jpg'
-import imgThr from '@/public/3.jpg'
-import imgFor from '@/public/4.jpg'
-import imgFiv from '@/public/5.jpg'
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
 import { MdRefresh } from "react-icons/md";
@@ -88,7 +83,7 @@ export default function TagPostsCard({ data, tag }) {
     }, [data])
 
     return (
-        <div className="w-full md:w-9/12 text-white">
+        <div className="w-full md:w-8/12 lg:w-9/12 text-white">
             <div className="mb-4 heading text-black">
                 <span className="flex gap-1 items-center">
                     <FaHashtag className=""/>
@@ -97,7 +92,7 @@ export default function TagPostsCard({ data, tag }) {
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>
             {postdata ? (
-                <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     
                     {data.map((d) => (
                         <div className="h-80" key={d.id}>
@@ -116,7 +111,7 @@ export default function TagPostsCard({ data, tag }) {
                                         </div>
                                     </div>
                                     <div className="my-2">
-                                        <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
+                                        <p className="text-[16px] md:text-[15px] font-semibold duration-500">{d.title}</p>
                                     </div>
                                     <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
                                         <div className="flex gap-3">

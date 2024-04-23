@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { FiInfo } from "react-icons/fi";
-import { GoLaw, GoLinkExternal, GoMegaphone } from "react-icons/go";
-import { IoShareSocialOutline } from "react-icons/io5";
+import { GoLaw } from "react-icons/go";
 import { RiContactsLine } from "react-icons/ri";
-import { CiFacebook, CiYoutube } from "react-icons/ci";
-import { FaFacebook, FaYoutube } from "react-icons/fa6";
 import logoLight from '@/public/logo-light.png'
 import logoDark from '@/public/logo-dark.png'
 import Image from "next/image";

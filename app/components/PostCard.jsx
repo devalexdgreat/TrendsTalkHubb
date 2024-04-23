@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
 import { BsDot, BsHandThumbsUp, BsHandThumbsUpFill } from "react-icons/bs";
-import { FaFacebook, FaFolderOpen, FaTwitter, FaUser, FaWhatsapp } from "react-icons/fa6";
-import imgOne from '@/public/5.jpg'
-import imgFiv from '@/public/1.jpg'
+import { FaFolderOpen, FaUser } from "react-icons/fa6";
 import { IoClose, IoShareSocialOutline } from "react-icons/io5";
 import Link from "next/link";
 import { AiOutlineRise } from "react-icons/ai";
@@ -251,7 +249,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
     };
 
     return (
-        <div className="w-full md:w-9/12 text-black">
+        <div className="w-full md:w-8/12 lg:w-9/12 text-black">
 
             <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
                 <div className="text-center rounded-lg w-11/12 md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">

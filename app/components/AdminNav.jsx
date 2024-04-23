@@ -1,35 +1,21 @@
 "use client";
 import Link from "next/link";
-import { GoMegaphone } from "react-icons/go";
 import { FiLogIn, FiLogOut, FiSearch } from "react-icons/fi";
 import { IoChevronDown, IoClose } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logoLight from '@/public/logo-light.png'
 import logoDark from '@/public/logo-dark.png'
-import imgOne from '@/public/1.jpg'
-import imgTwo from '@/public/2.jpg'
-import imgThr from '@/public/3.jpg'
-import imgFor from '@/public/4.jpg'
-import SearchComponent from "./SearchComponent";
 import LogoutBtn from "./LogoutBtn";
 import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 import { HiOutlineMenu } from "react-icons/hi";
 import { delCookies, getCookies } from "@/actions";
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 export default function AdminNav() {
 
-    const [open, setOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
-    const [query, setQuery] = useState("");
-    const [foundQuery, setFoundQuery] = useState(null);
-    const [isClicked, setIsClicked] = useState(false);
-    const [isEmpty, setIsEmpty] = useState(false);
     const [isloggedIn, setIsLoggedIn] = useState(true);
     const [user, setUser] = useState(null);
     const router = useRouter();
@@ -113,50 +99,9 @@ export default function AdminNav() {
         setProfileOpen(prevProfileOpen => !prevProfileOpen);
     };
 
-    const toggleSearch = () => {
-        setOpen(prevOpen => !prevOpen);
-    };
-
     const toggleMenu = () => {
         setMenuOpen(prevMenuOpen => !prevMenuOpen);
     };
-
-    const getPostsByQuery = async (query) => {
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts/search?query=${query}`, {
-                cache: "no-store",
-            });
-        
-            if (!res.ok) {
-                throw new Error("Failed to fetch Projects");
-            }
-        
-            return res.json();
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    
-    const handleSearch = async () => {
-        if(query.length <= 0) {
-            alert("Error - Search field is empty!");
-            return;
-        } else {
-            const posts = await getPostsByQuery(query);
-            setIsClicked(true);
-            if(posts !== undefined) {
-                setFoundQuery(posts);
-                setIsEmpty(true);
-                return;
-            }
-            else {
-                setIsEmpty(false);
-                setFoundQuery(null);
-            }
-        }
-    }
-
-    
 
     const Logout = () => {
         // Clear the access token from local storage
@@ -251,57 +196,6 @@ export default function AdminNav() {
                                 <span>Login</span>
                                 <FiLogIn />
                             </Link>
-                        )}
-                    </div>
-                </div>
-            )}
-            {open && (
-                <div className="z-20 w-full text-white fixed top-0 h-screen bg-black/50 backdrop-blur-sm">
-                    <div className="w-11/12 mx-auto flex flex-col items-end md:justify-end py-3">
-                        <div className="w-full md:w-6/12 flex items-center gap-1">
-                            <input onChange={(e) => setQuery(e.target.value)} value={query} type="text" className="w-full py-0.5 ps-2 rounded-sm text-black" placeholder="Search here"/>
-                            <button onClick={handleSearch} className="bg-black hover:bg-black/70 backdrop-blur-sm rounded-sm duration-500 p-2 flex items-center gap-1">
-                                <FiSearch /><span className="text-[12px]">Search</span>
-                            </button>
-                            <button onClick={toggleSearch} className="bg-red-500 hover:bg-red-500/90 backdrop-blur-sm rounded-sm duration-500 p-2"><IoClose /></button>
-                        </div>
-                        {isClicked ? (
-                        <>
-                            {isEmpty ? (
-                                <>
-                                {foundQuery ? (
-                                    <>  
-                                        <div className="w-full md:w-6/12 mt-3">
-                                            <span>Results for Search</span>
-                                        </div>
-                                        <div className="w-full md:w-6/12 flex flex-col only:md:flex-row mt-3 gap-2">
-                                            {foundQuery.map((f) => (
-                                                <div key={f.id} className="z-10">
-                                                    <Link href={`/blogs/${f.id}`} onClick={toggleSearch} className="z-20 group bg-black/30 backdrop-blur-sm rounded-md p-2 flex h-24 gap-2">
-                                                        <div className="w-3/12 h-full">
-                                                            <Image src={imgOne} className="rounded-md object-cover h-full" alt="" />
-                                                        </div>
-                                                        <div className="w-9/12 h-full flex items-center">
-                                                            <h1 className="text-[13px] md:text-base group-hover:text-gray-400 duration-500 font-semibold">{f.title}</h1>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-                                            ))}
-                                        </div>
-                                
-                                    </>
-                                ):(
-                                    <div></div>
-                                )}
-                            </>
-                            ) : (
-                                <div className="w-full md:w-6/12 mt-3 bg-red-500 text-white ps-2 rounded-md">
-                                    <h1>Not Found</h1>
-                                </div>
-                            )} 
-                        </>
-                        ):(
-                            <div></div>
                         )}
                     </div>
                 </div>
