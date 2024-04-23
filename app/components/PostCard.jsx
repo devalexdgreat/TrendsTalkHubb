@@ -367,7 +367,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                         <hr className="border-2 border-black w-12 rounded-3xl"/>
                     </div>
                     {relatedData.length !== 0 ? (
-                        <div className="text-white w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="text-white w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                             {relatedData.map((r) => (
                                 <div className="h-80" key={r.id}>
                                     <Link href={`/blogs/${r.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
