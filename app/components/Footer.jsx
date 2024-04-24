@@ -9,7 +9,7 @@ import Image from "next/image";
 export default function Footer() {
     return (
         <div className="w-full bg-black text-white py-6">
-            <div className="w-11/12 mx-auto flex flex-col md:flex-row justify-between items-center md:items-center text-center md:text-left gap-7">
+            <div className="w-11/12 mx-auto flex flex-row justify-between items-center md:items-center text-center md:text-left gap-7">
                 <Link href={'/'} className="duration-500">
                     <Image src={logoLight} className="h-10 w-32" alt="" />
                 </Link>
@@ -19,9 +19,6 @@ export default function Footer() {
                     </Link>
                     <Link href={'/contact-us'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
                         <span>Contact Us</span><RiContactsLine />
-                    </Link>
-                    <Link href={'/policy'} className="hover:text-gray-400 duration-500 flex items-center gap-1 justify-center md:justify-start">
-                        <span>Policy</span><GoLaw />
                     </Link>
                 </div>
             </div>
