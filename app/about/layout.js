@@ -62,7 +62,7 @@ export const metadata = {
     siteName: "TrendsTalk Hubb",
     type: "website"
   };
-
+  
 
 export default function Layout({ children }) {
     return (

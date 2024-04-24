@@ -7,8 +7,8 @@ import shopImg from '@/public/shop.gif'
 import tunedImg from '@/public/tuned.gif'
 import adOne from '@/public/try.jpg'
 import Link from "next/link";
-import { CiFacebook, CiYoutube } from "react-icons/ci";
 import { useState } from "react";
+import { FaFacebook, FaYoutube } from "react-icons/fa6";
 
 function truncateString(str, num) {
     if (str.length > num) {
@@ -36,12 +36,12 @@ export default function PostSideBar({ posts }) {
                 </div>
                 <div className="grid grid-cols-2 gap-2 items-center w-full my-3">
                     <Link href={'#'} className="rounded-md hover:bg-blue-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-blue-600" >
-                        <span className="text-xl"><CiFacebook /></span>
+                        <span className="text-xl"><FaFacebook /></span>
                         <span className="font-semibold">109K</span>
                         <span>Fol</span>
                     </Link>
                     <Link href={'https://youtube.com/@trendstalkhubb?si=2PqtzRCqk7MvnJlX'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
-                        <span className="text-xl"><CiYoutube /></span>
+                        <span className="text-xl"><FaYoutube /></span>
                         <span className="font-semibold">310K</span>
                         <span>Sub</span>
                     </Link>

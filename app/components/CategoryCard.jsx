@@ -68,7 +68,7 @@ export default function CategoryCard({ data, tag, title }) {
             <div className="mb-5 heading text-black">
                 <span className="flex gap-1 items-center text-xl">
                     <FaRegFolderOpen />
-                    <h1 className="font-semibold mb-0.5 text-xl">{title}</h1>
+                    <h1 className="font-semibold mb-0.5 text-xl">{title} News Collection</h1>
                 </span>
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>

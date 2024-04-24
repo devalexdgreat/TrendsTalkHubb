@@ -85,9 +85,13 @@ export default function TagPostsCard({ data, tag }) {
     return (
         <div className="w-full md:w-8/12 lg:w-9/12 text-white">
             <div className="mb-4 heading text-black">
-                <span className="flex gap-1 items-center">
-                    <FaHashtag className=""/>
-                    <h1 className="font-semibold text-base mb-0.5">{tag}</h1>
+                <span className="flex items-center font-medium text-base mb-0.5 gap-1">
+                    <span>Posts Tagged with </span>
+                    <span className="flex items-center font-semibold">
+                        <FaHashtag className="text-sm"/>
+                        <h1 className="">{tag}</h1>
+                    </span>
+                    
                 </span>
                 <hr className="border-2 border-black w-12 rounded-3xl"/>
             </div>
