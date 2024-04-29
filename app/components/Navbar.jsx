@@ -83,7 +83,7 @@ export default function Navbar() {
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
-            if(accessToken != null || aToken != null) {
+            if(accessToken != null || aToken != undefined) {
                 setIsLoggedIn(true);
                 return;
             } else {
@@ -96,11 +96,22 @@ export default function Navbar() {
     })
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
-        const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
-        const finalToken = accessToken ? accessToken : fallbackToken;
+        const fetchAt = async () => {
+            let rawAt = await getCookies();
+            const aT = rawAt?.value;
+            return aT;
+        }
+        const getAtoken = async () => {
+            const aT = await fetchAt();
+            return aT;
+        }
+
         
+
         const fetchUser = async () => {
+            const accessToken = await getAtoken();    
+            const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+            const finalToken = accessToken ? accessToken : fallbackToken; 
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
                     method: 'GET',

@@ -37,35 +37,35 @@ const getPosts = async () => {
   }
 }
 
-function isTokenExpired(token) {
-  if (!token) {
-      // If token is not provided, consider it as expired
-      return true;
-  }
+// function isTokenExpired(token) {
+//   if (!token) {
+//       // If token is not provided, consider it as expired
+//       return true;
+//   }
 
-  try {
-      // Decode the token
-      const payload = JSON.parse(atob(token.split('.')[1]));
+//   try {
+//       // Decode the token
+//       const payload = JSON.parse(atob(token.split('.')[1]));
 
-      // Get the expiration time (exp) from the payload
-      const expirationTime = payload.exp * 1000; // Convert to milliseconds
+//       // Get the expiration time (exp) from the payload
+//       const expirationTime = payload.exp * 1000; // Convert to milliseconds
 
-      // Check if the current time is after the expiration time
-      return Date.now() >= expirationTime;
-  } catch (error) {
-      // If decoding fails, consider the token as expired
-      return true;
-  }
-}
+//       // Check if the current time is after the expiration time
+//       return Date.now() >= expirationTime;
+//   } catch (error) {
+//       // If decoding fails, consider the token as expired
+//       return true;
+//   }
+// }
 
-const checkToken = (token) => {
-  if(token) {
-      console.log('Token present.')
-      return;
-  } else {
-      // redirect('/login')
-  }
-};
+// const checkToken = (token) => {
+//   if(token) {
+//       console.log('Token present.')
+//       return;
+//   } else {
+//       // redirect('/login')
+//   }
+// };
 
 export default async function Home() {
 
