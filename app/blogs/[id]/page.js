@@ -44,25 +44,6 @@ const fetchComments = async (id) => {
     }
 };
 
-// const fetchRelated = async (data) => {
-//     try {
-//         // Fetch post data from the protected endpoint
-//         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?tags[0]=${data.tags[0]}&tags[1]=${data.tags[1]}`, {
-//             cache: "no-store",
-//         });
-
-//         if (!response.ok) {
-//             throw new Error("Failed to fetch related post");
-//         }
-
-//         const relatedPosts = await response.json();
-//         return relatedPosts;
-        
-//     } catch (error) {
-//         console.error('Error fetching user data:', error);
-//     }
-// }
-
 const fetchRelated = async (data) => {
     try {
         let url = `${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=12`;
@@ -91,7 +72,6 @@ const fetchRelated = async (data) => {
     }
 }
 
-
 const getPosts = async () => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${4}`, {
@@ -108,19 +88,6 @@ const getPosts = async () => {
         console.log(error);
     }
 }
-
-// const assignAccessToken = (token) => {
-//     let aT;
-//     if(token) {
-//         console.log('Token present.');
-//         aT = token.value;
-//         return;
-//     } else {
-//         console.log('Token not present. Using fake token.');
-//         aT = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
-//     }
-//     return aT;
-// };
 
 export default async function Blog({ params }) {
     const { id } = params;

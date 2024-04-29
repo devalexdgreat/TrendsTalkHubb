@@ -60,12 +60,16 @@ export default function Navbar() {
     }
 
     useEffect(() => {
+        const deleteCookies = async () => {
+            await delCookies();
+        }
+
         const accessToken = localStorage.getItem('accessToken');
         if (isTokenExpired(accessToken)) {
             // console.log('Access token has expired now');
             // Clear the access token from local storage
             localStorage.removeItem('accessToken');
-            delCookies();
+            deleteCookies();
             return; 
         }
     });
@@ -84,6 +88,8 @@ export default function Navbar() {
                 return;
             } else {
                 setIsLoggedIn(false);
+                await delCookies();
+                localStorage.removeItem('accessToken');
             }
         }
         checkLogin();
