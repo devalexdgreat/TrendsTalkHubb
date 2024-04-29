@@ -80,12 +80,14 @@ export default function Navbar() {
             const aT = rawAt?.value;
             return aT;
         }
+
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
             if(accessToken != null || aToken != undefined) {
                 setIsLoggedIn(true);
                 return;
+                
             } else {
                 setIsLoggedIn(false);
                 await delCookies();
