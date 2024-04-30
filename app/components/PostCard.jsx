@@ -90,7 +90,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
-            if(accessToken != null || typeof aToken != 'undefined') {
+            if(accessToken != null || aToken != undefined) {
                 setIsLogIn(true);
                 return;
             } else {
