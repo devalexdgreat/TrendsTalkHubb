@@ -84,7 +84,7 @@ export default function Navbar() {
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
-            if(accessToken != null || typeof aToken !== 'undefined') {
+            if(accessToken != null || typeof aToken != 'undefined') {
                 setIsLoggedIn(true);
                 return;
                 
