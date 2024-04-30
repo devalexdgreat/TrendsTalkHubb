@@ -425,7 +425,10 @@ export default function Navbar() {
                                 </div>
                                 
                             ):(
-                                <div>Unverified...</div>
+                                <Link href={'/login'} onClick={toggleMenu} className="text-black bg-white rounded-md hover:bg-gray-400 duration-500 py-2 text-center mt-2 flex justify-center gap-3 items-center">
+                                    <span>Login</span>
+                                    <FiLogIn />
+                                </Link>
                             )}
                             </>
                         ):(
