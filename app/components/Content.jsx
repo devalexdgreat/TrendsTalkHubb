@@ -86,7 +86,7 @@ export default function Content({ feed, data }) {
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
-            if(accessToken != null || aToken != null) {
+            if(accessToken != null || typeof aToken != 'undefined') {
                 setIsLogIn(true);
                 return;
             } else {
