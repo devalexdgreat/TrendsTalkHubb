@@ -83,7 +83,8 @@ export default function PostCard({ post, token, postid, relatedData, comments })
 
     useEffect(() => {
         const fetchAt = async () => {
-            let aT = await getCookies();
+            let rawAt = await getCookies();
+            const aT = rawAt?.value;
             return aT;
         }
         const checkLogin = async () => {
