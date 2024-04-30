@@ -84,7 +84,7 @@ export default function Navbar() {
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
-            if(accessToken != null || aToken != undefined) {
+            if(accessToken != null || typeof aToken !== 'undefined') {
                 setIsLoggedIn(true);
                 return;
                 
@@ -112,8 +112,8 @@ export default function Navbar() {
 
         const fetchUser = async () => {
             const accessToken = await getAtoken();    
-            const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
-            const finalToken = accessToken ? accessToken : fallbackToken; 
+            // const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+            const finalToken = accessToken; 
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
                     method: 'GET',
