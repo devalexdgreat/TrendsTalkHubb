@@ -106,63 +106,64 @@ export default function PostList({ data, user }) {
     return (
         <div className="flex flex-col mt-4 w-full gap-4 text-white">
             <Toaster/>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {data.map((d) => (
-                    <div className="h-80" key={d.id}>
-                        <div className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
-                            <div className="h-3/6">
-                                <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
+            {data && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {data.map((d) => (
+                        <div className="h-80" key={d.id}>
+                            <div className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                <div className="h-3/6">
+                                    <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
 
-                                <div className="h-full w-full bg-black/20 md:hidden group-hover:block top-0 rounded-lg absolute">
+                                    <div className="h-full w-full bg-black/20 md:hidden group-hover:block top-0 rounded-lg absolute">
 
-                                </div>
-                            </div>
-                            <div className="bg-black p-3 t-box h-3/6 relative">
-                                <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
-                                    <span><FaUser /></span>
-                                    <div className="flex gap-0.5 items-center">
-                                        <h1>{d.author}</h1>
-                                        <span><BsDot /></span>
-                                        <span>{timeSinceCreation(d.date)}</span> 
                                     </div>
                                 </div>
-                                <div className="my-2">
-                                    <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
-                                </div>
-                                <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                    <div className="flex gap-3">
-                                        <button className="flex gap-1.5 items-center">
-                                            <BsHandThumbsUp />
-                                            <span>{formatNumber(d.likesCount)}</span>
-                                        </button>
-                                        <button className="flex gap-1.5 items-center">
-                                            <FiEye />
-                                            <span>{formatNumber(d.viewsCount)}</span>
-                                        </button>
+                                <div className="bg-black p-3 t-box h-3/6 relative">
+                                    <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
+                                        <span><FaUser /></span>
+                                        <div className="flex gap-0.5 items-center">
+                                            <h1>{d.author}</h1>
+                                            <span><BsDot /></span>
+                                            <span>{timeSinceCreation(d.date)}</span> 
+                                        </div>
                                     </div>
-                                    <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                        {d.tags.map((tag) => (
-                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                <AiOutlineRise />
-                                                <span>{tag}</span>
-                                            </Link>
-                                        ))}
+                                    <div className="my-2">
+                                        <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
+                                    </div>
+                                    <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                        <div className="flex gap-3">
+                                            <button className="flex gap-1.5 items-center">
+                                                <BsHandThumbsUp />
+                                                <span>{formatNumber(d.likesCount)}</span>
+                                            </button>
+                                            <button className="flex gap-1.5 items-center">
+                                                <FiEye />
+                                                <span>{formatNumber(d.viewsCount)}</span>
+                                            </button>
+                                        </div>
+                                        <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
+                                            {d.tags.map((tag) => (
+                                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                    <AiOutlineRise />
+                                                    <span>{tag}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="bg-black/10 md:invisible group-hover:visible border backdrop-blur-sm py-2 px-3 absolute top-1 right-1 rounded-md text-[15px] md:text-[12px] z-20 flex items-center gap-3">
-                                <Link href={`/admin/edit-post/${d.id}`} className="flex gap-1 items-center">
-                                    <FiEdit /><span>Edit</span>
-                                </Link>
-                                <button onClick={(e) => deletePost(d.id)} className="flex gap-1 items-center">
-                                    <RiDeleteBinLine /><span>Delete</span>
-                                </button>
+                                <div className="bg-black/10 md:invisible group-hover:visible border backdrop-blur-sm py-2 px-3 absolute top-1 right-1 rounded-md text-[15px] md:text-[12px] z-20 flex items-center gap-3">
+                                    <Link href={`/admin/edit-post/${d.id}`} className="flex gap-1 items-center">
+                                        <FiEdit /><span>Edit</span>
+                                    </Link>
+                                    <button onClick={(e) => deletePost(d.id)} className="flex gap-1 items-center">
+                                        <RiDeleteBinLine /><span>Delete</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-            
+                    ))}
+                </div>
+            )}
             <div className="flex justify-center pt-2">
                 <button className="bg-black text-white py-1 px-4 rounded-md hover:bg-black/70 duration-500">See More</button>
             </div>

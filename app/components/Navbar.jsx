@@ -134,7 +134,7 @@ export default function Navbar() {
             }
         };
 
-        fetchUser(); // Call fetchUser() when the component mounts
+        fetchUser(); 
     }, []);
 
     useEffect(() => {

@@ -73,8 +73,7 @@ function truncateString(str, num) {
 
 
 
-export default function PostCard({ post, token, postid, relatedData, comments }) {
-    const data = post;
+export default function PostCard({ post: data, token, postid, relatedData, comments }) {
     const [dData, setDData] = useState('none');
     const [isLiked, setIsLiked] = useState(false);
     const [isLogIn, setIsLogIn] = useState(false);
@@ -272,95 +271,97 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                 </div>
             </div>
 
-            <div className="w-full">       
-                <div>
-                    <Toaster />
-                    <div className="text-[13px] flex gap-1 items-center mt-4 mb-4">
-                        <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
-                        </Link>/
-                        <Link href={`/blogs/categories/${data.category}`} className="rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">
-                            <FaFolderOpen />{data.category}
-                        </Link>
-                    </div>
-                    <div className="text-[12px] flex gap-2 items-center mt-4 overflow-x-scroll scrollbar-hide">
-                        <div className="font-semibold">
-                            #Tags
-                        </div>
-                        {data.tags.map((tag) => (
-                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-1 px-2 rounded-md duration-500 text-[10px] flex items-center gap-2 hover:bg-black/80 backdrop-blur-sm bg-black text-white whitespace-nowrap">
-                                <AiOutlineRise />
-                                <p className="font-normal">{tag}</p>
+            <div className="w-full">
+                {data && (  
+                    <div>
+                        <Toaster />
+                        <div className="text-[13px] flex gap-1 items-center mt-4 mb-4">
+                            <Link href={'/'} className="text-black/80 rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">Home
+                            </Link>/
+                            <Link href={`/blogs/categories/${data.category}`} className="rounded-md font-normal flex gap-1 items-center hover:text-black/40 duration-500">
+                                <FaFolderOpen />{data.category}
                             </Link>
-                        ))}
-                    </div>
-                    <h1 className="w-full my-4 font-semibold text-2xl md:text-4xl">{data.title}</h1>
-                    <div className="flex gap-2 items-center text-[12px]">
-                        <FaUser className="text-[10px]"/>
-                        <div className="flex gap-0.5 items-center">
-                            <h1>{data.author}</h1>
-                            <span><BsDot /></span>
-                            <span>{timeSinceCreation(data.date)}</span> 
                         </div>
-                        <div className="flex gap-3 border border-black rounded-full py-1 px-3">
-                            <button onClick={() => handleLike(postid, token)} className="flex gap-1.5 items-center">
-                                {isLiked ? (
-                                    <BsHandThumbsUpFill />
-                                ):(
-                                    <BsHandThumbsUp />
-                                )}
-                                <span id={`like-count-${postid}`}>{formatNumber(data.likeCount)}</span>
-                            </button>|
-                            <button className="flex gap-1.5 items-center">
-                                <FiEye />
-                                <span>{formatNumber(data.viewCount)}</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="w-full mt-5 mb-5 h-64 md:h-[26rem] rounded-lg">
-                        <Splide 
-                        options={ {
-                            rewind: true,
-                            autoplay: true,
-                            gap   : '1rem',
-                            arrows: false,
-                        } }
-                        hasTrack={ false } aria-label="...">
-                            <div className="custom-wrapper">
-                                <div className="splide__progress">
-                                    <div className="splide__progress__bar" />
-                                </div>
-                                <SplideTrack className="h-60 md:h-[26rem] b-rad">
-                                    {post.images.map((f) => (
-                                        <SplideSlide key={f.caption} className="h-full relative">
-                                            <Image src={f.url} width={1000} height={1000} alt="Image 1" className="object-cover object-top h-full w-full b-rad" />
-                                            <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
-                                                <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.caption, 70)}</span>
-                                                <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.caption}</span>
-                                            </div>
-                                        </SplideSlide>
-                                    ))}
-                                </SplideTrack>
+                        <div className="text-[12px] flex gap-2 items-center mt-4 overflow-x-scroll scrollbar-hide">
+                            <div className="font-semibold">
+                                #Tags
                             </div>
-                        </Splide>
-                    </div>
-                    <article>
-                        <p>
-                            {data.content}
-                        </p>
-                    </article>
-                    <div className="w-full mt-5 border-y border-black py-2 flex justify-between items-center">
-                        <div className="flex gap-1 items-center">
-                            <IoShareSocialOutline />
-                            <span>Share <span className="hidden md:inline-block">this Article</span></span>
+                            {data.tags.map((tag) => (
+                                <Link key={tag} href={`/blogs/tags/${tag}`} className="py-1 px-2 rounded-md duration-500 text-[10px] flex items-center gap-2 hover:bg-black/80 backdrop-blur-sm bg-black text-white whitespace-nowrap">
+                                    <AiOutlineRise />
+                                    <p className="font-normal">{tag}</p>
+                                </Link>
+                            ))}
                         </div>
-                        <div className="flex gap-3 items-center">
-                            <button onClick={copyButtonHandler} className="flex items-center gap-1 bg-black text-white py-1 px-2 rounded-md hover:bg-black/80 duration-500">
-                                <MdContentCopy /><span>Copy Link</span>
-                            </button>
+                        <h1 className="w-full my-4 font-semibold text-2xl md:text-4xl">{data.title}</h1>
+                        <div className="flex gap-2 items-center text-[12px]">
+                            <FaUser className="text-[10px]"/>
+                            <div className="flex gap-0.5 items-center">
+                                <h1>{data.author}</h1>
+                                <span><BsDot /></span>
+                                <span>{timeSinceCreation(data.date)}</span> 
+                            </div>
+                            <div className="flex gap-3 border border-black rounded-full py-1 px-3">
+                                <button onClick={() => handleLike(postid, token)} className="flex gap-1.5 items-center">
+                                    {isLiked ? (
+                                        <BsHandThumbsUpFill />
+                                    ):(
+                                        <BsHandThumbsUp />
+                                    )}
+                                    <span id={`like-count-${postid}`}>{formatNumber(data.likeCount)}</span>
+                                </button>|
+                                <button className="flex gap-1.5 items-center">
+                                    <FiEye />
+                                    <span>{formatNumber(data.viewCount)}</span>
+                                </button>
+                            </div>
                         </div>
+                        <div className="w-full mt-5 mb-5 h-64 md:h-[26rem] rounded-lg">
+                            <Splide 
+                            options={ {
+                                rewind: true,
+                                autoplay: true,
+                                gap   : '1rem',
+                                arrows: false,
+                            } }
+                            hasTrack={ false } aria-label="...">
+                                <div className="custom-wrapper">
+                                    <div className="splide__progress">
+                                        <div className="splide__progress__bar" />
+                                    </div>
+                                    <SplideTrack className="h-60 md:h-[26rem] b-rad">
+                                        {data.images.map((f) => (
+                                            <SplideSlide key={f.caption} className="h-full relative">
+                                                <Image src={f.url} width={1000} height={1000} alt="Image 1" className="object-cover object-top h-full w-full b-rad" />
+                                                <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
+                                                    <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.caption, 70)}</span>
+                                                    <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.caption}</span>
+                                                </div>
+                                            </SplideSlide>
+                                        ))}
+                                    </SplideTrack>
+                                </div>
+                            </Splide>
+                        </div>
+                        <article>
+                            <p>
+                                {data.content}
+                            </p>
+                        </article>
+                        <div className="w-full mt-5 border-y border-black py-2 flex justify-between items-center">
+                            <div className="flex gap-1 items-center">
+                                <IoShareSocialOutline />
+                                <span>Share <span className="hidden md:inline-block">this Article</span></span>
+                            </div>
+                            <div className="flex gap-3 items-center">
+                                <button onClick={copyButtonHandler} className="flex items-center gap-1 bg-black text-white py-1 px-2 rounded-md hover:bg-black/80 duration-500">
+                                    <MdContentCopy /><span>Copy Link</span>
+                                </button>
+                            </div>
+                        </div>
+                        <CommentBox token={token} postid={postid} user={user} comments={comments} />
                     </div>
-                    <CommentBox token={token} postid={postid} user={user} comments={comments} />
-                </div>
+                )} 
 
                 <div className="mt-12">
                     <div className="mb-4 heading">
@@ -415,7 +416,7 @@ export default function PostCard({ post, token, postid, relatedData, comments })
                             ))}
                         </div>
                     ):(
-                        <span className="text-black font-normal">No related posts now </span>
+                        <span className="text-black font-normal">No related posts now 😥</span>
                     )}
                 </div>
                 

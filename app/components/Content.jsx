@@ -86,7 +86,6 @@ export default function Content({ feed, data }) {
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
             let aToken = await fetchAt();
-            console.log(typeof aToken);
             if(accessToken != null || aToken != undefined) {
                 setIsLogIn(true);
                 return;
@@ -153,47 +152,43 @@ export default function Content({ feed, data }) {
                     </div>
 
                     <div className="overflow-y-scroll w-full md:w-8/12 lg:w-9/12 scrollbar-hide">
-                        {feed ? (
-                        <div className="w-full">
-                            <div className="mb-5 heading mt-5">
-                                <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Posts</span>
-                                <hr className="border-2 border-black w-12 rounded-3xl"/>
-                            </div>
-                            <div className="w-full md:w-full mb-12 bg-black b-rad">
-                                <Splide 
-                                options={ {
-                                    rewind: true,
-                                    autoplay: true,
-                                    gap   : '1rem',
-                                    arrows: false,
-                                } }
-                                hasTrack={ false } aria-label="...">
-                                    <div className="custom-wrapper">
+                        {feed && (
+                            <div className="w-full">
+                                <div className="mb-5 heading mt-5">
+                                    <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Latest Posts</span>
+                                    <hr className="border-2 border-black w-12 rounded-3xl"/>
+                                </div>
+                                <div className="w-full md:w-full mb-12 bg-black b-rad">
+                                    <Splide 
+                                    options={ {
+                                        rewind: true,
+                                        autoplay: true,
+                                        gap   : '1rem',
+                                        arrows: false,
+                                    } }
+                                    hasTrack={ false } aria-label="...">
+                                        <div className="custom-wrapper">
 
 
-                                        <div className="splide__progress">
-                                            <div className="splide__progress__bar" />
+                                            <div className="splide__progress">
+                                                <div className="splide__progress__bar" />
+                                            </div>
+
+
+                                            <SplideTrack className="h-60 md:h-[26rem] b-rad">
+                                                {feed.map((f) => (
+                                                    <SplideSlide key={f.id} onClick={() => { handleClick(); pushLink(f.id); }} className="h-full relative">
+                                                        <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full h-full b-rad" />
+                                                        <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
+                                                            <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.title, 70)}</span>
+                                                            <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.title}</span>
+                                                        </div>
+                                                    </SplideSlide>
+                                                ))}
+                                            </SplideTrack>
                                         </div>
-
-
-                                        <SplideTrack className="h-60 md:h-[26rem] b-rad">
-                                            {feed.map((f) => (
-                                                <SplideSlide key={f.id} onClick={() => { handleClick(); pushLink(f.id); }} on className="h-full relative">
-                                                    <Image src={f.images[0].url} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full h-full b-rad" />
-                                                    <div className="b-rad w-full absolute bg-black/5 backdrop-blur-sm text-white bottom-0 pb-8 md:pb-8 px-2 flex justify-center">
-                                                        <span className="md:hidden w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{truncateString(f.title, 70)}</span>
-                                                        <span className="hidden md:block w-full md:w-8/12 mx-auto text-center text-base md:text-xl font-semibold">{f.title}</span>
-                                                    </div>
-                                                </SplideSlide>
-                                            ))}
-                                        </SplideTrack>
-                                    </div>
-                                </Splide>
-                            </div>
-                        </div>
-                        ):(
-                            <div>
-                                <span></span>
+                                    </Splide>
+                                </div>
                             </div>
                         )}
                         
@@ -201,53 +196,54 @@ export default function Content({ feed, data }) {
                             <span className="font-semibold mb-0.5 text-black text-lg md:text-xl tracking-tighter">Popular Posts</span>
                             <hr className="border-2 border-black w-12 rounded-3xl"/>
                         </div>
-                        <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                            
-                            {data.map((d) => (
-                                <div className="h-80" key={d.id} onClick={handleClick}>
-                                    <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
-                                        <div className="h-3/6">
-                                            <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
-                                            <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
-                                        </div>
-                                        <div className="bg-black p-3 t-box h-3/6 relative">
-                                            <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
-                                                <span><FaUser /></span>
-                                                <div className="flex gap-0.5 items-center">
-                                                    <h1>{d.author}</h1>
-                                                    <span><BsDot /></span>
-                                                    <span>{timeSinceCreation(d.date)}</span> 
+                        {data && (
+                            <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                {data.map((d) => (
+                                    <div className="h-80" key={d.id} onClick={handleClick}>
+                                        <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                            <div className="h-3/6">
+                                                <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
+                                                <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
+                                            </div>
+                                            <div className="bg-black p-3 t-box h-3/6 relative">
+                                                <div className="flex gap-2 items-center  text-[10px] md:text-[9px]">
+                                                    <span><FaUser /></span>
+                                                    <div className="flex gap-0.5 items-center">
+                                                        <h1>{d.author}</h1>
+                                                        <span><BsDot /></span>
+                                                        <span>{timeSinceCreation(d.date)}</span> 
+                                                    </div>
+                                                </div>
+                                                <div className="my-2">
+                                                    <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
+                                                </div>
+                                                <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
+                                                    <div className="flex gap-3">
+                                                        <button className="flex gap-1.5 items-center">
+                                                            <BsHandThumbsUp />
+                                                            <span>{formatNumber(d.likesCount)}</span>
+                                                        </button>
+                                                        <button className="flex gap-1.5 items-center">
+                                                            <FiEye />
+                                                            <span>{formatNumber(d.viewsCount)}</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
+                                                        {d.tags.map((tag) => (
+                                                            <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
+                                                                <AiOutlineRise />
+                                                                <span>{tag}</span>
+                                                            </Link>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="my-2">
-                                                <p className="text-[16px] md:text-[15px]  font-semibold duration-500">{d.title}</p>
-                                            </div>
-                                            <div className="flex gap-4 items-center text-[13px] md:text-[12px] absolute bottom-3 font-semibold w-11/12 justify-between">
-                                                <div className="flex gap-3">
-                                                    <button className="flex gap-1.5 items-center">
-                                                        <BsHandThumbsUp />
-                                                        <span>{formatNumber(d.likesCount)}</span>
-                                                    </button>
-                                                    <button className="flex gap-1.5 items-center">
-                                                        <FiEye />
-                                                        <span>{formatNumber(d.viewsCount)}</span>
-                                                    </button>
-                                                </div>
-                                                <div className="flex gap-1 overflow-x-scroll scrollbar-hide">
-                                                    {d.tags.map((tag) => (
-                                                        <Link key={tag} href={`/blogs/tags/${tag}`} className="py-0.5 px-1 rounded-sm duration-500 text-[10px] flex items-center gap-1 hover:bg-white/10 backdrop-blur-sm whitespace-nowrap">
-                                                            <AiOutlineRise />
-                                                            <span>{tag}</span>
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                                    </Link>
-                                </div>
-                            ))}
-                        </section>
+                                            <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
+                                        </Link>
+                                    </div>
+                                ))}
+                            </section>
+                        )}
                     </div>
                     <SideBar />
                 </div>

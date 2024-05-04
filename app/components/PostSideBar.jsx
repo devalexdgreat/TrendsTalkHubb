@@ -6,9 +6,12 @@ import { LuMoreHorizontal } from "react-icons/lu";
 import shopImg from '@/public/shop.gif'
 import tunedImg from '@/public/tuned.gif'
 import adOne from '@/public/try.jpg'
+import adTwo from '@/public/ad2.jpg'
 import Link from "next/link";
 import { useState } from "react";
 import { FaFacebook, FaYoutube } from "react-icons/fa6";
+import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
+import '@splidejs/react-splide/css';
 
 function truncateString(str, num) {
     if (str.length > num) {
@@ -17,6 +20,17 @@ function truncateString(str, num) {
         return str;
     }
 }
+
+const ads = [
+    {
+        name: adOne,
+        id: 1,
+    },
+    {
+        name: adTwo,
+        id: 2,
+    }
+]
 
 export default function PostSideBar({ posts }) {
 
@@ -42,7 +56,7 @@ export default function PostSideBar({ posts }) {
                     </Link>
                     <Link href={'https://youtube.com/@trendstalkhubb?si=2PqtzRCqk7MvnJlX'} className="rounded-md hover:bg-red-500 duration-500 py-2 px-2 flex gap-1 items-center justify-between text-[15px] bg-red-600" >
                         <span className="text-xl"><FaYoutube /></span>
-                        <span className="font-semibold">310K</span>
+                        <span className="font-semibold">340K</span>
                         <span>Sub</span>
                     </Link>
                 </div>
@@ -58,19 +72,21 @@ export default function PostSideBar({ posts }) {
                         <LuMoreHorizontal />
                     </button>
                 </div>
-                <div className="grid grid-cols-1 gap-2 items-center w-full my-3">
-                    {posts.map((p) => (
-                        <Link key={p.id} href={`/blogs/${p.id}`} className="w-full flex gap-2 items-center justify-between text-[12px] group">
-                            <div className="w-4/12 h-14 bg-white rounded-md">
-                               <Image src={p.images[0].url} width={1000} height={1000} className="object-cover object-top h-full rounded-md" alt="" /> 
-                            </div>
-                            
-                            <div className="w-8/12">
-                                <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">{truncateString(p.title, 70)}</h1>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+                {posts && (
+                    <div className="grid grid-cols-1 gap-2 items-center w-full my-3">
+                        {posts.map((p) => (
+                            <Link key={p.id} href={`/blogs/${p.id}`} className="w-full flex gap-2 items-center justify-between text-[12px] group">
+                                <div className="w-4/12 h-14 bg-white rounded-md">
+                                <Image src={p.images[0].url} width={1000} height={1000} className="object-cover object-top h-full rounded-md" alt="" /> 
+                                </div>
+                                
+                                <div className="w-8/12">
+                                    <h1 className="group-hover:text-gray-400 duration-500 font-semibold leading-tight">{truncateString(p.title, 70)}</h1>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* <div className="p-4 bg-black rounded-lg hover:shadow-2xl duration-500">
@@ -156,11 +172,28 @@ export default function PostSideBar({ posts }) {
                 </div>
                 <div className="flex flex-col w-full my-3">
                     {isAdAvail ? (
-                        <Link href={'https://devalexdgreat.vercel.app/Projects/65f67dfee188b57768deda2a'} className="flex w-full justify-center items-center">
-                            <div className="h-full">
-                                <Image src={adOne} alt="" className="rounded-md h-full object-cover" />
-                            </div>
-                        </Link>
+                        <div className="w-full md:w-full bg-black b-rad">
+                            <Splide 
+                            options={ {
+                                rewind: true,
+                                autoplay: true,
+                                gap   : '1rem',
+                                arrows: false,
+                            } }
+                            hasTrack={ false } aria-label="...">
+                                <div className="custom-wrapper">
+                                    <SplideTrack className="rounded-lg">
+                                        {ads.map((f) => (
+                                            <SplideSlide key={f.id} className="h-full">
+                                                <Link href={'https://devalexdgreat.vercel.app/Services'} className="h-full relative">
+                                                    <Image src={f.name} width={1000} height={1000} alt="Image 1" className="object-cover object-top w-full h-full b-rad" />   
+                                                </Link>
+                                            </SplideSlide>
+                                        ))}
+                                    </SplideTrack>
+                                </div>
+                            </Splide>
+                        </div>
                     ):(
                         <div className="flex bg-gray-300/30 hover:bg-gray-300/40 duration-500 rounded-md backdrop-blur-md w-full justify-center items-center h-64">
                             <span>Place Ads</span>
@@ -168,7 +201,7 @@ export default function PostSideBar({ posts }) {
                     )}
                 </div>
                 <div className="flex justify-center">
-                    <button className="text-[12px] bg-white/10 backdrop-blur-sm py-1.5 px-3 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Place Ads</button>
+                    <Link href={'/contact-us'} className="text-[12px] bg-white/10 backdrop-blur-sm py-1.5 px-3 rounded-full border hover:shadow-lg duration-500 hover:scale-105">Place Ads</Link>
                 </div>
             </div>
 
