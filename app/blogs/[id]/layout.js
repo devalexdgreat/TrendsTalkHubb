@@ -44,7 +44,7 @@ export async function generateMetadata({params, searchParams }, parent) {
     // console.log(realPost[0].images[0].url);
  
   return {
-    metadataBase: new URL('https://trendstalkhubb.vercel.app'),
+    metadataBase: new URL('https://www.trendstalkhubb.info'),
     alternates: {
       canonical: `/blogs/${id}`,
       languages: {
@@ -60,7 +60,7 @@ export async function generateMetadata({params, searchParams }, parent) {
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
       images: realPost[0].images[0].url,
-      url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
+      url: `https://www.trendstalkhubb.info/blogs/${realPost[0].id}`,
       },
     openGraph: {
       title: realPost[0].title,
@@ -69,7 +69,7 @@ export async function generateMetadata({params, searchParams }, parent) {
       type: 'article',
       publishedTime: timeSinceCreation(realPost[0].date),
       authors: 'TrendsTalk Hubb',
-      url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
+      url: `https://www.trendstalkhubb.info/blogs/${realPost[0].id}`,
       siteName: "TrendsTalk Hubb",
       images: realPost[0].images[0].url,
     },
@@ -90,7 +90,7 @@ export async function generateMetadata({params, searchParams }, parent) {
     description: realPost[0].content,
     keywords: convertArrayToStringWithCommas(realPost[0].tags),
     author: "TrendsTalk Hubb",
-    url: `https://trendstalkhubb.vercel.app/blogs/${realPost[0].id}`,
+    url: `https://www.trendstalkhubb.info/blogs/${realPost[0].id}`,
     image: realPost[0].images[0].url,
     siteName: "TrendsTalk Hubb",
     type: "website",

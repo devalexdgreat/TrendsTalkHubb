@@ -2,7 +2,7 @@ export const metadata = {
     icons: {
       apple: '/apple-icon.png',
     },
-    metadataBase: new URL('https://trendstalkhubb.vercel.app'),
+    metadataBase: new URL('https://www.trendstalkhubb.info'),
     alternates: {
       canonical: '/signup',
       languages: {
@@ -22,7 +22,7 @@ export const metadata = {
     openGraph: {
       title: 'Sign Up - TrendsTalk Hubb',
       description: "Join TrendsTalk Hubb and be part of a vibrant community where you can explore the latest trends, share insights, and connect with like-minded individuals.",
-      url: 'https://trendstalkhubb.vercel.app/signup',
+      url: 'https://www.trendstalkhubb.info/signup',
       siteName: 'TrendsTalk Hubb',
       images: [
         {
@@ -51,7 +51,7 @@ export const metadata = {
     description: "Join TrendsTalk Hubb and be part of a vibrant community where you can explore the latest trends, share insights, and connect with like-minded individuals.",
     keywords: "sign up, register, TrendsTalk Hubb, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     author: "TrendsTalk Hubb",
-    url: "https://trendstalkhubb.vercel.app/signup",
+    url: "https://www.trendstalkhubb.info/signup",
     image: "https://trendstalkhubb.vercel.app/favicon.png",
     siteName: "TrendsTalk Hubb",
     type: "website"

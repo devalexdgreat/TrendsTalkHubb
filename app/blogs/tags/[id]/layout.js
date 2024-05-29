@@ -13,7 +13,7 @@ export async function generateMetadata({params, searchParams }, parent) {
   // console.log(ps[randomIndex].images[0].url);
  
   return {
-    metadataBase: new URL('https://trendstalkhubb.vercel.app'),
+    metadataBase: new URL('https://www.trendstalkhubb.info'),
     alternates: {
       canonical: `/blogs/tags/${id}`,
       languages: {
@@ -29,14 +29,14 @@ export async function generateMetadata({params, searchParams }, parent) {
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
       images: ps[randomIndex].images[0].url,
-      url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
+      url: `https://www.trendstalkhubb.info/blogs/tags/${id}`,
       },
     openGraph: {
       title: `${id} Tag - TrendsTalk Hubb`,
       description: `Explore posts tagged with "${id}" and stay updated on the latest trends and insights across various industries at TrendsTalk Hubb.`,
       keywords: `${id}, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
       type: 'website',
-      url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
+      url: `https://www.trendstalkhubb.info/blogs/tags/${id}`,
       siteName: 'TrendsTalk Hubb',
       images: ps[randomIndex].images[0].url,
     },
@@ -57,7 +57,7 @@ export async function generateMetadata({params, searchParams }, parent) {
     description: `Explore posts tagged with "${id}" and stay updated on the latest trends and insights across various industries at TrendsTalk Hubb.`,
     keywords: `${id}, posts, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog`,
     author: "TrendsTalk Hubb",
-    url: `https://trendstalkhubb.vercel.app/blogs/tags/${id}`,
+    url: `https://www.trendstalkhubb.info/blogs/tags/${id}`,
     image: ps[randomIndex].images[0].url,
     siteName: "TrendsTalk Hubb",
     type: "website",
