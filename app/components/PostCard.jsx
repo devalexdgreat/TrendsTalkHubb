@@ -244,7 +244,7 @@ export default function PostCard({ post: data, token, postid, relatedData, comme
     }
 
     const copyButtonHandler = () => {
-        const textToCopy = `https://trendstalkhubb.vercel.app/blogs/${postid}`;
+        const textToCopy = `https://www.trendstalkhubb.info/blogs/${postid}`;
         copyToClipboard(textToCopy);
     };
 
