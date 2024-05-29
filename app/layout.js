@@ -2,24 +2,6 @@ import Footer from "./components/Footer";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { Inter, Poppins } from 'next/font/google'
- 
-// const anyFont = Poppins({
-//   subsets: ['latin'],
-//   display: "swap",
-//   weight: ["100", "200", "300"]
-// })
-
-// const anyFont = localFont({
-//   src: [
-//     {
-//       path: './fonts/Poppins-Regular.woff2',
-//       weight: '400',
-//       style: 'normal',
-//       variable: '--font-poppins',
-//       fallback: ['system-ui', 'arial']
-//     },
-//   ],
-// })
 
 export const metadata = {
   icons: {
@@ -40,7 +22,7 @@ export const metadata = {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
+      images: ['https://www.trendstalkhubb.info/favicon.png'], // Must be an absolute URL
       url: "https://www.trendstalkhubb.info",
     },
   openGraph: {
@@ -51,12 +33,12 @@ export const metadata = {
     siteName: 'TrendsTalk Hubb',
     images: [
       {
-        url: 'https://trendstalkhubb.vercel.app/favicon.png', // Must be an absolute URL
+        url: 'https://www.trendstalkhubb.info/favicon.png', // Must be an absolute URL
         width: 800,
         height: 600,
       },
       {
-        url: 'https://trendstalkhubb.vercel.app/favicon.png', // Must be an absolute URL
+        url: 'https://www.trendstalkhubb.info/favicon.png', // Must be an absolute URL
         width: 1800,
         height: 1600,
         alt: 'Trendstalk Hubb.',
@@ -83,7 +65,7 @@ export const metadata = {
   keywords: "trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
   author: "TrendsTalk Hubb",
   url: "https://www.trendstalkhubb.info",
-  image: "https://trendstalkhubb.vercel.app/favicon.png",
+  image: "https://www.trendstalkhubb.info/favicon.png",
   siteName: "TrendsTalk Hubb",
   type: "website"
 };

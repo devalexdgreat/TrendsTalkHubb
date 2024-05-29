@@ -17,7 +17,7 @@ export const metadata = {
       siteId: '@TrendsTalkHubb',
       creator: 'TrendsTalkHubb',
       creatorId: '@TrendsTalkHubb',
-      images: ['https://trendstalkhubb.vercel.app/favicon.png'],
+      images: ['https://www.trendstalkhubb.info/favicon.png'],
     },
     openGraph: {
       title: 'Sign Up - TrendsTalk Hubb',
@@ -26,7 +26,7 @@ export const metadata = {
       siteName: 'TrendsTalk Hubb',
       images: [
         {
-          url: 'https://trendstalkhubb.vercel.app/favicon.png',
+          url: 'https://www.trendstalkhubb.info/favicon.png',
           width: 800,
           height: 600,
         },
@@ -52,7 +52,7 @@ export const metadata = {
     keywords: "sign up, register, TrendsTalk Hubb, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     author: "TrendsTalk Hubb",
     url: "https://www.trendstalkhubb.info/signup",
-    image: "https://trendstalkhubb.vercel.app/favicon.png",
+    image: "https://www.trendstalkhubb.info/favicon.png",
     siteName: "TrendsTalk Hubb",
     type: "website"
   };

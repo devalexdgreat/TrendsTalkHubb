@@ -17,7 +17,7 @@ export const metadata = {
     siteId: '@TrendsTalkHubb',
     creator: 'TrendsTalkHubb',
     creatorId: '@TrendsTalkHubb',
-    images: ['https://trendstalkhubb.vercel.app/favicon.png'], // Must be an absolute URL
+    images: ['https://www.trendstalkhubb.info/favicon.png'], // Must be an absolute URL
     },
     openGraph: {
       title: 'Login - TrendsTalk Hubb',
@@ -26,12 +26,12 @@ export const metadata = {
       siteName: 'TrendsTalk Hubb',
       images: [
         {
-          url: 'https://trendstalkhubb.vercel.app/favicon.png', // Must be an absolute URL
+          url: 'https://www.trendstalkhubb.info/favicon.png', // Must be an absolute URL
           width: 800,
           height: 600,
         },
         {
-          url: 'https://trendstalkhubb.vercel.app/favicon.png', // Must be an absolute URL
+          url: 'https://www.trendstalkhubb.info/favicon.png', // Must be an absolute URL
           width: 1800,
           height: 1600,
           alt: 'Trendstalk Hubb.',
@@ -58,7 +58,7 @@ export const metadata = {
     keywords: "login, sign in, authentication, trends, insights, articles, discussions, industry trends, latest trends, blog, blogging, Trending topics, Trend analysis, news, blog",
     author: "TrendsTalk Hubb",
     url: "https://www.trendstalkhubb.info/login",
-    image: "https://trendstalkhubb.vercel.app/favicon.png",
+    image: "https://www.trendstalkhubb.info/favicon.png",
     siteName: "TrendsTalk Hubb",
     type: "website"
   };
