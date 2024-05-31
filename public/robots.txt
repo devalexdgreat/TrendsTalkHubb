@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /login
 Disallow: /signup
 
-Sitemap: https://trendstalkhubb.vercel.app/sitemap.xml
+Sitemap: https://www.trendstalkhubb.info/sitemap.xml
