@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /_next/
-Disallow: /api/
+Allow: /contact-us
+Allow: /about
+Allow: /blogs
 Disallow: /login
 Disallow: /signup
 
