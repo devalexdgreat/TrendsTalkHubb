@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Content from "./components/Content";
-import Navbar from "./components/Navbar";
 import { getCookies } from "@/actions";
+import Navbar from "../components/Navbar";
+import Content from "../components/Content";
 
 const fetchFeed = async () => {
   try {
