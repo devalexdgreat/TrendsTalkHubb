@@ -37,7 +37,7 @@ const getPosts = async () => {
   }
 }
 
-export default async function Home() {
+export default async function BlogHome() {
 
   const posts = await getPosts();
   const feed = await fetchFeed();
