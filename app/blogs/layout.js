@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import "./globals.css";
+import "../globals.css";
 import localFont from 'next/font/local';
 import { Inter, Poppins } from 'next/font/google'
 
