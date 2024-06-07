@@ -72,22 +72,22 @@ const fetchRelated = async (data) => {
     }
 }
 
-const getPosts = async () => {
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${4}`, {
-            cache: "no-store",
-        });
+// const getPosts = async () => {
+//     try {
+//         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${4}`, {
+//             cache: "no-store",
+//         });
   
-        if (!res.ok) {
-            throw new Error("Failed to fetch related posts");
-        }
+//         if (!res.ok) {
+//             throw new Error("Failed to fetch related posts");
+//         }
   
-        return res.json();
+//         return res.json();
         
-    } catch (error) {
-        console.log(error);
-    }
-}
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 export default async function Blog({ params }) {
     const { id } = params;
@@ -110,7 +110,6 @@ export default async function Blog({ params }) {
     const related = checkRelated();
     
     const posts = await fetchServer(`posts?limit=${4}`);
-    //  await getPosts();
     const com = await fetchComments(id);
     const comments = com.reverse();
 
