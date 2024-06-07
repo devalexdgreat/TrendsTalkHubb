@@ -2,45 +2,12 @@ import Image from "next/image";
 import Content from "./components/Content";
 import Navbar from "./components/Navbar";
 import { getCookies } from "@/actions";
-
-const fetchFeed = async () => {
-  try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${5}`, {
-          cache: "no-store",
-      });
-
-      if (!response.ok) {
-          throw new Error("Failed to fetch feed");
-      }
-
-      return response.json();
-
-  } catch (error) {
-      console.error(error);
-  }
-};
-
-const getPosts = async () => {
-  try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
-          cache: "no-store",
-      });
-
-      if (!res.ok) {
-          throw new Error("Failed to fetch Projects");
-      }
-
-      return res.json();
-      
-  } catch (error) {
-      console.log(error);
-  }
-}
+import fetchServer from "@/utils/fetchServer";
 
 export default async function Home() {
 
-  const posts = await getPosts();
-  const feed = await fetchFeed();
+  const posts = await fetchServer(`posts?limit=${12}`);
+  const feed = await fetchServer(`posts?limit=${5}`);
 
   return (
     <main className="h-auto antialiased">

@@ -199,7 +199,7 @@ export default function Content({ feed, data }) {
                         {data && (
                             <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                                 {data.map((d) => (
-                                    <div className="h-80" key={d.id} onClick={handleClick}>
+                                    <div className="text-white h-80" key={d.id} onClick={handleClick}>
                                         <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
                                             <div className="h-3/6">
                                                 <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />

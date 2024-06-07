@@ -29,7 +29,7 @@ export default function SideBar() {
     ]
 
     return (
-        <div className="sticky top-0 w-full md:w-4/12 lg:w-3/12 flex gap-3 flex-col">
+        <div className="sticky top-0 w-full md:w-4/12 lg:w-3/12 flex gap-3 flex-col text-white">
             <div className="p-4 bg-black rounded-lg hover:shadow-2xl duration-500">
                 
                 <div className="flex justify-between">

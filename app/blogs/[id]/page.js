@@ -3,6 +3,7 @@ import PostCard from "@/app/components/PostCard";
 import Navbar from '@/app/components/Navbar';
 import PostSideBar from '@/app/components/PostSideBar';
 import { getCookies } from "@/actions";
+import fetchServer from "@/utils/fetchServer";
 
 const fetchPostById = async (id, accessToken) => {
     try {
@@ -108,7 +109,8 @@ export default async function Blog({ params }) {
         
     const related = checkRelated();
     
-    const posts = await getPosts();
+    const posts = await fetchServer(`posts?limit=${4}`);
+    //  await getPosts();
     const com = await fetchComments(id);
     const comments = com.reverse();
 
