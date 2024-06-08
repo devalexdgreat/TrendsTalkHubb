@@ -3,6 +3,8 @@ export default async function fetchServer(arg) {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${arg}`, {
             cache: "no-store",
         });
+
+        
   
         if (!response.ok) {
             throw new Error("Failed to fetch");

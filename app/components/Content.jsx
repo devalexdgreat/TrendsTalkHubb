@@ -71,7 +71,6 @@ function truncateString(str, num) {
 }
 
 export default function Content({ feed, data }) {
-
     const [dData, setDData] = useState('none');
     const [isLogIn, setIsLogIn] = useState(false);
 
@@ -124,6 +123,10 @@ export default function Content({ feed, data }) {
     const bypassAuth = async () => {
         setIsLogIn(true);
         toggleMenu();
+    }
+
+    if (!data || !feed) {
+        return <div className="h-screen w-full bg-white text-black text-xl flex justify-center items-center"><div>Loading...</div></div>;
     }
 
     return (
