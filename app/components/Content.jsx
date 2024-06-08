@@ -125,10 +125,6 @@ export default function Content({ feed, data }) {
         toggleMenu();
     }
 
-    if (!data || !feed) {
-        return <div className="h-screen w-full bg-white text-black text-xl flex justify-center items-center"><div>Loading...</div></div>;
-    }
-
     return (
         <div className="w-full h-full mt-20 mb-24">
             <div className="w-11/12 mx-auto h-full">
