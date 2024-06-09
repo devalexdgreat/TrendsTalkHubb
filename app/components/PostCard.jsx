@@ -71,8 +71,6 @@ function truncateString(str, num) {
     }
 }
 
-
-
 export default function PostCard({ post: data, token, postid, relatedData, comments }) {
     const [dData, setDData] = useState('none');
     const [isLiked, setIsLiked] = useState(false);
@@ -372,7 +370,8 @@ export default function PostCard({ post: data, token, postid, relatedData, comme
                         <div className="text-white w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                             {relatedData.map((r) => (
                                 <div className="h-80" key={r.id}>
-                                    <Link href={`/blogs/${r.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                    <div className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                        <Link href={`/blogs/${r.id}`} className="absolute h-full w-full bg-transparent z-20"></Link>
                                         <div className="h-3/6">
                                             <Image src={r.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
                                             <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
@@ -411,7 +410,7 @@ export default function PostCard({ post: data, token, postid, relatedData, comme
                                             </div>
                                         </div>
                                         <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                                    </Link>
+                                    </div>
                                 </div>
                             ))}
                         </div>

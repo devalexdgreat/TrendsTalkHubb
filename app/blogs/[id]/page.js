@@ -3,7 +3,6 @@ import PostCard from "@/app/components/PostCard";
 import Navbar from '@/app/components/Navbar';
 import PostSideBar from '@/app/components/PostSideBar';
 import { getCookies } from "@/actions";
-import fetchServer from "@/utils/fetchServer";
 
 const fetchPostById = async (id, accessToken) => {
     try {

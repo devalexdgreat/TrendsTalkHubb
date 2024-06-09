@@ -76,7 +76,8 @@ export default function CategoryCard({ data, tag, title }) {
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {data.map((d) => (
                         <div className="h-80" key={d.id}>
-                            <Link href={`/blogs/${d.id}`} className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                            <div className="group rounded-lg h-full hover:shadow-2xl shadow-black duration-500 relative">
+                                <Link href={`/blogs/${d.id}`} className="absolute h-full w-full bg-transparent z-20"></Link>
                                 <div className="h-3/6">
                                     <Image src={d.images[0].url} width={1000} height={1000} alt="" className="post-img h-full object-cover object-top" />
                                     <div className="h-full w-full bg-black/20 hidden group-hover:block top-0 rounded-lg absolute"></div>
@@ -115,7 +116,7 @@ export default function CategoryCard({ data, tag, title }) {
                                     </div>
                                 </div>
                                 <span className="bg-black/10 invisible group-hover:visible border backdrop-blur-sm py-1 px-2 absolute top-1 right-1 rounded-md text-[12px] z-20 flex items-center gap-1"><span>Read more</span><FiInfo /></span>
-                            </Link>
+                            </div>
                         </div>
                     ))}
                 </div>
