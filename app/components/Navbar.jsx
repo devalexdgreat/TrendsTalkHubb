@@ -31,88 +31,32 @@ export default function Navbar() {
     const [foundQuery, setFoundQuery] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
-    const [isloggedIn, setIsLoggedIn] = useState(true);
+    const [isloggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [categories, setCategories] = useState(null);
     const router = useRouter();
     const ref = useRef();
 
-
-    function isTokenExpired(token) {
-        if (!token) {
-            // If token is not provided, consider it as expired
-            return true;
-        }
-    
-        try {
-            // Decode the token
-            const payload = JSON.parse(atob(token.split('.')[1]));
-    
-            // Get the expiration time (exp) from the payload
-            const expirationTime = payload.exp * 1000; // Convert to milliseconds
-    
-            // Check if the current time is after the expiration time
-            return Date.now() >= expirationTime;
-        } catch (error) {
-            // If decoding fails, consider the token as expired
-            return true;
-        }
-    }
-
     useEffect(() => {
-        const deleteCookies = async () => {
-            await delCookies();
-        }
-
-        const accessToken = localStorage.getItem('accessToken');
-        if (isTokenExpired(accessToken)) {
-            // console.log('Access token has expired now');
-            // Clear the access token from local storage
-            localStorage.removeItem('accessToken');
-            deleteCookies();
-            return; 
-        }
-    });
-
-    useEffect(() => {
-        const fetchAt = async () => {
-            let rawAt = await getCookies();
-            const aT = rawAt?.value;
-            return aT;
-        }
-
         const checkLogin = async () => {
             let accessToken = localStorage.getItem('accessToken');
-            let aToken = await fetchAt();
-            if(accessToken != null || aToken != undefined) {
+            // console.log(accessToken);
+            // let aToken = await fetchAt();
+            if(accessToken != null) {
                 setIsLoggedIn(true);
                 return;
                 
             } else {
                 setIsLoggedIn(false);
-                await delCookies();
                 localStorage.removeItem('accessToken');
             }
         }
         checkLogin();
-    })
+    },[])
 
     useEffect(() => {
-        const fetchAt = async () => {
-            let rawAt = await getCookies();
-            const aT = rawAt?.value;
-            return aT;
-        }
-        const getAtoken = async () => {
-            const aT = await fetchAt();
-            return aT;
-        }
-
-        
-
         const fetchUser = async () => {
-            const accessToken = await getAtoken();    
-            // const fallbackToken = process.env.NEXT_PUBLIC_FALLBACK_TOKEN;
+            let accessToken = localStorage.getItem('accessToken');
             const finalToken = accessToken; 
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/get_current_user`, {
@@ -134,8 +78,12 @@ export default function Navbar() {
             }
         };
 
-        fetchUser(); 
-    }, []);
+        if(isloggedIn === true) {
+            fetchUser();
+            return;
+        }
+        
+    }, [isloggedIn]);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -155,7 +103,7 @@ export default function Navbar() {
             }
         }
         getCategories();
-    }, [])
+    }, [categories])
 
     const toggleProfile = () => {
         setProfileOpen(prevProfileOpen => !prevProfileOpen);
@@ -214,12 +162,6 @@ export default function Navbar() {
         // Redirect the user to the login page
         router.push('/login'); // Replace '/login' with the appropriate login page route
         toggleMenu();
-    }
-
-    const handleSelect = (e) => {
-        const link = e.target.value;
-        console.log(link);
-        router.push(link);
     }
 
     return (

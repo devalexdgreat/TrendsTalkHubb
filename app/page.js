@@ -100,7 +100,7 @@ export default async function Home() {
 
   return (
     <main className="h-auto antialiased">
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="w-full h-full mt-20 mb-24">
             <div className="w-11/12 mx-auto h-full">
                 <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8 h-full">
