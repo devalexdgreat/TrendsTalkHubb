@@ -10,40 +10,41 @@ import { FiInfo } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import SideBar from "./components/SideBar";
 import SlideShow from "./components/SlideShow";
+import useFetch from "@/utils/useFetch";
 
-const fetchFeed = async () => {
-  try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${5}`, {
-          cache: "no-store",
-      });
+// const fetchFeed = async () => {
+//   try {
+//       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts?limit=${5}`, {
+//           cache: "no-store",
+//       });
 
-      if (!response.ok) {
-          throw new Error("Failed to fetch feed");
-      }
+//       if (!response.ok) {
+//           throw new Error("Failed to fetch feed");
+//       }
 
-      return response.json();
+//       return response.json();
 
-  } catch (error) {
-      console.error(error);
-  }
-};
+//   } catch (error) {
+//       console.error(error);
+//   }
+// };
 
-const getPosts = async () => {
-  try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
-          cache: "no-store",
-      });
+// const getPosts = async () => {
+//   try {
+//       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/posts`, {
+//           cache: "no-store",
+//       });
 
-      if (!res.ok) {
-          throw new Error("Failed to fetch Projects");
-      }
+//       if (!res.ok) {
+//           throw new Error("Failed to fetch Projects");
+//       }
 
-      return res.json();
+//       return res.json();
       
-  } catch (error) {
-      console.log(error);
-  }
-};
+//   } catch (error) {
+//       console.log(error);
+//   }
+// };
 
 function timeSinceCreation(createdDate) {
   // Get the current date
@@ -94,13 +95,12 @@ function formatNumber(number) {
 
 export default async function Home() {
 
-  const data = await getPosts();
-  const feed = await fetchFeed();
+  const data = await useFetch(`posts`);
+  const feed = await useFetch(`posts?limit=${5}`);
 
   return (
     <main className="h-auto antialiased">
-      <Navbar />
-      {/* <Content feed={feed} data={posts}/> */}
+      {/* <Navbar /> */}
       <div className="w-full h-full mt-20 mb-24">
             <div className="w-11/12 mx-auto h-full">
                 <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8 h-full">
