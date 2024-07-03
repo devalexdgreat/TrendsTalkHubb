@@ -3,6 +3,7 @@ import PostCard from "@/app/components/PostCard";
 import Navbar from '@/app/components/Navbar';
 import PostSideBar from '@/app/components/PostSideBar';
 import { getCookies } from "@/actions";
+import Footer from "@/app/components/Footer";
 
 const fetchPostById = async (id, accessToken) => {
     try {
@@ -121,6 +122,7 @@ export default async function Blog({ params }) {
                     <PostSideBar posts={posts} />
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

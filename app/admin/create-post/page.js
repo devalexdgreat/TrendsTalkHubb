@@ -1,6 +1,7 @@
 import { getCookies } from "@/actions";
 import AdminNav from "@/app/components/AdminNav";
 import CreatePostForm from "@/app/components/CreatePostForm";
+import Footer from "@/app/components/Footer";
 import { redirect } from "next/navigation";
 
 const getCategories = async () => {
@@ -104,6 +105,7 @@ export default async function CreatePost() {
                 </div>
                 <CreatePostForm data={categories} />
             </div>
+            <Footer />
         </div>
     );
 }

@@ -7,6 +7,7 @@ import { FiPlus } from "react-icons/fi";
 import { getCookies } from "@/actions";
 import PostList from "../components/PostLists";
 import { redirect } from "next/navigation";
+import Footer from "../components/Footer";
 
 
 function timeSinceCreation(createdDate) {
@@ -287,6 +288,7 @@ export default async function AdminPage() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

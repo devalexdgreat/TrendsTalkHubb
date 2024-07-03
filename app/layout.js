@@ -1,4 +1,4 @@
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { Inter, Poppins } from 'next/font/google'
@@ -76,7 +76,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className="">
       <body className="">
           {children}
-          <Footer />
       </body>
     </html>
   );

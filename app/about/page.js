@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import SideBar from "../components/SideBar"
 import Link from "next/link"
 import { FiInfo } from "react-icons/fi";
+import Footer from "../components/Footer";
   
   export default function About() {
     return (
@@ -51,6 +52,7 @@ import { FiInfo } from "react-icons/fi";
             </div>
             <SideBar />
           </div>
+          <Footer />
         </div>
     )
   }

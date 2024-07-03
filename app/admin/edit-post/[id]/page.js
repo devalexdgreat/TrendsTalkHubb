@@ -1,6 +1,7 @@
 import { getCookies } from "@/actions";
 import AdminNav from "@/app/components/AdminNav";
 import EditPostForm from "@/app/components/EditPostForm";
+import Footer from "@/app/components/Footer";
 import { redirect } from "next/navigation";
 
 const getCategories = async () => {
@@ -139,6 +140,7 @@ export default async function EditPost({ params }) {
                 </div>
                 <EditPostForm data={el} pData={post} cData={elm} id={id} />
             </div>
+            <Footer />
         </div>
     );
 }

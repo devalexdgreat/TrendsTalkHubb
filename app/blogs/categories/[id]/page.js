@@ -1,4 +1,5 @@
 import CategoryCard from "@/app/components/CategoryCard";
+import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import PostSideBar from "@/app/components/PostSideBar";
 
@@ -56,6 +57,7 @@ export default async function Categories({ params }) {
                     <PostSideBar posts={allPost}/>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

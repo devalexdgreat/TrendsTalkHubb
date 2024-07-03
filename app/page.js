@@ -11,6 +11,7 @@ import { IoClose } from "react-icons/io5";
 import SideBar from "./components/SideBar";
 import SlideShow from "./components/SlideShow";
 import useFetch from "@/utils/useFetch";
+import Footer from "./components/Footer";
 
 // const fetchFeed = async () => {
 //   try {
@@ -100,10 +101,10 @@ export default async function Home() {
 
   return (
     <main className="h-auto antialiased">
-      <Navbar />
-      <div className="w-full h-full mt-20 mb-24">
-            <div className="w-11/12 mx-auto h-full">
-                <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8 h-full">
+        <Navbar />
+        <div className="w-full mt-20 mb-24">
+            <div className="w-11/12 mx-auto">
+                <div className="w-full flex flex-col md:flex-row gap-3 md:gap-8">
 
                     {/* <div style={{display: `${dData}`}} className="flex justify-center items-center h-screen w-full bg-black/30 backdrop-blur-sm fixed top-0 left-0 z-50">
                         <div className="text-center rounded-lg w-11/12 md:w-4/12 shadow-2xl shadow-black px-6 py-6 text-black z-40 bg-white relative">
@@ -196,6 +197,7 @@ export default async function Home() {
                 </div>
             </div>
         </div>
+        <Footer />
     </main>
   );
 }

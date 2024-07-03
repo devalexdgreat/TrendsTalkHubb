@@ -8,6 +8,7 @@ import { IoChevronForward } from "react-icons/io5";
 import { VscSend } from "react-icons/vsc";
 import { TiSocialFacebook, TiSocialInstagram, TiSocialYoutube } from "react-icons/ti";
 import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa6";
+import Footer from "../components/Footer";
   
   export default function Contact() {
     return (
@@ -115,6 +116,7 @@ import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa6"
             </div>
             <SideBar />
           </div>
+          <Footer />
         </div>
     )
   }

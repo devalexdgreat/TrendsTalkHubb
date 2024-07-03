@@ -1,6 +1,7 @@
 import { getCookies } from "@/actions";
 import AdminNav from "@/app/components/AdminNav";
 import CreateCategoryForm from "@/app/components/CreateCategoryForm";
+import Footer from "@/app/components/Footer";
 import { redirect } from "next/navigation";
 
 const fetchUser = async (token) => {
@@ -82,6 +83,7 @@ export default async function CreateCategory() {
                 </div>
                 <CreateCategoryForm />
             </div>
+            <Footer />
         </div>
     );
 }

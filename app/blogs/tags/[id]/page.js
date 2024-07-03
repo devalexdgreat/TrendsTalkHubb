@@ -1,3 +1,4 @@
+import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import PostSideBar from "@/app/components/PostSideBar";
 import TagPostsCard from "@/app/components/TagPostsCard";
@@ -50,6 +51,7 @@ export default async function Tags({ params }) {
                     <PostSideBar posts={allPost} />
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
