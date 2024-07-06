@@ -4,7 +4,7 @@ export default async function sitemap() {
     // const { posts } = await fetchServer(`posts`);
     const response = await fetch(`https://trendstalk-blog-api.onrender.com/api/posts`);
     const posts = await response.json();
-    const dateK = '2024-05-04T21:20:09.533Z';
+    const dateK = '2024-06-04T21:20:09.533Z';
 
     const postEntries = posts.map(({ id, date }) => ({
         url: `https://www.trendstalkhubb.info/blogs/${id}`,
