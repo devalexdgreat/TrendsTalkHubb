@@ -5,5 +5,4 @@ Allow: /about
 Allow: /blogs
 Disallow: /login
 Disallow: /signup
-Disallow: /_next/
 Sitemap: https://www.trendstalkhubb.info/sitemap.xml
