@@ -32,12 +32,6 @@ export default async function sitemap() {
             changeFrequency: 'monthly',
             priority: 1,
         },
-        {
-            url: 'https://www.trendstalkhubb.info/blogs',
-            lastModified: dateK,
-            changeFrequency: 'monthly',
-            priority: 1,
-        },
         ...postEntries
     ];
 }
